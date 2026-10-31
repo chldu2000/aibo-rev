@@ -9,6 +9,7 @@
 - [当前方向](docs/adr/0002-aibo-refactor-direction.md)：以现有 Aibo 为基线推进彻底重构。
 - [完整版本功能 Checklist](docs/refactor-feature-inventory.md)：手动勾选完整版本必需的特性，包含已有功能、数据治理和新增候选。
 - [数据生命周期盘点](docs/data-lifecycle-inventory.md)：数据放大来源、已有治理和仍需完成的能力。
+- [Zed / ACP 实现研究](docs/zed-acp-research.md)：统一会话呈现的源码路径、适配边界及对重构的启发。
 - [领域词汇](CONTEXT.md)：业务历史、恢复、审计、过程明细和派生数据的区别。
 - [讨论记录](docs/discussion.md)：方向演进及尚未定案的取舍。
 
