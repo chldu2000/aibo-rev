@@ -1,8 +1,11 @@
 ---
-status: accepted
+status: superseded
+superseded_by: 0002-aibo-refactor-direction
 ---
 
 # 终端路线引用固定版本的原始 Transcript
+
+当前主线已改为现有 Aibo 的彻底重构，见 [ADR 0002](0002-aibo-refactor-direction.md)。以下是终端路线语境下曾确认的决定；原始 transcript、固定版本和摘录规则仍可作为重构参考，但不能未经核对就替代现有 Aibo 的历史与引用合同。
 
 用户提出以跨 Agent 会话引用为核心的新候选路线：直接运行各 Agent 的原生 CLI，尽量保留会话列表及 Git、文件浏览等面板的扩展性。已确认的引用设计允许运行能力与完整引用能力分离，接受少量历史接入适配，以减少统一聊天界面和输入流程的维护工作。本决定记录产品约束，不表示已选择终端引擎或批准产品实施。
 

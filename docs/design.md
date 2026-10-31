@@ -1,12 +1,14 @@
 # 终端优先工作台设计提案
 
-状态：候选方案。产品决定见 [ADR 0001](adr/0001-terminal-transcript-references.md)，讨论来由见[讨论记录](discussion.md)。
+状态：历史备选，当前主线已调整为[现有 Aibo 的彻底重构](adr/0002-aibo-refactor-direction.md)。下文保留终端路线当时的设计，不作为当前功能范围或实施要求。原决定见 [ADR 0001](adr/0001-terminal-transcript-references.md)。
 
 ## 产品范围
 
 核心体验是让用户直接使用各 Agent 的原生 CLI，并把一个会话的原始 transcript 引用到另一个会话。工作台保留持久会话列表，为 Git、文件浏览和 Diff 等面板保留扩展空间。
 
 原生 CLI 负责自身的对话、工具输出、审批、模型与命令交互。Aibo Rev 负责会话目录、终端承载、原文引用和工作区面板。统一聊天渲染、完整通用插件平台及完整 Agent 管理中心不自动成为本路线的前置承诺；是否需要这些能力要另行决定。
+
+另有[原生 CLI 执行与 GUI 历史阅读方案](cli-gui-reading-proposal.md)：保留上述执行分工，并为同一会话提供只读的图形化历史、搜索和引用入口。该方案已记录供比较，尚未选定，不要求把审批和输入改为统一 GUI。
 
 ## 候选架构
 
