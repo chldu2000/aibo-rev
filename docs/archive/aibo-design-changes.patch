@@ -1,0 +1,52 @@
+diff --git a/CONTEXT.md b/CONTEXT.md
+index 2aacb39..8f74ffe 100644
+--- a/CONTEXT.md
++++ b/CONTEXT.md
+@@ -67,10 +67,16 @@ Making a source conversation's saved history available as reference material to
+ _Avoid_: Using “shared session” to imply shared native execution or transferable pending approvals.
+ 
+ **Session Reference**:
+-An explicit link from a receiving conversation to a source conversation whose saved history supplies context. In the accepted simplification design, sending a reference fixes the history version available to the recipient; later source activity requires an explicit reference update.
++An explicit link from a receiving conversation to a fixed version of source history that supplies context. The terminal-first design fixes this version when the user creates the reference; later source activity requires an explicit reference update.
+ 
+ **Reference History Version**:
+-The fixed contents and membership of source history made available by a sent Session Reference, including the captured state of messages still in progress. It is distinct from the source conversation's current history.
++The fixed contents and membership of source history made available by a Session Reference, including any captured state of messages still in progress. It is distinct from the source conversation's current history.
++
++**Native Transcript**:
++The source Agent's own persisted or exported conversation record, retaining its original format and contents. It is distinct from terminal scrollback, an Aibo History Projection, and a generated summary.
++
++**Transcript Excerpt**:
++A selected portion of a Reference History Version supplied directly to the receiving Agent. The excerpt is reference material from the original transcript, not a substitute for the full captured version.
+ 
+ **Aibo Session**:
+ A host-owned conversation with a stable session identity independent of plugin processes and vendor-native session identifiers.
+diff --git a/docs/adr/0011-maintenance-simplification-scope.md b/docs/adr/0011-maintenance-simplification-scope.md
+index 02e5411..22b52b6 100644
+--- a/docs/adr/0011-maintenance-simplification-scope.md
++++ b/docs/adr/0011-maintenance-simplification-scope.md
+@@ -15,3 +15,5 @@ status: accepted
+ 插件界面卡死时，宿主必须保持可操作，用户能够关闭插件或切回默认界面，正在运行的 Agent 不因界面故障而中断。引用在发送时固定可读取历史的版本；来源新增内容需要主动更新引用。此处冻结的是内容与成员范围，不只是末尾消息 ID，流式消息后续更新不能改变既有引用。
+ 
+ 具体模块边界、隔离容器实现及历史数据迁移方案仍待确定。允许隔离前端代码是后续替换现有受限视觉树路径的设计方向，不代表现行插件已获得 DOM 或额外执行权限。本文不表示已批准或实施架构替换，现行运行合同仍有效。待审阅的模块方案见[轻量化架构提案](../lightweight-architecture-proposal.md)。
++
++后续探索：用户提出终端优先的更小产品范围。[ADR 0012](0012-terminal-transcript-references.md) 记录该路线已确认的引用语义，其中冻结时点调整为用户创建引用时。此调整适用于终端路线；不表示上一版完整平台提案已实施，也不直接修改现行运行行为。
+diff --git a/docs/adr/0012-terminal-transcript-references.md b/docs/adr/0012-terminal-transcript-references.md
+new file mode 100644
+index 0000000..1c218a7
+--- /dev/null
++++ b/docs/adr/0012-terminal-transcript-references.md
+@@ -0,0 +1,13 @@
++---
++status: accepted
++---
++
++# 终端路线传递固定版本的原始 Transcript
++
++在终端优先的候选路线中，用户确认：引用在点击引用时冻结，不要求拦截原生 CLI 的实际提交；可运行的 Agent 与支持完整会话引用的 Agent 分开定义，没有可靠历史入口的 CLI 可运行，引用需要手动导入。该路线围绕原生 CLI、会话列表与 Git/文件等扩展面板展开，尚未决定终端引擎或批准实施。
++
++跨 Agent 引用直接传递来源 Agent 的原始 transcript。允许默认附带部分原文，完整捕获版本可通过 MCP 等按需读取机制提供。原始 transcript 是来源 Agent 保存或导出的会话记录，保留其格式和内容；不以屏幕滚动记录或生成摘要替代原始历史，也不要求先转换成 Aibo 统一聊天模型才能引用。
++
++摘录与完整读取必须指向同一固定版本，不能先附带旧摘录、随后读取来源文件的最新内容。“完整”指已捕获的 transcript 范围，不暗示能恢复厂商未记录的消息、附件文件字节或执行状态。该路线替代 [ADR 0011](0011-maintenance-simplification-scope.md) 中发送时冻结的选择，以减少对原生 CLI 输入状态及提交 Hook 的依赖；现行运行合同不变。
++
++尚待确定：默认摘录选择和大小预算、来源仍在写入时的捕获边界、引用在原生输入框中的交付方式，以及快照保留策略。无需解析整个 Agent 执行协议，但自动选择完整消息或轮次仍可能需要每种 transcript 格式的小型读取适配器；原文保留与用于定位的索引应分开。
