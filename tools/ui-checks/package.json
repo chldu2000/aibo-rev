@@ -1,0 +1,17 @@
+{
+  "name": "aibo-rev-ui-checks",
+  "private": true,
+  "type": "module",
+  "description": "Local verification for docs/design/ui-requirements.md",
+  "scripts": {
+    "check": "node run.mjs all",
+    "static": "node run.mjs static",
+    "requirements": "node run.mjs requirements",
+    "tokens": "node build-tokens.mjs",
+    "e2e": "node run.mjs e2e"
+  },
+  "devDependencies": {
+    "axe-core": "^4.14.0",
+    "playwright-core": "1.65.0"
+  }
+}

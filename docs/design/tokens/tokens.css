@@ -1,0 +1,101 @@
+/* 由 tools/ui-checks/build-tokens.mjs 从 tokens.json 生成，请勿手改。 */
+:root, [data-theme="light"] {
+  --bg: #FBFBFA;
+  --surface: #F3F3F1;
+  --raised: #FFFFFF;
+  --border: #E3E3DF;
+  --border-strong: #D2D2CC;
+  --text: #1C1C1A;
+  --muted: #6A6A65;
+  --hover: rgba(0,0,0,.045);
+  --select: rgba(76,91,212,.10);
+  --accent: #4C5BD4;
+  --on-accent: #FFFFFF;
+  --attention: #966319;
+  --danger: #C93B3B;
+  --success: #297C4D;
+  --unknown: #8357BD;
+  --attention-bg: rgba(183,121,31,.08);
+  --danger-bg: rgba(201,59,59,.07);
+  --unknown-bg: rgba(138,92,199,.08);
+  --user-bg: #F1F1EE;
+  --bubble: #ECEDF6;
+  --code-bg: #F3F3F0;
+  --shadow: 0 8px 28px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.08);
+  --tooltip-bg: #242426;
+  --tooltip-text: #FFFFFF;
+  --scrim: rgba(0,0,0,.28);
+  --mark: rgba(255,200,0,.35);
+}
+
+[data-theme="dark"] {
+  --bg: #151517;
+  --surface: #1B1B1E;
+  --raised: #222226;
+  --border: #2C2C31;
+  --border-strong: #3A3A40;
+  --text: #E7E7E4;
+  --muted: #9A9AA0;
+  --hover: rgba(255,255,255,.05);
+  --select: rgba(140,151,255,.14);
+  --accent: #8C97FF;
+  --on-accent: #12131C;
+  --attention: #E0A748;
+  --danger: #F07070;
+  --success: #5CC48A;
+  --unknown: #B490F0;
+  --attention-bg: rgba(224,167,72,.10);
+  --danger-bg: rgba(240,112,112,.09);
+  --unknown-bg: rgba(180,144,240,.10);
+  --user-bg: #1E1E22;
+  --bubble: #2A2B36;
+  --code-bg: #1C1C20;
+  --shadow: 0 10px 32px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+  --tooltip-bg: #3A3A40;
+  --tooltip-text: #FFFFFF;
+  --scrim: rgba(0,0,0,.5);
+  --mark: rgba(255,200,0,.28);
+}
+
+:root {
+  --font-ui: -apple-system, "Segoe UI Variable", "Segoe UI", "PingFang SC", "Microsoft YaHei UI", sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-size-min: 12px;
+  --font-size-ui: 13px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --font-size-title: 15px;
+  --font-line-ui: 1.45;
+  --font-line-body: 1.6;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-control: 6px;
+  --radius-card: 8px;
+  --radius-popover: 10px;
+  --radius-bubble: 14px;
+  --radius-pill: 999px;
+  --size-control: 28px;
+  --size-control-sm: 24px;
+  --size-hit-min: 24px;
+  --size-header: 44px;
+  --size-sidebar: 240px;
+  --size-tool-bar: 44px;
+  --size-tool-panel: 360px;
+  --size-stream-max: 760px;
+  --size-window-min-width: 960px;
+  --size-window-min-height: 600px;
+  --z-popover: 50;
+  --z-menu: 60;
+  --z-toast: 70;
+  --z-tooltip: 80;
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-easing: cubic-bezier(.2, 0, 0, 1);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 1px;
+}

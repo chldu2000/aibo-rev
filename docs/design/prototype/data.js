@@ -51,7 +51,7 @@ const ICONS = {
 
 const AGENTS = {
   claude: {
-    name: 'Claude Code', short: 'CC', color: '#C46A47', adapter: 'claude-agent-acp 0.9.2', verified: true, ok: true,
+    name: 'Claude Code', short: 'CC', color: '#B05F40', adapter: 'claude-agent-acp 0.9.2', verified: true, ok: true,
     steer: false, steerWhy: '此 Agent/适配器组合的插话存在回退歧义，尚未启用。可以排队，或停止后发送。',
     goal: true, goalPause: false, goalPauseWhy: '此 Agent 只提供设置与清除目标，不支持暂停/恢复。',
     models: ['Claude Opus 5.5', 'Claude Sonnet 5.5', 'Claude Haiku 5.5'], reasoning: ['低', '中', '高'],
@@ -71,7 +71,7 @@ const AGENTS = {
     fast: false, fastWhy: '此 Agent 未提供服务档位选项。', modes: ['默认', '自动'], fullRead: false,
   },
   opencode: {
-    name: 'OpenCode', short: 'OC', color: '#777', adapter: '通用 ACP 模板', verified: false, ok: false,
+    name: 'OpenCode', short: 'OC', color: '#757575', adapter: '通用 ACP 模板', verified: false, ok: false,
     okWhy: '未找到可执行文件 opencode（已检查 PATH 与 ~/.local/bin）。',
   },
 };

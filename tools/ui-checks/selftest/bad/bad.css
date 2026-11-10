@@ -1,0 +1,9 @@
+/* 每条规则至少命中一次；用于 run.mjs selftest */
+:root { --attention: #B7791F; }
+.card.attention { border-left: 3px solid var(--attention); }
+.row.active { box-shadow: inset 3px 0 0 var(--accent); }
+.item.active::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; background: var(--accent); }
+.tip { background: #222; color: white; }
+.badge { font-size: 11px; }
+.input { outline: none; }
+@keyframes pulse { 50% { opacity: .4; } }

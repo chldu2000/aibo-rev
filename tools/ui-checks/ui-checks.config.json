@@ -1,0 +1,19 @@
+{
+  "$description": "ui-checks 的检查范围与验收目标。实现目录建立后把它加入 styleRoots/copyRoots，并新增一个 target。",
+  "requirements": "docs/design/ui-requirements.md",
+  "inventory": "docs/refactor-feature-inventory.md",
+  "tokens": "docs/design/tokens/tokens.json",
+  "tokensCss": "docs/design/tokens/tokens.css",
+  "styleRoots": ["docs/design/prototype", "prototypes/stream-composer/src"],
+  "copyRoots": ["docs/design/prototype", "prototypes/stream-composer/src"],
+  "forbiddenCopy": ["视为已停止", "即将推出", "敬请期待", "Coming soon", "coming soon", "发送成功"],
+  "defaultTarget": "static-prototype",
+  "targets": {
+    "static-prototype": {
+      "$description": "静态原型（docs/design/prototype），仅用于演示验收脚本；不提供性能夹具。",
+      "serve": "docs/design",
+      "path": "/prototype/index.html",
+      "fixtures": ["running-approval", "delivery-unknown", "pending-question", "turn-failed", "untrusted", "idle-empty", "restart", "save-failure"]
+    }
+  }
+}

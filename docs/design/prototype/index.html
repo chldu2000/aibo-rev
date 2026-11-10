@@ -15,15 +15,15 @@
     <section id="sessionView" class="session-view">
       <header id="shead" class="shead"></header>
       <div class="stream-wrap">
-        <div id="stream" class="stream" role="log" aria-live="polite"></div>
-        <button id="newContent" class="new-content" data-a="scrollBottom" hidden>↓ 有新内容</button>
+        <div id="stream" class="stream" role="log" aria-live="polite" aria-label="会话流" tabindex="0" data-testid="stream"></div>
+        <button id="newContent" class="new-content" data-a="scrollBottom" data-testid="new-content" hidden>↓ 有新内容</button>
       </div>
       <div id="composerWrap" class="composer-wrap">
         <div id="pending"></div>
-        <div id="picker" class="picker" hidden></div>
+        <div id="picker" class="picker" data-testid="trigger-picker" hidden></div>
         <div class="composer">
           <div id="chips" class="chips"></div>
-          <textarea id="ta" rows="3" placeholder="输入消息。@ 文件/目录　# 引用会话　/ 命令与 Skills" aria-label="消息输入"></textarea>
+          <textarea id="ta" rows="3" placeholder="输入消息。@ 文件/目录　# 引用会话　/ 命令与 Skills" aria-label="消息输入" data-testid="composer-input"></textarea>
           <div id="cbar" class="cbar"></div>
         </div>
         <div id="settingsBar" class="settings-bar"></div>
@@ -35,7 +35,7 @@
 </div>
 <div id="overlay"></div>
 <div id="toasts" class="toasts" aria-live="polite"></div>
-<div id="scenario" class="scenario"></div>
+<div id="scenario" class="scenario" data-ui-check="ignore"></div>
 <script src="data.js"></script>
 <script src="render.js"></script>
 <script src="actions.js"></script>

@@ -6,21 +6,29 @@ const clearTimers = (s) => { (s.timers || []).forEach(clearTimeout); s.timers = 
 const push = (s, it) => { s.items.push(it); return it; };
 
 /* ---------- overlay helpers ---------- */
-function closeOverlay() { $('#overlay').innerHTML = ''; S.palette = null; S.menuFns = null; S.modalFns = null; }
-function showModal({ title, body, actions }) {
+function closeOverlay() {
+  $('#overlay').innerHTML = ''; S.palette = null; S.menuFns = null; S.modalFns = null;
+  // 关闭弹层后焦点回到触发元素（UI-A11Y-02）
+  const back = S.returnFocus; S.returnFocus = null;
+  if (back && back.isConnected) back.focus();
+}
+function showModal({ title, body, actions, testid = 'confirm-dialog' }) {
   S.modalFns = actions.map((a) => a.fn);
-  $('#overlay').innerHTML = `<div class="scrim" data-a="scrim"><div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><h2>${title}</h2><div class="mb">${body}</div>
+  if (!S.returnFocus && document.activeElement !== document.body) S.returnFocus = document.activeElement;
+  $('#overlay').innerHTML = `<div class="scrim" data-a="scrim"><div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}" data-testid="${testid}"><h2>${title}</h2><div class="mb">${body}</div>
     <div class="mf">${actions.map((a, i) => `<button class="btn ${a.cls || ''}" data-a="modalAct" data-i="${i}" ${a.dis ? 'disabled' : ''}>${a.label}</button>`).join('')}</div></div></div>`;
   const b = $('#overlay .mf .btn.primary, #overlay .mf .btn.solid') || $('#overlay .mf .btn'); b && b.focus();
 }
 function showMenu(anchor, items) {
+  S.returnFocus = anchor;
   const r = anchor.getBoundingClientRect();
   S.menuFns = items.map((x) => x.fn);
   $('#overlay').innerHTML = `<div class="scrim" data-a="scrim" style="background:transparent"></div><div class="menu" role="menu">${items.map((x, i) => x === 'sep' ? '<div class="sep"></div>' : x.h ? `<div class="mh">${x.h}</div>`
-    : `<div class="mi ${x.dis ? 'dis' : ''}" role="menuitem" tabindex="0" data-a="${x.dis ? '' : 'menuAct'}" data-i="${i}" ${x.tip ? `title="${esc(x.tip)}"` : ''}>${x.label}${x.d ? `<span class="d">${x.d}</span>` : ''}</div>`).join('')}</div>`;
+    : `<div class="mi ${x.dis ? 'dis' : ''}" role="menuitem" tabindex="0" ${x.dis ? 'aria-disabled="true"' : ''} data-a="${x.dis ? '' : 'menuAct'}" data-i="${i}" ${x.tip ? `title="${esc(x.tip)}"` : ''}>${x.label}${x.d ? `<span class="d">${x.d}</span>` : ''}</div>`).join('')}</div>`;
   const m = $('#overlay .menu');
   const top = r.bottom + 4 + m.offsetHeight > innerHeight ? r.top - m.offsetHeight - 4 : r.bottom + 4;
   m.style.top = top + 'px'; m.style.left = Math.min(r.left, innerWidth - m.offsetWidth - 8) + 'px';
+  m.querySelector('.mi:not(.dis)')?.focus();
 }
 function toast(text, actions = [], ms = 5000) {
   const el = document.createElement('div'); el.className = 'toast';
@@ -153,7 +161,7 @@ function renderPalette() {
   const P = S.palette, G = paletteResults(); P.flat = G.flatMap((g) => g[1]); P.idx = Math.min(P.idx, Math.max(0, P.flat.length - 1));
   let n = 0;
   const scopes = [['all', '全部'], ['cmd', '> 命令'], ['sess', '# 会话'], ['msg', '? 消息'], ['file', '@ 文件']];
-  const html = `<div class="scrim" data-a="scrim"><div class="palette" role="dialog" aria-label="搜索与命令">
+  const html = `<div class="scrim" data-a="scrim"><div class="palette" role="dialog" aria-label="搜索与命令" data-testid="command-palette">
     <div class="pin">${icon('search')}<input id="pq" value="${esc(P.q)}" placeholder="搜索会话、消息、文件、命令与设置…" autocomplete="off"><span class="kbd">Esc</span></div>
     <div class="scopes">${scopes.map(([kk, n2]) => `<button class="scope ${P.scope === kk ? 'on' : ''}" data-a="pscope" data-s="${kk}">${n2}</button>`).join('')}<span style="flex:1"></span><button class="scope on">全部工作区</button><button class="scope on">含已归档</button></div>
     <div class="res">${G.length ? G.map(([gname, rs]) => `<div class="grp">${gname}</div>` + rs.map((r) => `<div class="r ${n === P.idx ? 'on' : ''}" data-a="prun" data-i="${n++}">${icon(r.ic, 'sm')}<div class="rt"><div>${r.t}</div>${r.sub ? `<div class="sub">${r.sub}</div>` : ''}</div>${r.kb ? `<span class="kbd">${r.kb}</span>` : ''}</div>`).join('')).join('') : '<div class="grp">没有结果。可以切换到“全部”范围，或在文件搜索中包含隐藏文件。</div>'}</div>
@@ -171,7 +179,8 @@ function jumpTo(sid, idx) {
 /* ---------- actions ---------- */
 const A = {
   open(el, id) {
-    id = id || el.dataset.id; const prev = cur();
+    // 点击分发时第二个参数是 dataset，只接受字符串形式的会话 ID
+    id = typeof id === 'string' ? id : el.dataset.id; const prev = cur();
     if (prev) { S.drafts[prev.id] = ta.value; (S.scrollPos = S.scrollPos || {})[prev.id] = $('#stream').scrollTop; }
     S.current = id; S.view = 'session'; S.drill = null; S.pop = null; closePicker(); closeOverlay();
     ta.value = S.drafts[id] || ''; renderAll('restore');
@@ -184,7 +193,7 @@ const A = {
   pin(el) { const s = sess(el.dataset.id); s.pinned = !s.pinned; renderSidebar(); toast(s.pinned ? '已置顶' : '已取消置顶', [], 1500); },
   details() {
     const s = cur();
-    showModal({ title: `会话详情 · ${esc(s.title)}`, body: `<div class="hint" style="margin-bottom:10px">这些信息默认不在工作台中展示，主要用于排查问题。</div>${contextHtml(s)}`, actions: [{ label: '关闭' }] });
+    showModal({ testid: 'session-details', title: `会话详情 · ${esc(s.title)}`, body: `<div class="hint" style="margin-bottom:10px">这些信息默认不在工作台中展示，主要用于排查问题。</div>${contextHtml(s)}`, actions: [{ label: '关闭' }] });
   },
   headMenu(el) {
     const s = cur();
@@ -305,9 +314,9 @@ const A = {
     const body = () => `<label class="hint">工作区</label><select id="nsWs" class="fld" style="margin-bottom:10px">${S.workspaces.map((w) => `<option value="${w.id}" ${w.id === wsId ? 'selected' : ''}>${esc(w.name)}${w.trusted ? '' : '（未信任）'}</option>`).join('')}</select>
       ${Object.entries(AGENTS).map(([id, a]) => `<div class="agent-opt ${id === pickA ? 'sel' : ''}" data-a="nsPick" data-id="${id}">${mark(a)}<div class="grow"><div>${a.name} ${a.verified ? '<span class="tag success">已验证</span>' : '<span class="tag unknown">未验证组合</span>'}</div><div class="hint ${a.ok ? '' : 'warn'}">${a.ok ? `${a.adapter} · 可执行文件与认证检查通过` : a.okWhy}</div></div></div>`).join('')}`;
     S.nsPick = (id) => { pickA = id; $('#overlay .mb').innerHTML = body(); const ok = AGENTS[id].ok, b = $('#overlay .mf .primary'); b.disabled = !ok; b.title = ok ? '' : AGENTS[id].okWhy; };
-    showModal({ title: '新建会话', body: body(), actions: [{ label: '取消' }, { label: '创建 ⏎', cls: 'primary', fn: () => {
+    showModal({ testid: 'new-session-dialog', title: '新建会话', body: body(), actions: [{ label: '取消' }, { label: '创建 ⏎', cls: 'primary', fn: () => {
       const a = AGENTS[pickA], w = $('#nsWs')?.value || wsId, id = 'n' + Date.now();
-      S.sessions.unshift({ id, ws: w, title: '新会话', agent: pickA, model: a.models[0], reasoning: a.reasoning[1] || a.reasoning[0] || '', fast: false, mode: a.modes[1] || a.modes[0], ctx: a.reasoning.length ? [0, 200] : null, running: false, updated: '刚刚', queue: [], queuePaused: null, goal: null, subagents: [], tasks: [], items: [] });
+      S.sessions.unshift({ id, last: Date.now(), ws: w, title: '新会话', agent: pickA, model: a.models[0], reasoning: a.reasoning[1] || a.reasoning[0] || '', fast: false, mode: a.modes[1] || a.modes[0], ctx: a.reasoning.length ? [0, 200] : null, running: false, updated: '刚刚', queue: [], queuePaused: null, goal: null, subagents: [], tasks: [], items: [] });
       A.open(null, id); ta.focus();
     } }] });
     S.wsPick = wsId;
@@ -315,7 +324,7 @@ const A = {
   nsPick(el) { S.nsPick(el.dataset.id); },
   sessMenu(el, _, e) {
     e.stopPropagation(); const s = sess(el.dataset.id);
-    showMenu(el, [{ label: s.pinned ? '取消置顶' : '置顶', fn: () => A.pin({ dataset: { id: s.id } }) }, { label: '改名', d: 'F2', fn: () => { S.renaming = s.id; renderSidebar(); } }, { label: '归档', fn: () => archive(s) }, { label: '复制会话信息', fn: () => toast('已复制会话信息') }, 'sep', { label: '关闭会话', d: '默认界面不提供', dis: true, tip: '默认工作台用会话列表切换；离开会话不会结束执行。' }]);
+    showMenu(el, [{ label: s.pinned ? '取消置顶' : '置顶', fn: () => A.pin({ dataset: { id: s.id } }) }, { label: '改名', d: 'F2', fn: () => { S.renaming = s.id; renderSidebar(); } }, { label: '归档', fn: () => archive(s) }, { label: '复制会话信息', fn: () => toast('已复制会话信息') }]);
   },
   wsMenu(el, _, e) {
     e.stopPropagation(); const w = S.workspaces.find((x) => x.id === el.dataset.id);
@@ -424,6 +433,16 @@ document.addEventListener('click', (e) => {
 });
 document.addEventListener('dblclick', (e) => { const t = e.target.closest('[data-a2="rename"]'); if (t) { S.renaming = t.dataset.id; renderSidebar(); } });
 document.addEventListener('keydown', (e) => {
+  // 非 button 元素上的 role=button/radio/menuitem 支持 Enter/Space 激活；菜单内 ↑↓ 移动焦点
+  const roleEl = e.target.closest?.('[role="button"], [role="radio"], [role="menuitem"]');
+  if (roleEl && roleEl.tagName !== 'BUTTON' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); roleEl.click(); return; }
+  if (e.target.matches?.('.menu .mi') && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+    e.preventDefault();
+    const items = [...document.querySelectorAll('.menu .mi:not(.dis)')];
+    const i = items.indexOf(e.target);
+    items[(i + (e.key === 'ArrowDown' ? 1 : items.length - 1)) % items.length]?.focus();
+    return;
+  }
   const ri = e.target.id === 'renameInput';
   if (ri) { if (e.key === 'Enter' || e.key === 'Escape') { if (e.key === 'Enter') sess(S.renaming).title = e.target.value.trim() || sess(S.renaming).title; S.renaming = null; renderAll(); } return; }
   const mod = e.metaKey || e.ctrlKey;
@@ -475,6 +494,28 @@ setInterval(() => { if (S.view === 'session' && cur().running) renderHead(); }, 
 addEventListener('resize', () => { if (innerWidth < 1180 && S.tool) { S.tool = null; renderTools(); } });
 
 renderScenario();
+
+/* ---------- 验收夹具（docs/design/ui-requirements.md §11.2） ---------- */
+const FIXTURES = {
+  'running-approval': () => { S.current = 's1'; },
+  'delivery-unknown': () => { S.current = 's2'; },
+  'pending-question': () => { S.current = 's3'; },
+  'turn-failed': () => { S.current = 's4'; },
+  untrusted: () => { S.current = 's5'; },
+  'idle-empty': () => {
+    S.sessions.unshift({ id: 'fx-idle', last: Date.now(), ws: 'rev', title: '新会话', agent: 'codex', model: 'gpt-5.5-codex', reasoning: '中', fast: false, mode: '询问', ctx: [0, 272], running: false, updated: '刚刚', queue: [], queuePaused: null, goal: null, subagents: [], tasks: [], items: [] });
+    S.current = 'fx-idle';
+  },
+  restart: () => { S.current = 's1'; },
+  'save-failure': () => { S.current = 's1'; S.saveFail = true; },
+};
+const fixture = new URLSearchParams(location.search).get('fixture');
+if (fixture && !FIXTURES[fixture]) {
+  document.body.innerHTML = `<pre data-testid="fixture-error">未知夹具：${esc(fixture)}</pre>`;
+  throw new Error(`unknown fixture: ${fixture}`);
+}
+if (fixture) FIXTURES[fixture]();
 ta.value = S.drafts[S.current] || '';
 renderAll('bottom');
+if (fixture === 'restart') SC.restart();
 requestAnimationFrame(() => A.scrollBottom());
