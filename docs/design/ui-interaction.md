@@ -12,6 +12,7 @@ Status: draft（2026-11-04；2026-11-10 按用户第一轮反馈修订）
 | 已确认前提 | 来源 |
 | --- | --- |
 | 桌面容器为 MyGO；默认 UI 与外部呈现包都走系统 WebView（macOS WKWebView / Windows WebView2）。原生 UI 只用于呈现失效时的恢复入口等少量宿主窗口 | 用户 2026-11-04 |
+| 宿主用 Go；默认呈现用 Svelte 5 + Bits UI + virtua，流式 Markdown 用 markdown-it，代码高亮用 Shiki | 用户 2026-11-10，[ADR 0003](../adr/0003-desktop-and-ui-stack.md) |
 | 视觉方向：克制的开发者工具风；浅色、深色同等对待 | 用户 2026-11-04 |
 | 布局：左为工作区/会话列表，中为会话视图；会话的活动和队列以标签/徽标形式放在输入框上方；右侧留给能力插件提供的界面（Git、终端等） | 用户 2026-11-04、2026-11-10 |
 | 用户消息使用聊天气泡；审批卡留在会话流中；Windows 常驻通知区域图标；会话按最近活动排序并允许置顶；第一版不开放自定义快捷键 | 用户 2026-11-10 |
@@ -21,7 +22,7 @@ Status: draft（2026-11-04；2026-11-10 按用户第一轮反馈修订）
 | 引用在加入输入框时固定版本；默认最近 3 轮，单条 12,000 字符，单次合计 32,000 字符 | [06 历史与引用](../../.scratch/aibo-rev-architecture/issues/06-history-reference-authority.md#answer)、[10 数据所有权](../../.scratch/aibo-rev-architecture/issues/10-data-ownership-and-search.md#answer) |
 | 目标、回合、队列、后台任务分别表示与控制 | [08 目标与后台任务](../../.scratch/aibo-rev-architecture/issues/08-goals-and-background-work.md#answer) |
 
-本方案**不决定**：前端框架、组件库、共享交互模块的方法名与传输格式（归 [11 模块与桌面架构](../../.scratch/aibo-rev-architecture/issues/11-module-and-desktop-architecture.md)）；外部呈现包的视觉。默认 UI 只使用公开呈现接口，不依赖外部包拿不到的私有入口。
+本方案**不决定**：共享交互模块的位置、方法名与传输格式（归 [11 模块与桌面架构](../../.scratch/aibo-rev-architecture/issues/11-module-and-desktop-architecture.md)）；外部呈现包的视觉。默认 UI 只使用公开呈现接口，不依赖外部包拿不到的私有入口。
 
 范围以 [Checklist](../refactor-feature-inventory.md) 已勾选的 85 项为准。回合检查点、文件预览、Agent 设置页等未勾选项不在默认界面中预留空位，也不放“即将推出”的占位入口。
 

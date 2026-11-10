@@ -33,6 +33,8 @@ Blocked by: 02, 03, 05, 07, 09, 10, 13
 
 ## Comments
 
+2026-11-10：用户决定桌面容器为 MyGO（系统 WebView 路线）、宿主语言为 Go、默认呈现为 Svelte 5 + Bits UI + virtua（markdown-it、Shiki），记录于 [ADR 0003](../../../docs/adr/0003-desktop-and-ui-stack.md)。本条取代下方关于该组件栈“仍不构成正式选型”的说法；MyGO 内的运行验证改为选型后的必做验证。本票继续开放，剩余问题为进程部署、共享无界面交互模块的位置与语言、公开呈现接口的传输与格式、存储与索引、ACP 接入实现及工具面板装载。
+
 2026-11-10：默认 UI 组件栈候选 Svelte 5 + Bits UI + virtua（流式 Markdown 用 markdown-it，代码高亮用 Shiki）已完成会话流与输入区的浏览器验证，见 [`prototypes/stream-composer`](../../../prototypes/stream-composer/README.md) 与[设计文档 §15.1](../../../docs/design/ui-interaction.md#151-验证记录会话流与输入区2026-11-10)。对本票的约束：代码高亮等重计算须放在 Web Worker（MyGO 的资源协议需支持模块 Worker）；该栈尚未在 MyGO 的 WKWebView/WebView2 中运行，中文 IME 未实测，因此仍不构成正式选型。
 
 2026-11-10：范围新增 F17.1、F17.5。[09 修订](09-package-lifecycle.md#2026-11-10-修订能力包的工具面板)允许能力包贡献工具面板，本票须一并选择面板的装载方式（同文档、独立文档或独立 WebView）、接口格式、与工作区/会话的绑定及面板级故障恢复；不预设沿用旧 `toolView` 合同。

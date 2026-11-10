@@ -4,11 +4,12 @@
 
 当前进入架构决策阶段，依据已勾选的核心功能，通过决策地图明确实现路线，尚未开始产品实现。“彻底重构”不预先等于重写全部代码、照搬全部旧合同或删除旧数据。终端优先、CLI 配合 GUI 阅读及 VS Code 扩展保留为历史备选，不再作为当前主线。
 
-2026-11-04 阶段记录：全 ACP、框架中立、会话控制、历史引用、扩展生命周期和数据所有权等架构基线已形成；用户认可跨框架呈现原型基本通过。正式技术栈、用户界面与交互方案后续单独设计，暂不指定设计系统或呈现风格。原型代码与证据保留在 `prototype/presentation-conformance` 分支（`83ac7e8`），不作为正式实现选型。
+2026-11-04 阶段记录：全 ACP、框架中立、会话控制、历史引用、扩展生命周期和数据所有权等架构基线已形成；用户认可跨框架呈现原型基本通过。正式技术栈、用户界面与交互方案后续单独设计，暂不指定设计系统或呈现风格（2026-11-10 已确定技术栈与默认界面方案，见下方阅读入口）。原型代码与证据保留在 `prototype/presentation-conformance` 分支（`83ac7e8`），不作为正式实现选型。
 
 ## 阅读入口
 
 - [当前方向](docs/adr/0002-aibo-refactor-direction.md)：以现有 Aibo 为基线推进彻底重构。
+- [技术栈](docs/adr/0003-desktop-and-ui-stack.md)：MyGO + 系统 WebView、Go 宿主、默认呈现 Svelte 5 + Bits UI + virtua（2026-11-10）。
 - [全 ACP 与框架中立架构地图](.scratch/aibo-rev-architecture/map.md)：本轮约束、已完成研究与逐项架构决策的入口。
 - [完整版本功能 Checklist](docs/refactor-feature-inventory.md)：手动勾选完整版本必需的特性，包含已有功能、数据治理和新增候选。
 - [数据生命周期盘点](docs/data-lifecycle-inventory.md)：数据放大来源、已有治理和仍需完成的能力。
