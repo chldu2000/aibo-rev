@@ -13,6 +13,7 @@
 - [完整版本功能 Checklist](docs/refactor-feature-inventory.md)：手动勾选完整版本必需的特性，包含已有功能、数据治理和新增候选。
 - [数据生命周期盘点](docs/data-lifecycle-inventory.md)：数据放大来源、已有治理和仍需完成的能力。
 - [Zed / ACP 实现研究](docs/zed-acp-research.md)：统一会话呈现的源码路径、适配边界及对重构的启发。
+- [默认工作台界面与交互方案](docs/design/ui-interaction.md)：MyGO + WebView 下的布局、关键流程、运行控制与恢复交互，附可点击原型（草案）。
 - [MyGo 桌面方案调研](docs/research/mygo-desktop-evaluation.md)：构建链、WebView 与原生 UI 路线、发布成熟度及 Aibo 的验证边界。
 - [领域词汇](CONTEXT.md)：业务历史、恢复、审计、过程明细和派生数据的区别。
 - [讨论记录](docs/discussion.md)：方向演进及尚未定案的取舍。

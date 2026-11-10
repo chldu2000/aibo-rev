@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light" data-platform="mac">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aibo Rev · 默认工作台原型</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app" class="app">
+  <aside id="sidebar" class="sidebar" aria-label="工作区与会话"></aside>
+  <main id="main" class="main">
+    <div id="winctl" class="winctl" aria-hidden="true"><span>—</span><span>☐</span><span>✕</span></div>
+    <div id="banners"></div>
+    <section id="sessionView" class="session-view">
+      <header id="shead" class="shead"></header>
+      <div class="stream-wrap">
+        <div id="stream" class="stream" role="log" aria-live="polite"></div>
+        <button id="newContent" class="new-content" data-a="scrollBottom" hidden>↓ 有新内容</button>
+      </div>
+      <div id="composerWrap" class="composer-wrap">
+        <div id="pending"></div>
+        <div id="picker" class="picker" hidden></div>
+        <div class="composer">
+          <div id="chips" class="chips"></div>
+          <textarea id="ta" rows="3" placeholder="输入消息。@ 文件/目录　# 引用会话　/ 命令与 Skills" aria-label="消息输入"></textarea>
+          <div id="cbar" class="cbar"></div>
+        </div>
+        <div id="settingsBar" class="settings-bar"></div>
+      </div>
+    </section>
+    <section id="otherView" class="other-view" hidden></section>
+  </main>
+  <aside id="inspector" class="inspector" aria-label="检视栏"></aside>
+</div>
+<div id="overlay"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="scenario" class="scenario"></div>
+<script src="data.js"></script>
+<script src="render.js"></script>
+<script src="actions.js"></script>
+</body>
+</html>
