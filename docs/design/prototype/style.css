@@ -129,7 +129,6 @@ svg.i.sm { width: 14px; height: 14px; }
 .srow { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 6px 0 10px; border-radius: 6px; cursor: pointer; position: relative; }
 .srow:hover { background: var(--hover); }
 .srow.active { background: var(--select); }
-.srow.active::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 2px; border-radius: 2px; background: var(--accent); }
 .srow .dotbox { width: 10px; display: grid; place-items: center; }
 .srow .title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .srow .meta { font-size: 12px; color: var(--muted); }
@@ -198,9 +197,10 @@ svg.i.sm { width: 14px; height: 14px; }
 .subfold div { padding: 3px 0; color: var(--muted); }
 
 .card { border: 1px solid var(--border); border-radius: 8px; background: var(--raised); padding: 12px 14px; }
-.card.attention { border-left: 3px solid var(--attention); }
-.card.danger { border-left: 3px solid var(--danger); }
-.card.unknown { border: 1px dashed var(--unknown); border-left: 3px solid var(--unknown); }
+/* 状态卡：整圈细边框 + 浅底色，不使用一侧加粗的信号条（设计文档 §2.4） */
+.card.attention { border-color: color-mix(in srgb, var(--attention) 45%, var(--border)); background: color-mix(in srgb, var(--attention-bg) 100%, var(--raised)); }
+.card.danger { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger-bg) 100%, var(--raised)); }
+.card.unknown { border: 1px dashed var(--unknown); background: color-mix(in srgb, var(--unknown-bg) 100%, var(--raised)); }
 .card.expired { opacity: .7; border-style: dashed; }
 .card .ct { display: flex; align-items: center; gap: 6px; font-weight: 600; margin-bottom: 8px; }
 .card .ct .i { color: var(--attention); }

@@ -1,0 +1,30 @@
+{
+  "name": "aibo-rev-stream-composer-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Throwaway experiment: session stream and composer on Svelte 5 + Bits UI + virtua",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "playwright-core": "^1.65.0",
+    "svelte": "^5.57.3",
+    "svelte-check": "^4.7.8",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.7"
+  },
+  "dependencies": {
+    "@shikijs/engine-javascript": "4.6.0",
+    "@shikijs/langs": "4.6.0",
+    "@shikijs/themes": "4.6.0",
+    "@types/markdown-it": "^14.2.0",
+    "bits-ui": "^2.20.6",
+    "markdown-it": "^15.0.3",
+    "shiki": "^4.6.0",
+    "virtua": "^0.54.2"
+  }
+}

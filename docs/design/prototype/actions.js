@@ -79,7 +79,7 @@ function finishStop(s) {
 /* ---------- picker ---------- */
 function detectTrig() {
   const pos = ta.selectionStart, v = ta.value.slice(0, pos);
-  const m = v.match(/(^|\s)([@#/])([^\s@#/]*)$/);
+  const m = v.match(/(^|\s)([@#/])(\S*)$/); // 查询部分允许包含 /，以便输入路径
   if (!m) return closePicker();
   S.trig = { ch: m[2], start: pos - m[3].length - 1, q: m[3].toLowerCase() }; S.pickIdx = 0; renderPicker();
 }

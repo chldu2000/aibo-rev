@@ -33,6 +33,8 @@ Blocked by: 02, 03, 05, 07, 09, 10, 13
 
 ## Comments
 
+2026-11-10：默认 UI 组件栈候选 Svelte 5 + Bits UI + virtua（流式 Markdown 用 markdown-it，代码高亮用 Shiki）已完成会话流与输入区的浏览器验证，见 [`prototypes/stream-composer`](../../../prototypes/stream-composer/README.md) 与[设计文档 §15.1](../../../docs/design/ui-interaction.md#151-验证记录会话流与输入区2026-11-10)。对本票的约束：代码高亮等重计算须放在 Web Worker（MyGO 的资源协议需支持模块 Worker）；该栈尚未在 MyGO 的 WKWebView/WebView2 中运行，中文 IME 未实测，因此仍不构成正式选型。
+
 2026-11-10：范围新增 F17.1、F17.5。[09 修订](09-package-lifecycle.md#2026-11-10-修订能力包的工具面板)允许能力包贡献工具面板，本票须一并选择面板的装载方式（同文档、独立文档或独立 WebView）、接口格式、与工作区/会话的绑定及面板级故障恢复；不预设沿用旧 `toolView` 合同。
 
 2026-11-04，用户认可前序原型基本通过，并明确后续单独设计正式技术栈、用户界面与交互方案。本票保留 open/unassigned，作为后续正式设计输入；本次主架构文档提交不认领或继续解决本票，也不将原型代码提升为默认实现。界面布局、控件与交互细节另行设计，已有业务约束的变更仍需明确记录。
