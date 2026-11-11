@@ -117,6 +117,20 @@ Status: active（2026-11-10；2026-11-11 改为 MyGO 原生 UI，见 [ADR 0006](
 - 验收：静态检查没有未说明的 `NonMotion`；开启减少动态效果后人工核对。
 - 验证：static:reduced-motion
 
+#### UI-VIS-09 · 必须 · 玻璃只用于外框层
+- 条款：Liquid Glass 材质（窗口材质与 `plugins/glass` 的 `Glass`、`ScrollEdge`、`Blur`）只用于侧栏、标题行下的滚动边缘、浮动输入区及其上的控件，以及后续组件设计明确列出的位置。消息、工具卡、审批卡、结果未知卡、代码块与工具面板区不得使用半透明材质，背景保持不透明令牌色。玻璃上的文字在浅色、深色下与常见内容叠放时都须清晰可读。
+- 依据：ui-interaction §2.5；ADR 0007
+- Checklist：F20.1
+- 验收：深浅色截图中，内容滚到玻璃下方时玻璃上的文字可读，内容层没有透出下层。
+- 验证：manual
+
+#### UI-VIS-10 · 必须 · 尊重减少透明度
+- 条款：系统开启“减少透明度”时，所有玻璃与窗口材质改为不透明表面，界面不留透明区域；开启“增强对比度”时玻璃边缘可辨。不得绕过 MyGO 对这两项偏好的处理。
+- 依据：ui-interaction §2.5、§14；ADR 0007
+- Checklist：F20.1
+- 验收：以 `ui.Preferences{ReduceTransparency: true}` 与 `HighContrast: true` 截图，并在真实窗口中开启系统设置后人工核对。
+- 验证：manual
+
 ## 3. 导航与会话目录
 
 #### UI-NAV-01 · 不得 · 独立的关闭会话入口

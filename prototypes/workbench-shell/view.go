@@ -83,12 +83,12 @@ func (app *App) streamView(c *ui.Context, p Palette) {
 	ui.Column(c).Grow(1).AlignItems(ui.Stretch).Selectable().Children(func() {
 		ui.List(c, &app.list, len(app.items), func(i int) {
 			app.guardedItem(c, p, app.items[i])
-		}).Grow(1).Padding(Space4, Space4).Gap(Space4).Justify(ui.End).Label("会话内容")
+		}).Grow(1).Padding(app.streamPad()...).ScrollbarInsets(app.scrollInsets()...).Gap(Space4).Justify(ui.End).Label("会话内容")
 	})
 }
 
 func (app *App) item(c *ui.Context, p Palette, it *Item) {
-	ui.Column(c).AlignSelf(ui.Center).Width(SizeStreamMax).MaxWidth(10000).Children(func() {
+	ui.Column(c).AlignSelf(ui.Center).Width(SizeStreamMax).MaxWidthPercent(100).Children(func() {
 		switch it.Kind {
 		case KindUser:
 			ui.Row(c).Role(ui.RoleGroup).Label("用户消息").Children(func() {
@@ -193,7 +193,11 @@ func (app *App) statusStrip(c *ui.Context, p Palette) {
 }
 
 func (app *App) composer(c *ui.Context, p Palette) {
-	box := ui.Column(c).Border(1, p.BorderStrong).Radius(RadiusCard).Background(p.Raised).Padding(Space2).Gap(Space2)
+	box := ui.Column(c).Gap(Space2)
+	if !app.sh.glass {
+		box.Padding(Space2)
+	}
+	app.composerSurface(box, p)
 	if files := box.DroppedFiles(); files != nil {
 		for _, f := range files {
 			app.chips = append(app.chips, Chip{Kind: "drop", Label: f})

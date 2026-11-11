@@ -77,3 +77,27 @@ open "dist/darwin-arm64/Aibo Shell Prototype.app" --args -log "$PWD/reports/manu
 4. **故障**：用面板“…”菜单让页面卡死，工作台仍能输入和滚动，点“重新载入”恢复；用“故障注入”菜单让各区域 panic，再点“重试”。
 5. **通知**：菜单栏“验证 → 8 秒后发送审批通知”，然后切到别的应用（或先切到“ACP 连接层”会话再关窗口）；首次会请求通知权限；点击通知后，窗口打开、切到“修复队列暂停逻辑”并滚动到新的审批卡。
 6. **VoiceOver**（⌘F5）：依次朗读侧栏会话、会话内容的“用户消息/Agent 回复”分组、输入框“消息”、禁用的“发送”及原因、面板网页内容、分隔条。
+
+## Liquid Glass 外观（2026-11-12，用户已采用，见 ADR 0007）
+
+`./bin/shell -glass`，或在运行中点标题行的“玻璃外观 / 标准外观”切换。玻璃只用在外框层，内容层（消息、工具卡、审批卡、结果未知卡）保持不透明：
+
+| 位置 | 做法 |
+| --- | --- |
+| 侧栏 | 窗口材质 `VibrancySidebar`（系统材质，透出桌面），侧栏与根元素透明 |
+| 会话区顶部 | 会话流铺到标题行下方；标题行下是 `glass.ScrollEdge{Hard: true}`（磨砂边缘）。最初用的 Soft 边缘渐隐太弱，滚到下方的文字会和标题重叠，已改为 Hard |
+| 输入区 | 状态条与输入框放在同一块浮动玻璃 `glass.Glass{}` 上（圆角令牌 `RadiusGlass` = 22），下方用 `ScrollEdge{Bottom}` 渐隐；“有新内容”为可按压的小玻璃按钮 |
+| 工具面板 | 不变（不透明） |
+
+截图（测试器 CPU 绘制，没有窗口材质，侧栏显示为不透明表面）：`reports/shot-standard-light.png`、`shot-glass-light.png`、`shot-glass-dark.png`、`shot-glass-reduce-transparency.png`（玻璃变为不透明表面）、`shot-glass-increase-contrast.png`。生成：`SHOTS=1 CGO_ENABLED=0 go test -run TestShots`。
+
+真实窗口帧耗时（Metal，`MYGO_FRAME_STATS=all ./bin/shell [-glass] -perf reports/perf.done`，流式长回复 + 120 步滚动，单位 ms）：
+
+| 外观 | 流式 中位 / p95 / 最大 | 滚动 中位 / p95 / 最大 |
+| --- | --- | --- |
+| 标准 | 1.3 / 2.6 / 6.6 | 2.5 / 3.4 / 6.0 |
+| 玻璃 | 1.7 / 2.6 / 8.0 | 2.8 / 3.9 / 6.7 |
+
+GPU 上的开销很小。CPU 回退（无 GPU 时）按 MyGO 文档每帧可达 30–70 ms，本机未测。
+
+同时修正了外壳原型的一个布局错误：工具面板展开时会话区比 `SizeStreamMax` 窄，内容两侧被裁掉。改为 `Width(SizeStreamMax).MaxWidthPercent(100)`（相当于 CSS 的 `min(宽度, 100%)`）。

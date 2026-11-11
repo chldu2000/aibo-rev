@@ -113,6 +113,7 @@ const (
 	RadiusBubble  = 14
 	RadiusCard    = 8
 	RadiusControl = 6
+	RadiusGlass   = 22
 	RadiusPill    = 999
 	RadiusPopover = 10
 )

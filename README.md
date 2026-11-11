@@ -12,6 +12,7 @@
 - [技术栈](docs/adr/0003-desktop-and-ui-stack.md)：MyGO 桌面容器、Go 宿主（2026-11-10；默认界面部分已由 ADR 0006 取代）。
 - [原生界面](docs/adr/0006-native-ui.md)：默认界面用 MyGO 原生 UI，取消外部完整呈现包，工具面板为嵌入的独立 WebView（2026-11-11）。
 - [共享交互状态与公开呈现协议](docs/adr/0004-presentation-protocol.md)：状态在 Go 宿主；版本化 JSON 协议现只用于工具面板（2026-11-11，经 ADR 0006 修订）。
+- [默认外观](docs/adr/0007-liquid-glass-default-appearance.md)：Liquid Glass，玻璃只用于外框层（2026-11-12）。
 - [进程、存储、ACP 接入、包与工具面板](docs/adr/0005-runtime-storage-and-packages.md)：单一应用进程、SQLite、自写 ACP 连接层、zip 包与 MCP 能力包、工具面板（2026-11-11；面板装载方式经 ADR 0006 修订）。
 - [全 ACP 与框架中立架构地图](.scratch/aibo-rev-architecture/map.md)：本轮约束、已完成研究与逐项架构决策的入口。
 - [完整版本功能 Checklist](docs/refactor-feature-inventory.md)：手动勾选完整版本必需的特性，包含已有功能、数据治理和新增候选。

@@ -45,3 +45,5 @@ Agent 与存储可继续使用前序模拟模型；真实 ACP 消费、停止、
 上文中“完整呈现替换”“两种 UI 框架”“明确失败自动回退”“页面卡死时的原生菜单恢复”等项不再需要验证。
 
 2026-11-12：macOS 上的对应项已由[原生工作台外壳在 macOS 上的组合验证](18-macos-workbench-shell-validation.md)完成，`prototypes/workbench-shell` 可直接在 Windows 上复用（`-auto` 自动检查）。Windows 上补充核对：WebView2 面板收起与窗口隐藏时的计时器节流程度；“结束面板渲染进程”须改用 WebView2 的方式（`ProcessID` 为共享浏览器进程）；关闭最后一个窗口时销毁窗口、托盘重新打开后的状态恢复；通知点击定位（通知区域气泡）。
+
+2026-11-12：默认外观改为 Liquid Glass（[ADR 0007](../../../docs/adr/0007-liquid-glass-default-appearance.md)）。Windows 上另需核对：侧栏窗口材质（`VibrancySidebar` 在 Windows 11 上为 Mica）、`plugins/glass` 在 Direct3D 11 上的绘制与帧耗时（`workbench-shell -glass -perf`），以及“透明效果”关闭时的不透明回退。

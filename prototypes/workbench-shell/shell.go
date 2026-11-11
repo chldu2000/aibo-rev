@@ -29,6 +29,9 @@ type shell struct {
 	cur      int
 	sessions []*session
 
+	glass     bool    // Liquid Glass 外观（glass.go）
+	composerH float32 // 上一帧浮动输入区的高度
+
 	panelOpen   bool
 	panelW      float32
 	panel       *mygo.WebView // 工具面板；属于窗口，窗口关闭时随之销毁
@@ -141,6 +144,9 @@ func (app *App) view(c *ui.Context) {
 	app.list.FollowEnd = true
 	app.list.FollowAnimation = &ui.Smooth
 
+	if app.sh.glass && c.Vibrancy() {
+		c.Root().Background(ui.Transparent) // 侧栏透出窗口材质
+	}
 	if c.Shortcut(ui.Cmd, ui.KeyBackslash) {
 		app.sh.panelOpen = !app.sh.panelOpen
 	}
@@ -157,17 +163,21 @@ func (app *App) view(c *ui.Context) {
 		ui.Split(c, &left, func() {
 			app.mainColumn(c, p, ui.Column(c).Fill().AlignItems(ui.Stretch))
 		}, func() {
-			app.guard(c, "工具面板", ui.Column(c).Fill().AlignItems(ui.Stretch).BorderWidth(0, 0, 0, 1).BorderColor(p.Border), func() { app.panelView(c, p) })
+			app.guard(c, "工具面板", ui.Column(c).Fill().AlignItems(ui.Stretch).Background(p.Bg).BorderWidth(0, 0, 0, 1).BorderColor(p.Border), func() { app.panelView(c, p) })
 		}).Grow(1).AlignSelf(ui.Stretch).SplitReset(room - 360)
 		app.sh.panelW = max(240, room-left)
 	})
 }
 
 func (app *App) mainColumn(c *ui.Context, p Palette, box ui.Element) {
+	if app.sh.glass {
+		app.glassMain(c, p, box)
+		return
+	}
 	box.Children(func() {
 		app.header(c, p)
 		app.guard(c, "会话内容", ui.Column(c).Grow(1).AlignItems(ui.Stretch), func() { app.streamView(c, p) })
-		app.guard(c, "输入区", ui.Column(c).AlignSelf(ui.Center).Width(SizeStreamMax).MaxWidth(10000).Padding(0, Space4, Space4, Space4).Gap(Space2), func() {
+		app.guard(c, "输入区", ui.Column(c).AlignSelf(ui.Center).Width(SizeStreamMax).MaxWidthPercent(100).Padding(0, Space4, Space4, Space4).Gap(Space2), func() {
 			if !app.list.AtEnd() {
 				if ui.Button(c, "有新内容 ↓").AlignSelf(ui.Center).Clicked() {
 					app.list.ScrollToEnd()
@@ -181,7 +191,11 @@ func (app *App) mainColumn(c *ui.Context, p Palette, box ui.Element) {
 
 func (app *App) sidebar(c *ui.Context, p Palette) {
 	bar := c.TitleBar()
-	ui.Column(c).Grow(1).AlignItems(ui.Stretch).Background(p.Surface).BorderWidth(0, 1, 0, 0).BorderColor(p.Border).Children(func() {
+	side := ui.Column(c).Grow(1).AlignItems(ui.Stretch)
+	if !app.sh.glass || !c.Vibrancy() {
+		side.Background(p.Surface).BorderWidth(0, 1, 0, 0).BorderColor(p.Border)
+	}
+	side.Children(func() {
 		// 标题栏区域：交通灯右侧留白，整条可拖动窗口
 		ui.Row(c).Height(max(bar.Height, SizeHeader)).Padding(0, Space2, 0, bar.Left+Space2).DragWindow().Label("窗口拖动区（侧栏）")
 		ui.Column(c).Padding(Space1, Space2).Gap(Space1).Children(func() {
@@ -207,7 +221,10 @@ func (app *App) sidebar(c *ui.Context, p Palette) {
 
 func (app *App) header(c *ui.Context, p Palette) {
 	bar := c.TitleBar()
-	hdr := ui.Row(c).Height(max(bar.Height, SizeHeader)).AlignItems(ui.Center).Gap(Space2).Padding(0, Space4).BorderWidth(0, 0, 1, 0).BorderColor(p.Border).DragWindow()
+	hdr := ui.Row(c).Height(max(bar.Height, SizeHeader)).AlignItems(ui.Center).Gap(Space2).Padding(0, Space4).DragWindow()
+	if !app.sh.glass {
+		hdr.BorderWidth(0, 0, 1, 0).BorderColor(p.Border)
+	}
 	if hdr.WindowDoubleClicked() {
 		app.event("标题栏双击（会话区）")
 	}
@@ -220,6 +237,9 @@ func (app *App) header(c *ui.Context, p Palette) {
 		}
 		if ui.Button(c, map[bool]string{true: "收起工具面板", false: "展开工具面板"}[app.sh.panelOpen]).Clicked() {
 			app.sh.panelOpen = !app.sh.panelOpen
+		}
+		if ui.Button(c, map[bool]string{true: "标准外观", false: "玻璃外观"}[app.sh.glass]).Clicked() {
+			app.setGlass(!app.sh.glass)
 		}
 		ui.MenuButton(c, "故障注入", func(m *ui.Menu) {
 			for _, name := range []string{"侧栏", "会话内容", "工具卡", "输入区", "候选弹层", "工具面板"} {

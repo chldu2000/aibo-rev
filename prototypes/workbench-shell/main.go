@@ -37,6 +37,8 @@ var closeMode = flag.String("close", "destroy", "关闭窗口：destroy 销毁�
 func main() {
 	auto := flag.String("auto", "", "自动检查并写出报告")
 	logPath := flag.String("log", "", "事件日志文件")
+	glassOn := flag.Bool("glass", false, "Liquid Glass 外观")
+	perfOut := flag.String("perf", "", "帧耗时测量（配合 MYGO_FRAME_STATS=all）")
 	flag.Parse()
 	if *logPath != "" {
 		eventLog, _ = os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
@@ -79,7 +81,11 @@ func main() {
 		if _, err := mygo.NewTray(mygo.TrayOptions{Icon: trayIcon(), IconIsTemplate: true, ToolTip: "Aibo 外壳原型", Menu: mygo.NewMenu(app.menuItems())}); err != nil {
 			app.event("托盘创建失败：%v", err)
 		}
+		app.sh.glass = *glassOn
 		app.openWindow()
+		if *perfOut != "" {
+			go runPerf(app, *perfOut)
+		}
 		if *auto != "" {
 			go runAuto(app, *auto)
 		}
@@ -116,6 +122,9 @@ func (app *App) openWindow() {
 		Content:       ui.View(app.view),
 	})
 	app.win = w
+	if app.sh.glass {
+		w.SetVibrancy(mygo.VibrancySidebar)
+	}
 	w.OnClose(func(e *mygo.CloseEvent) {
 		if *closeMode == "hide" {
 			e.PreventDefault()

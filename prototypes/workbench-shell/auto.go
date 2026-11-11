@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/egoist/mygo/ui"
 	"os"
 	"syscall"
 	"time"
@@ -198,5 +200,43 @@ func runAuto(app *App, out string) {
 	rep["8_reopen"] = reopen
 	app.onMain(func() { rep["events"] = append([]string(nil), app.sh.events...) })
 	save()
+	mygo.App.Exit(0)
+}
+
+// runPerf：流式长回复 + 逐步滚动（内容从玻璃下方经过），配合 MYGO_FRAME_STATS=all 记录帧耗时。
+func runPerf(app *App, out string) {
+	wait := time.Sleep
+	wait(2500 * time.Millisecond)
+	app.onMain(func() { app.sh.panelOpen = false; app.win.Invalidate() })
+	wait(500 * time.Millisecond)
+	fmt.Println("PERF-BEGIN stream")
+	app.onMain(func() { app.startLong() })
+	wait(300 * time.Millisecond)
+	app.onMain(func() {
+		for _, it := range app.items {
+			if it.Kind == KindApproval && it.Approval == "pending" {
+				app.approve(it, true)
+			}
+		}
+	})
+	for i := 0; i < 150; i++ {
+		wait(100 * time.Millisecond)
+		running := true
+		app.onMain(func() { running = app.running })
+		if !running {
+			break
+		}
+	}
+	fmt.Println("PERF-BEGIN scroll")
+	n := 0
+	app.onMain(func() { n = len(app.items) })
+	for i := 0; i < 120; i++ {
+		idx := n - 1 - i
+		app.onMain(func() { app.list.ScrollTo(idx, ui.End) })
+		wait(16 * time.Millisecond)
+	}
+	fmt.Println("PERF-END")
+	wait(300 * time.Millisecond)
+	_ = os.WriteFile(out, []byte("done\n"), 0o644)
 	mygo.App.Exit(0)
 }
