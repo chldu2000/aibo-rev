@@ -1,0 +1,458 @@
+{
+  "S1_parallelText": [
+    [
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "expect": "TOKEN-R0-S0",
+        "stopReason": "end_turn",
+        "ms": 8056,
+        "reply": "TOKEN-R0-S0",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+        "expect": "TOKEN-R0-S1",
+        "stopReason": "end_turn",
+        "ms": 13814,
+        "reply": "TOKEN-R0-S1",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7d0-7382-8a58-79da22e55091",
+        "expect": "TOKEN-R0-S2",
+        "stopReason": "end_turn",
+        "ms": 7972,
+        "reply": "TOKEN-R0-S2",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7e3-7a42-9867-df2f7e2a441a",
+        "expect": "TOKEN-R0-S3",
+        "stopReason": "end_turn",
+        "ms": 4585,
+        "reply": "TOKEN-R0-S3",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7ff-7161-bea7-6d2650ffee45",
+        "expect": "TOKEN-R0-S4",
+        "stopReason": "end_turn",
+        "ms": 13221,
+        "reply": "TOKEN-R0-S4",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b81d-7ba0-9a80-0bf8cf9edc56",
+        "expect": "TOKEN-R0-S5",
+        "stopReason": "end_turn",
+        "ms": 13848,
+        "reply": "TOKEN-R0-S5",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      }
+    ],
+    [
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "expect": "TOKEN-R1-S0",
+        "stopReason": "end_turn",
+        "ms": 2473,
+        "reply": "TOKEN-R1-S0",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+        "expect": "TOKEN-R1-S1",
+        "stopReason": "end_turn",
+        "ms": 2717,
+        "reply": "TOKEN-R1-S1",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7d0-7382-8a58-79da22e55091",
+        "expect": "TOKEN-R1-S2",
+        "stopReason": "end_turn",
+        "ms": 1693,
+        "reply": "TOKEN-R1-S2",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7e3-7a42-9867-df2f7e2a441a",
+        "expect": "TOKEN-R1-S3",
+        "stopReason": "end_turn",
+        "ms": 1832,
+        "reply": "TOKEN-R1-S3",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7ff-7161-bea7-6d2650ffee45",
+        "expect": "TOKEN-R1-S4",
+        "stopReason": "end_turn",
+        "ms": 2629,
+        "reply": "TOKEN-R1-S4",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b81d-7ba0-9a80-0bf8cf9edc56",
+        "expect": "TOKEN-R1-S5",
+        "stopReason": "end_turn",
+        "ms": 3779,
+        "reply": "TOKEN-R1-S5",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      }
+    ],
+    [
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "expect": "TOKEN-R2-S0",
+        "stopReason": "end_turn",
+        "ms": 2719,
+        "reply": "TOKEN-R2-S0",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+        "expect": "TOKEN-R2-S1",
+        "stopReason": "end_turn",
+        "ms": 2705,
+        "reply": "TOKEN-R2-S1",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7d0-7382-8a58-79da22e55091",
+        "expect": "TOKEN-R2-S2",
+        "stopReason": "end_turn",
+        "ms": 1869,
+        "reply": "TOKEN-R2-S2",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7e3-7a42-9867-df2f7e2a441a",
+        "expect": "TOKEN-R2-S3",
+        "stopReason": "end_turn",
+        "ms": 2191,
+        "reply": "TOKEN-R2-S3",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7ff-7161-bea7-6d2650ffee45",
+        "expect": "TOKEN-R2-S4",
+        "stopReason": "end_turn",
+        "ms": 1631,
+        "reply": "TOKEN-R2-S4",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b81d-7ba0-9a80-0bf8cf9edc56",
+        "expect": "TOKEN-R2-S5",
+        "stopReason": "end_turn",
+        "ms": 1790,
+        "reply": "TOKEN-R2-S5",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      }
+    ]
+  ],
+  "S2_cwdIsolation": [
+    {
+      "session": "01a1cb87-b789-7311-876d-195274a20aad",
+      "expect": "NOTE-0-2000",
+      "stopReason": "end_turn",
+      "ms": 7915,
+      "reply": "我会读取 note.txt 的内容。NOTE-0-2000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 14,
+        "session_info_update": 2,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+      "expect": "NOTE-1-9000",
+      "stopReason": "end_turn",
+      "ms": 4273,
+      "reply": "NOTE-1-9000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 6,
+        "session_info_update": 3,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb87-b7d0-7382-8a58-79da22e55091",
+      "expect": "NOTE-2-5000",
+      "stopReason": "end_turn",
+      "ms": 4745,
+      "reply": "NOTE-2-5000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 6,
+        "session_info_update": 2,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb87-b7e3-7a42-9867-df2f7e2a441a",
+      "expect": "NOTE-3-9000",
+      "stopReason": "end_turn",
+      "ms": 5725,
+      "reply": "NOTE-3-9000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 6,
+        "session_info_update": 2,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb87-b7ff-7161-bea7-6d2650ffee45",
+      "expect": "NOTE-4-5000",
+      "stopReason": "end_turn",
+      "ms": 6121,
+      "reply": "我会读取 note.txt。\nNOTE-4-5000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 12,
+        "session_info_update": 2,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb87-b81d-7ba0-9a80-0bf8cf9edc56",
+      "expect": "NOTE-5-9000",
+      "stopReason": "end_turn",
+      "ms": 4648,
+      "reply": "我会读取 note.txt。\nNOTE-5-9000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 12,
+        "session_info_update": 2,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    }
+  ],
+  "S3_cancelOne": {
+    "cancelSentAfterMs": 2594,
+    "turns": [
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "expect": "cancelled",
+        "stopReason": "cancelled",
+        "ms": 2604,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 46,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+        "expect": "DONE",
+        "stopReason": "end_turn",
+        "ms": 6522,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\nDONE",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 241,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "expect": "AGAIN-OK",
+        "stopReason": "end_turn",
+        "ms": 3370,
+        "reply": "AGAIN-OK",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 4,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      }
+    ]
+  },
+  "S4_adapterKilled": {
+    "appServersAfter2s": null,
+    "appServersBefore": [
+      "24989 24988 24988 /Users/chldu/.local/bin/codex app-server"
+    ],
+    "processGroupAfter2s": [
+      "24988 24988 24987 \u003cdefunct\u003e \u003cdefunct\u003e"
+    ],
+    "processGroupBefore": [
+      "24988 24988 24987 node node /Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/adapter/node_modules/.bin/codex-acp",
+      "24989 24988 24988 /Users/chldu/.local/bin/codex /Users/chldu/.local/bin/codex app-server"
+    ],
+    "settledAfterKillMs": 270,
+    "turns": [
+      {
+        "session": "01a1cb87-b789-7311-876d-195274a20aad",
+        "stopReason": "",
+        "error": "连接已关闭：EOF",
+        "ms": 4008,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n",
+        "ok": false,
+        "updateKinds": {
+          "agent_message_chunk": 126,
+          "session_info_update": 1
+        }
+      },
+      {
+        "session": "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+        "stopReason": "",
+        "error": "连接已关闭：EOF",
+        "ms": 4008,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55",
+        "ok": false,
+        "updateKinds": {
+          "agent_message_chunk": 109,
+          "session_info_update": 1
+        }
+      }
+    ]
+  },
+  "adapterPid": 24988,
+  "descendantsAfterSessions": [
+    "24988 24988 24987 node node /Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/adapter/node_modules/.bin/codex-acp",
+    "24989 24988 24988 /Users/chldu/.local/bin/codex /Users/chldu/.local/bin/codex app-server"
+  ],
+  "initialize": {
+    "agentInfo": {
+      "name": "@agentclientprotocol/codex-acp",
+      "title": "Codex",
+      "version": "2.6.0"
+    },
+    "authMethods": [
+      {
+        "_meta": {
+          "api-key": {
+            "provider": "openai"
+          }
+        },
+        "description": "Use an API key to authenticate",
+        "id": "api-key",
+        "name": "API Key"
+      }
+    ],
+    "protocolVersion": 1
+  },
+  "logDir": "/Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/reports/20261112-005346",
+  "permissionRequests": null,
+  "sessions": [
+    "01a1cb87-b789-7311-876d-195274a20aad",
+    "01a1cb87-b7c1-7ff0-8d81-952b330fc83d",
+    "01a1cb87-b7d0-7382-8a58-79da22e55091",
+    "01a1cb87-b7e3-7a42-9867-df2f7e2a441a",
+    "01a1cb87-b7ff-7161-bea7-6d2650ffee45",
+    "01a1cb87-b81d-7ba0-9a80-0bf8cf9edc56"
+  ],
+  "sessionsCreatedMs": 4941,
+  "unroutedNotifications": 0,
+  "workspace": "/var/folders/vt/gg0_j7155r554w95f7t7hxsm0000gn/T/aibo-acp-concurrency-1804232250"
+}

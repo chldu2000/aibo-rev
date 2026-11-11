@@ -1,0 +1,182 @@
+{
+  "S1_parallelText": [
+    [
+      {
+        "session": "01a1cb86-e955-7a40-b878-008b8f2005b2",
+        "expect": "TOKEN-R0-S0",
+        "stopReason": "end_turn",
+        "ms": 4344,
+        "reply": "TOKEN-R0-S0",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb86-ee4f-74e3-b7be-307b6b32608d",
+        "expect": "TOKEN-R0-S1",
+        "stopReason": "end_turn",
+        "ms": 4554,
+        "reply": "TOKEN-R0-S1",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 5,
+          "session_info_update": 3,
+          "usage_update": 1
+        }
+      }
+    ]
+  ],
+  "S2_cwdIsolation": [
+    {
+      "session": "01a1cb86-e955-7a40-b878-008b8f2005b2",
+      "expect": "NOTE-0-5000",
+      "stopReason": "end_turn",
+      "ms": 7245,
+      "reply": "NOTE-0-5000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 6,
+        "session_info_update": 3,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    },
+    {
+      "session": "01a1cb86-ee4f-74e3-b7be-307b6b32608d",
+      "expect": "NOTE-1-4000",
+      "stopReason": "end_turn",
+      "ms": 5694,
+      "reply": "NOTE-1-4000",
+      "ok": true,
+      "updateKinds": {
+        "agent_message_chunk": 6,
+        "session_info_update": 3,
+        "tool_call": 1,
+        "tool_call_update": 1,
+        "usage_update": 2
+      }
+    }
+  ],
+  "S3_cancelOne": {
+    "cancelSentAfterMs": 1626,
+    "turns": [
+      {
+        "session": "01a1cb86-e955-7a40-b878-008b8f2005b2",
+        "expect": "cancelled",
+        "stopReason": "cancelled",
+        "ms": 1637,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 14,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb86-ee4f-74e3-b7be-307b6b32608d",
+        "expect": "DONE",
+        "stopReason": "end_turn",
+        "ms": 7545,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n101\n102\n103\n104\n105\n106\n107\n108\n109\n110\n111\n112\n113\n114\n115\n116\n117\n118\n119\n120\nDONE",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 241,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      },
+      {
+        "session": "01a1cb86-e955-7a40-b878-008b8f2005b2",
+        "expect": "AGAIN-OK",
+        "stopReason": "end_turn",
+        "ms": 3229,
+        "reply": "AGAIN-OK",
+        "ok": true,
+        "updateKinds": {
+          "agent_message_chunk": 4,
+          "session_info_update": 2,
+          "usage_update": 1
+        }
+      }
+    ]
+  },
+  "S4_adapterKilled": {
+    "appServersAfter2s": null,
+    "appServersBefore": [
+      "23915 23914 23914 /Users/chldu/.local/bin/codex app-server"
+    ],
+    "processGroupAfter2s": [
+      "23914 23914 23913 \u003cdefunct\u003e \u003cdefunct\u003e"
+    ],
+    "processGroupBefore": [
+      "23914 23914 23913 node node /Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/adapter/node_modules/.bin/codex-acp",
+      "23915 23914 23914 /Users/chldu/.local/bin/codex /Users/chldu/.local/bin/codex app-server"
+    ],
+    "settledAfterKillMs": 266,
+    "turns": [
+      {
+        "session": "01a1cb86-e955-7a40-b878-008b8f2005b2",
+        "stopReason": "",
+        "error": "连接已关闭：EOF",
+        "ms": 4005,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n",
+        "ok": false,
+        "updateKinds": {
+          "agent_message_chunk": 122,
+          "session_info_update": 1
+        }
+      },
+      {
+        "session": "01a1cb86-ee4f-74e3-b7be-307b6b32608d",
+        "stopReason": "",
+        "error": "连接已关闭：EOF",
+        "ms": 4005,
+        "reply": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n",
+        "ok": false,
+        "updateKinds": {
+          "agent_message_chunk": 46,
+          "session_info_update": 1
+        }
+      }
+    ]
+  },
+  "adapterPid": 23914,
+  "descendantsAfterSessions": [
+    "23914 23914 23913 node node /Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/adapter/node_modules/.bin/codex-acp",
+    "23915 23914 23914 /Users/chldu/.local/bin/codex /Users/chldu/.local/bin/codex app-server"
+  ],
+  "initialize": {
+    "agentInfo": {
+      "name": "@agentclientprotocol/codex-acp",
+      "title": "Codex",
+      "version": "2.6.0"
+    },
+    "authMethods": [
+      {
+        "_meta": {
+          "api-key": {
+            "provider": "openai"
+          }
+        },
+        "description": "Use an API key to authenticate",
+        "id": "api-key",
+        "name": "API Key"
+      }
+    ],
+    "protocolVersion": 1
+  },
+  "logDir": "/Users/chldu/Workspace/aibo-dev/aibo-rev/prototypes/acp-concurrency/reports/20261112-005257",
+  "permissionRequests": null,
+  "sessions": [
+    "01a1cb86-e955-7a40-b878-008b8f2005b2",
+    "01a1cb86-ee4f-74e3-b7be-307b6b32608d"
+  ],
+  "sessionsCreatedMs": 1969,
+  "unroutedNotifications": 0,
+  "workspace": "/var/folders/vt/gg0_j7155r554w95f7t7hxsm0000gn/T/aibo-acp-concurrency-3961317816"
+}

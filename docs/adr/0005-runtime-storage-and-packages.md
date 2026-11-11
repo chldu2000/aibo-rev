@@ -79,6 +79,6 @@ date: 2026-11-11
 
 - ~~WKWebView 与 WebView2 中跨 origin iframe 是否在独立进程中运行……~~ 2026-11-11 在 macOS 上验证：iframe 与主页面同线程、不能调用 Go；改用嵌入的独立 WebView（第 5 节修订）。每个包的独立 origin 已验证。WebView2 上的同项验证并入 17 号票。
 - 纯 Go SQLite 驱动在长历史与并发流式写入下的性能，以及 FTS5 trigram 支持。2026-11-11 在 macOS 上验证通过（`modernc.org/sqlite` v1.62.0：并发流式写入约 28 万行/秒，FTS5 trigram 可用，见 [`mygo-validation`](../../prototypes/mygo-validation/README.md)）。
-- 正式支持的 Agent 在同一连接中并发多个会话的可靠性；不可靠的 Agent 改为声明每会话独立进程。
+- 正式支持的 Agent 在同一连接中并发多个会话的可靠性；不可靠的 Agent 改为声明每会话独立进程。2026-11-12 Codex（codex-cli 0.167.0 + `@agentclientprotocol/codex-acp` 2.6.0）验证可靠：一个连接 6 个会话并发、各自工作目录、取消互不影响，适配器退出时 app-server 随之退出（[`acp-concurrency`](../../prototypes/acp-concurrency/README.md)，19 号票）。其他 Agent 待各自验证。
 - Windows Job Object 与 macOS 父进程退出检测在应用崩溃时确实结束全部子进程。2026-11-11 macOS 部分已验证：须用“stdin EOF + 重启时按进程组清理”（第 1 节补充）；Windows 部分待验证。
 - ~~页面心跳中断与 Windows `unresponsive` 事件的提示……~~ 2026-11-11 随全局恢复入口取消；Windows 上工具面板 WebView 的卡死与恢复并入 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)。
