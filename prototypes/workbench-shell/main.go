@@ -38,6 +38,7 @@ func main() {
 	auto := flag.String("auto", "", "自动检查并写出报告")
 	logPath := flag.String("log", "", "事件日志文件")
 	glassOn := flag.Bool("glass", false, "Liquid Glass 外观")
+	variant := flag.Int("variant", 0, "组件方案 0=A 1=B 2=C")
 	perfOut := flag.String("perf", "", "帧耗时测量（配合 MYGO_FRAME_STATS=all）")
 	flag.Parse()
 	if *logPath != "" {
@@ -82,6 +83,7 @@ func main() {
 			app.event("托盘创建失败：%v", err)
 		}
 		app.sh.glass = *glassOn
+		app.sh.variant = *variant
 		app.openWindow()
 		if *perfOut != "" {
 			go runPerf(app, *perfOut)
@@ -118,8 +120,9 @@ func (app *App) openWindow() {
 	}
 	w := mygo.NewWindow(mygo.WindowOptions{
 		Title: "Aibo 工作台外壳原型", Width: 1280, Height: 820, MinWidth: SizeWindowMinWidth, MinHeight: SizeWindowMinHeight,
-		TitleBarStyle: mygo.TitleBarHiddenInset,
-		Content:       ui.View(app.view),
+		TitleBarStyle:  mygo.TitleBarHiddenInset,
+		TitleBarHeight: SizeHeader, // Windows/Linux：窗口按钮与标题行同高
+		Content:        ui.View(app.view),
 	})
 	app.win = w
 	if app.sh.glass {

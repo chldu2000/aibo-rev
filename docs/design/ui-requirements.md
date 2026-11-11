@@ -131,6 +131,20 @@ Status: active（2026-11-10；2026-11-11 改为 MyGO 原生 UI，见 [ADR 0006](
 - 验收：以 `ui.Preferences{ReduceTransparency: true}` 与 `HighContrast: true` 截图，并在真实窗口中开启系统设置后人工核对。
 - 验证：manual
 
+#### UI-VIS-11 · 必须 · 窗口按钮让位
+- 条款：隐藏标题栏的窗口中，标题行必须按 `c.TitleBar()` 留出窗口按钮占用的位置：左侧 `Left`（macOS 交通灯）、右侧 `Right`（Windows 的最小化/最大化/关闭）；最右侧的标题行随工具面板展开与收起变化，都须让出 `Right`。窗口的 `TitleBarHeight` 与标题行同高。标题行中的控件不得与窗口按钮重叠。
+- 依据：ui-interaction §2.5、§15
+- Checklist：F20.1
+- 验收：用 `ui.Tester.SetTitleBar` 模拟 Windows（`Right` 为 138）截图，工具面板展开与收起两种状态下控件不进入窗口按钮区域；Windows 实机复核。
+- 验证：manual
+
+#### UI-VIS-12 · 必须 · 弹出层统一且保留标准行为
+- 条款：下拉选择、菜单、子菜单、候选列表与浮层使用同一玻璃面板与菜单项样式（ui-interaction §2.5）。自绘外观时必须基于 MyGO 的无外观部件（`SelectBase`、`MenuBase`、`PopoverBase` 等），保留其键盘操作（方向键、Home/End、首字母跳转、Enter/Space、Escape、Tab 关闭）、焦点归还与无障碍角色；不得用普通按钮与面板拼出菜单。
+- 依据：ui-interaction §2.5、§13、§14
+- Checklist：F20.1
+- 验收：键盘打开菜单、移动高亮并选择后菜单关闭、焦点回到触发按钮；读屏识别为菜单与菜单项；深浅色截图人工核对。
+- 验证：manual
+
 ## 3. 导航与会话目录
 
 #### UI-NAV-01 · 不得 · 独立的关闭会话入口

@@ -101,3 +101,35 @@ open "dist/darwin-arm64/Aibo Shell Prototype.app" --args -log "$PWD/reports/manu
 GPU 上的开销很小。CPU 回退（无 GPU 时）按 MyGO 文档每帧可达 30–70 ms，本机未测。
 
 同时修正了外壳原型的一个布局错误：工具面板展开时会话区比 `SizeStreamMax` 窄，内容两侧被裁掉。改为 `Width(SizeStreamMax).MaxWidthPercent(100)`（相当于 CSS 的 `min(宽度, 100%)`）。
+
+## 组件方案（2026-11-12，用户选定 A，见界面方案 §2.5）
+
+玻璃外观下，窗口左下角的切换条（或 ←/→ 键，输入框有焦点时不响应）在三套方案之间切换；`-variant 0|1|2` 指定初始方案。代码在 `kit.go`，截图 `reports/kit-{a,b,c}-{light,dark}.png`（`SHOTS=1 CGO_ENABLED=0 go test -run TestKitShots`）。
+
+| 组件 | A 玻璃胶囊 | B 安静无框 | C 浮动工具岛 |
+| --- | --- | --- | --- |
+| 标题行操作 | 图标按钮合成一组玻璃胶囊（`glass.Group`），“更多”单独一颗 | 只有图标，平时无底色，悬停出现浅底 | 一块玻璃工具岛，内含带文字的按钮与分隔线 |
+| 主操作（发送） | 着色玻璃胶囊，图标 + 文字 | 实心圆形图标按钮 | 着色玻璃圆形图标按钮 |
+| 状态标签 | 着色玻璃小胶囊 | 圆点 + 文字 | 实心徽记，压在输入区玻璃上缘 |
+| 附件/引用标签 | 玻璃小胶囊 | 浅底小圆角 | 描边胶囊 |
+| 模型/推理强度 | 两颗玻璃胶囊下拉 | 文字 + 箭头，悬停浅底 | 合成一个分段控件 |
+| 侧栏选中 | 玻璃胶囊 | 浅底圆角 | 着色玻璃 |
+| 内容层按钮（审批等，不透明） | 胶囊：主操作实心、次操作描边 | 主操作实心、次操作文字按钮 | 8px 圆角：主操作实心、次操作描边 |
+| 下拉与队列弹层 | 三套相同：玻璃面板 | | |
+
+2026-11-12 用户倾向 A，并要求状态标签悬浮在输入面板之外：A 方案的状态标签与“停止”改为输入面板上方独立的玻璃小胶囊。
+
+### Windows 外观
+
+- **近似模拟**（`SHOTS=1 CGO_ENABLED=0 go test -run TestWindowsSim`，`reports/win-sim-*.png`）：标题栏按 Windows 的几何（窗口按钮在右上角，3×46 DIP，高度取 `TitleBarHeight` = 44），侧栏透明处填近似 Mica 的纯色，按 150% 缩放绘制。`plugins/glass` 在各平台用同一着色器，面板玻璃按同一实现绘制；字体仍是 macOS 的（没有 Segoe UI / 微软雅黑），Mica 没有壁纸色调。这不是 Windows 实测。
+- 模拟发现并已修正：Windows 的窗口按钮在右上角，最右侧的标题行（工具面板标题行，面板收起时为会话区标题行）须让出 `c.TitleBar().Right`；`TitleBarHeight` 设为标题行高度 44，窗口按钮与标题行同高。
+- **真实构建**：`CGO_ENABLED=0 go tool mygo build -platform windows/amd64,windows/arm64 -skip-installer` 生成 `dist/windows-*/Aibo Shell Prototype.exe`（未签名），可在 Windows 11 上直接运行，`-glass` 打开玻璃外观。
+
+### 玻璃菜单（2026-11-12）
+
+用户要求下拉菜单与模型/推理强度选择一致。“更多”、面板“…”菜单改为 `ui.MenuBase`（无外观的菜单，保留键盘、焦点与读屏行为），`@`/`#`/`/` 候选列表同样改用玻璃面板：
+
+- 面板：玻璃，圆角 16，内边距 4，加柔和阴影（浅色模式下玻璃叠在白色内容上时，否则看不出边缘）。模型选择、队列浮层用同一面板。
+- 菜单项：高 28，圆角 10，左侧 16 DIP 图标列，右侧弱化的快捷键提示；高亮时强调色底、`OnAccent` 文字；破坏性操作为红色文字、高亮时红底。
+- 小标题（弱化小字）与分隔线分组；子菜单用同一面板，右侧箭头。
+- 测试：`TestGlassMenu`（点击打开、↓ + Enter 选择后关闭）；截图 `reports/menu-{more,panel}-{light,dark}.png`。

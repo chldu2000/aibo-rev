@@ -58,16 +58,8 @@ func (app *App) glassMain(c *ui.Context, p Palette, box ui.Element) {
 			ui.Box(c).Absolute().Bottom(0).Left(0).Right(0).Height(max(app.sh.composerH, 120) * 0.6).PassThrough().Material(glass.ScrollEdge{Bottom: true, Background: p.Bg})
 			ui.Column(c).Absolute().Bottom(0).Left(0).Right(0).AlignItems(ui.Center).PassThrough().Children(func() {
 				area := app.guard(c, "输入区", ui.Column(c).Width(SizeStreamMax).MaxWidthPercent(100).Padding(0, Space4, Space4, Space4).Gap(Space2), func() {
-					if !app.list.AtEnd() {
-						ui.Row(c).AlignSelf(ui.Center).Padding(4, 12).Radius(16).Material(glass.Glass{Interactive: true}).Label("有新内容").Children(func() {
-							ui.Text(c, "有新内容 ↓").FontSize(FontSizeSmall)
-						}).OnClick(func() { app.list.ScrollToEnd() })
-					}
-					// 状态条与输入框在同一块玻璃上
-					ui.Column(c).AlignItems(ui.Stretch).Radius(RadiusGlass).Padding(Space2, Space3).Gap(Space1).Material(glass.Glass{}).Children(func() {
-						app.statusStrip(c, p)
-						app.composer(c, p)
-					})
+					// 状态条与输入框在同一块玻璃上（kit.go 按方案布局）
+					app.kComposerPanel(c, p)
 				})
 				if b := area.Bounds(); b.H > 0 {
 					app.sh.composerH = b.H

@@ -30,6 +30,9 @@ type shell struct {
 	sessions []*session
 
 	glass     bool    // Liquid Glass 外观（glass.go）
+	variant   int     // 组件方案（kit.go）
+	menuMore  bool
+	menuPanel bool
 	composerH float32 // 上一帧浮动输入区的高度
 
 	panelOpen   bool
@@ -167,6 +170,7 @@ func (app *App) view(c *ui.Context) {
 		}).Grow(1).AlignSelf(ui.Stretch).SplitReset(room - 360)
 		app.sh.panelW = max(240, room-left)
 	})
+	app.variantSwitcher(c)
 }
 
 func (app *App) mainColumn(c *ui.Context, p Palette, box ui.Element) {
@@ -203,7 +207,9 @@ func (app *App) sidebar(c *ui.Context, p Palette) {
 			ui.Text(c, "会话").FontSize(FontSizeSmall).TextColor(p.Muted).Padding(Space1, Space2)
 			for i, s := range app.sh.sessions {
 				row := ui.ButtonBase(c.Key(s.name)).Justify(ui.Start).Padding(6, Space2).Radius(RadiusControl).Label(s.name)
-				if i == app.sh.cur {
+				if app.sh.glass {
+					app.kSessionRow(c, p, row, i == app.sh.cur)
+				} else if i == app.sh.cur {
 					row.Background(p.Select)
 				} else if row.Hovered() {
 					row.Background(p.Hover)
@@ -222,8 +228,17 @@ func (app *App) sidebar(c *ui.Context, p Palette) {
 func (app *App) header(c *ui.Context, p Palette) {
 	bar := c.TitleBar()
 	hdr := ui.Row(c).Height(max(bar.Height, SizeHeader)).AlignItems(ui.Center).Gap(Space2).Padding(0, Space4).DragWindow()
+	if !app.sh.panelOpen {
+		hdr.Padding(0, Space4+bar.Right, 0, Space4) // Windows：窗口按钮在右上角
+	}
 	if !app.sh.glass {
 		hdr.BorderWidth(0, 0, 1, 0).BorderColor(p.Border)
+	} else {
+		if hdr.WindowDoubleClicked() {
+			app.event("标题栏双击（会话区）")
+		}
+		app.kHeader(c, p, hdr)
+		return
 	}
 	if hdr.WindowDoubleClicked() {
 		app.event("标题栏双击（会话区）")
@@ -264,14 +279,21 @@ func (app *App) guardedItem(c *ui.Context, p Palette, it *Item) {
 // ---- 工具面板 ----
 
 func (app *App) panelView(c *ui.Context, p Palette) {
-	ui.Row(c).Height(SizeHeader).AlignItems(ui.Center).Gap(Space1).Padding(0, Space2).BorderWidth(0, 0, 1, 0).BorderColor(p.Border).DragWindow().Children(func() {
+	ui.Row(c).Height(max(c.TitleBar().Height, SizeHeader)).AlignItems(ui.Center).Gap(Space1).Padding(0, Space2+c.TitleBar().Right, 0, Space2).BorderWidth(0, 0, 1, 0).BorderColor(p.Border).DragWindow().Children(func() {
 		app.maybePanic("工具面板")
 		ui.Text(c, "示例包 · 面板").FontWeight(600)
 		ui.Spacer(c)
-		if ui.Button(c, "重新载入").Label("重新载入工具面板").Clicked() {
+		var reload ui.Element
+		if app.sh.glass {
+			reload = app.kbtn(c, p, "重新载入工具面板", icReload, kNormal, true)
+			app.glassMenu(c, p, "面板操作", &app.sh.menuPanel, true, app.panelItems())
+		} else {
+			reload = ui.Button(c, "重新载入").Label("重新载入工具面板")
+		}
+		if reload.Clicked() {
 			go app.reloadPanel()
 		}
-		ui.MenuButton(c, "…", func(m *ui.Menu) {
+		panelMenu := func(m *ui.Menu) {
 			if m.Item("让面板页面卡死").Chosen() {
 				go app.evalPanel("setTimeout(() => { for (;;) {} }, 0); return 1")
 			}
@@ -281,7 +303,10 @@ func (app *App) panelView(c *ui.Context, p Palette) {
 			if m.Item("收起").Chosen() {
 				app.sh.panelOpen = false
 			}
-		}).Label("面板操作")
+		}
+		if !app.sh.glass {
+			ui.MenuButton(c, "…", panelMenu).Label("面板操作")
+		}
 	})
 	if app.sh.panelStatus != "" {
 		ui.Text(c, app.sh.panelStatus).FontSize(FontSizeSmall).TextColor(p.Muted).Padding(Space1, Space2)
@@ -312,7 +337,10 @@ func (app *App) killPanel() {
 		return
 	}
 	if pid := app.sh.panel.Page().ProcessID(); pid > 0 && pid != syscall.Getpid() {
-		_ = syscall.Kill(pid, syscall.SIGKILL)
+		// 原型：跨平台结束进程。Windows 上 WebView2 的 ProcessID 是共享的浏览器进程（见 mygo-validation），17 号票另行验证。
+		if proc, err := os.FindProcess(pid); err == nil {
+			_ = proc.Kill()
+		}
 		app.event("已结束面板渲染进程 %d", pid)
 	}
 }

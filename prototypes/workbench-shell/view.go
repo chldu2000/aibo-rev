@@ -116,7 +116,7 @@ func (app *App) item(c *ui.Context, p Palette, it *Item) {
 				ui.Text(c, "结果未知").FontWeight(600).TextColor(p.Unknown)
 				ui.Text(c, it.Text)
 				ui.Row(c).Children(func() {
-					if ui.Button(c, "重新发送（可能重复执行）").Clicked() {
+					if app.btn(c, p, "重新发送（可能重复执行）", kNormal).Clicked() {
 						app.deliver("重新发送上一条消息")
 					}
 				})
@@ -136,10 +136,10 @@ func (app *App) approvalCard(c *ui.Context, p Palette, it *Item) {
 		ui.Row(c).Gap(Space2).Children(func() {
 			switch it.Approval {
 			case "pending":
-				if ui.PrimaryButton(c, "允许一次").Clicked() {
+				if app.btn(c, p, "允许一次", kPrimary).Clicked() {
 					app.approve(it, true)
 				}
-				if ui.Button(c, "拒绝").Clicked() {
+				if app.btn(c, p, "拒绝", kNormal).Clicked() {
 					app.approve(it, false)
 				}
 			case "allowed":
@@ -210,9 +210,15 @@ func (app *App) composer(c *ui.Context, p Palette) {
 		if len(app.chips) > 0 {
 			ui.Row(c).Gap(Space1).Wrap().Children(func() {
 				for i, ch := range app.chips {
+					idx := i
+					if app.sh.glass {
+						app.kattach(c.Key(fmt.Sprint(i, ch.Label)), p, map[string]string{"file": "文件", "ref": "引用", "cmd": "命令", "image": "图片", "drop": "拖入"}[ch.Kind], ch.Label, func() {
+							app.chips = append(app.chips[:idx:idx], app.chips[idx+1:]...)
+						})
+						continue
+					}
 					ui.Row(c.Key(fmt.Sprint(i, ch.Label))).Gap(Space1).AlignItems(ui.Center).Padding(2, 6).Radius(RadiusControl).Background(p.Surface).Border(1, p.Border).Children(func() {
 						ui.Text(c, map[string]string{"file": "文件", "ref": "引用", "cmd": "命令", "image": "图片", "drop": "拖入"}[ch.Kind]+" · "+ch.Label).FontSize(FontSizeSmall)
-						idx := i
 						ui.ButtonBase(c).Label("移除 "+ch.Label).Padding(0, 4).Children(func() { ui.Text(c, "×").TextColor(p.Muted) }).OnClick(func() {
 							app.chips = append(app.chips[:idx:idx], app.chips[idx+1:]...)
 						})
@@ -275,12 +281,21 @@ func (app *App) pickerPanel(c *ui.Context, p Palette, box, in ui.Element) {
 	ui.Overlay(c, func() {
 		app.maybePanic("候选弹层")
 		panel := ui.Column(c).AttachTo(box, ui.AnchorTopLeft, ui.AnchorBottomLeft).Margin(0, 0, 6, 0).Width(420).Padding(Space1).Gap(2).
-			Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, popoverShadow).
 			Role(ui.RoleListBox).Label("候选")
+		if app.sh.glass {
+			app.glassPanel(panel)
+		} else {
+			panel.Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, popoverShadow)
+		}
 		panel.Children(func() {
 			for i, s := range cs {
 				row := ui.ButtonBase(c.Key(s)).Justify(ui.Start).Padding(6, Space2).Radius(RadiusControl).Label(s).Role(ui.RoleOption)
-				if i == app.pick.hi {
+				if app.sh.glass {
+					row.Height(SizeControl).Padding(0, 10).Radius(10)
+					if i == app.pick.hi {
+						row.Background(p.Accent).TextColor(p.OnAccent)
+					}
+				} else if i == app.pick.hi {
 					row.Background(p.Select)
 				}
 				row.Children(func() { ui.Text(c, s) })
@@ -300,6 +315,10 @@ func (app *App) pickerPanel(c *ui.Context, p Palette, box, in ui.Element) {
 }
 
 func (app *App) settingsBar(c *ui.Context, p Palette) {
+	if app.sh.glass {
+		app.kSettings(c, p)
+		return
+	}
 	ui.Row(c).Gap(Space2).AlignItems(ui.Center).Children(func() {
 		prev := app.model
 		ui.Select(c, &app.model, models).Label("模型")
@@ -333,4 +352,15 @@ func (app *App) settingsBar(c *ui.Context, p Palette) {
 			app.draft = ""
 		}
 	})
+}
+
+// btn：内容层按钮。玻璃外观下按组件方案绘制，标准外观用 MyGO 默认按钮。
+func (app *App) btn(c *ui.Context, p Palette, label string, k kind) ui.Element {
+	if app.sh.glass {
+		return app.cbtn(c, p, label, k)
+	}
+	if k == kPrimary {
+		return ui.PrimaryButton(c, label)
+	}
+	return ui.Button(c, label)
 }
