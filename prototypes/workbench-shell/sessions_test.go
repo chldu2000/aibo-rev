@@ -44,7 +44,7 @@ func TestSessionHoverActionsAndPin(t *testing.T) {
 	if !app.sh.sessions[3].pinned {
 		t.Fatal("not pinned")
 	}
-	o := order(tt, "工具面板装载", "修复队列暂停逻辑")
+	o := order(tt, "工具面板装载", "ACP 连接层") // 同在 aibo 工作区
 	if o[0] < 0 || o[0] > o[1] {
 		t.Fatalf("pinned session not first: %v", o)
 	}
@@ -143,8 +143,8 @@ func TestSessionArchive(t *testing.T) {
 	if _, hasInput := tt.Find("输入消息，@ 引用文件，# 引用会话，/ 命令"); !tt.HasText("此会话已归档，可以阅读和搜索，不能发送。") || hasInput {
 		t.Fatalf("archived composer: %q", tt.Texts())
 	}
-	if !tt.HasText("已归档 1") {
-		t.Fatal("archived section missing")
+	if !tt.HasText("已归档") || !tt.HasText("1") {
+		t.Fatal("archived entry missing")
 	}
 	_ = tt.Click("取消归档后继续")
 	tt.Frame()
@@ -163,7 +163,6 @@ func TestSessionShots(t *testing.T) {
 		app.sh.glass = true
 		app.sh.sessions[3].pinned = true
 		app.sh.sessions[1].archived = true
-		app.sh.showArchived = true
 		tt := ui.NewTesterWith(app.view, 1280, 820, ui.TesterOptions{Dark: dark})
 		tt.SetScale(2)
 		tt.Frame()

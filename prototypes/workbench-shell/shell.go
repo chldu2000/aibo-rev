@@ -18,6 +18,8 @@ import (
 // session 保存非当前会话的内容；切换时与 App 上的当前会话字段交换。
 type session struct {
 	name       string
+	ws         int      // 所属工作区
+	cat        *catalog // Agent 提供的模型目录
 	pinned     bool
 	archived   bool
 	renaming   bool
@@ -43,7 +45,10 @@ type shell struct {
 	matrix   matrixState // 模型 × 推理强度矩阵（picker.go）
 
 	// 会话列表（sessions.go）
-	showArchived   bool
+	workspaces     []*workspace // workspaces.go
+	archiveView    bool
+	removeAsk      int
+	removeAskOpen  bool
 	renameFocus    bool
 	archiveAsk     int
 	archiveAskOpen bool
@@ -65,10 +70,12 @@ type shell struct {
 
 func newShell() shell {
 	names := []string{"修复队列暂停逻辑", "设计令牌生成", "ACP 连接层", "工具面板装载"}
-	sh := shell{panelOpen: true, panelW: 360, faults: map[string]string{}, inject: map[string]bool{}}
+	sh := shell{workspaces: newWorkspaces(), panelOpen: true, panelW: 360, faults: map[string]string{}, inject: map[string]bool{}}
 	for i, n := range names {
 		s := &session{name: n}
-		s.model, s.effort = catalogFor(i).defaults()
+		s.cat = catalogFor(i)
+		s.model, s.effort = s.cat.defaults()
+		s.ws = i / 2 // 会话 1、2 在 aibo-rev，会话 3、4 在 aibo
 		if i > 0 {
 			for j := 0; j < 30; j++ {
 				s.items = append(s.items, &Item{ID: 1_000_000*i + j, Kind: KindUser, Text: fmt.Sprintf("%s · 第 %d 条", n, j), Done: true})
@@ -195,6 +202,7 @@ func (app *App) view(c *ui.Context) {
 		app.sh.panelW = max(240, room-left)
 	})
 	app.archiveDialog(c)
+	app.removeDialog(c)
 	app.variantSwitcher(c)
 }
 
@@ -233,6 +241,7 @@ func (app *App) sidebar(c *ui.Context, p Palette) {
 		})
 		ui.Spacer(c).DragWindow()
 		app.toastView(c, p)
+		app.sidebarFooter(c, p)
 	})
 }
 

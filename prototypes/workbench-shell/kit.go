@@ -493,7 +493,7 @@ func (app *App) kSessionRow(c *ui.Context, p Palette, row ui.Element, selected b
 	}
 }
 
-// variantSwitcher：原型用的方案切换条，固定在窗口底部左侧（与设计无关）。
+// variantSwitcher：原型用的方案切换条，放在侧栏顶部窗口按钮右侧的空白处（与设计无关）。
 func (app *App) variantSwitcher(c *ui.Context) {
 	if !app.sh.glass {
 		return
@@ -505,17 +505,18 @@ func (app *App) variantSwitcher(c *ui.Context) {
 		app.sh.variant = (app.sh.variant + len(variantNames) - 1) % len(variantNames)
 	}
 	dark := ui.Hex("#111114") // ui-check-allow: color 原型切换条，不属于设计
-	ui.Row(c).Absolute().Left(Space3).Bottom(Space3).Height(36).Padding(0, 4).Gap(4).AlignItems(ui.Center).Radius(18).
+	bar := c.TitleBar()
+	ui.Row(c).Absolute().Left(bar.Left+Space2).Top((max(bar.Height, SizeHeader)-28)/2).Height(28).Padding(0, 2).Gap(2).AlignItems(ui.Center).Radius(14).
 		Background(dark).Shadow(0, 6, 20, 0, popoverShadow).Label("原型方案切换").Children(func() {
 		arrow := func(s string, d int) {
-			b := ui.ButtonBase(c.Key("sw"+s)).Label(map[int]string{-1: "上一个方案", 1: "下一个方案"}[d]).Size(28, 28).Center().Radius(14).TextColor(ui.Hex("#FFFFFF")) // ui-check-allow: color 原型切换条
+			b := ui.ButtonBase(c.Key("sw"+s)).Label(map[int]string{-1: "上一个方案", 1: "下一个方案"}[d]).Size(24, 24).Center().Radius(12).TextColor(ui.Hex("#FFFFFF")) // ui-check-allow: color 原型切换条
 			b.Children(func() { ui.Text(c, s) })
 			if b.Clicked() {
 				app.sh.variant = (app.sh.variant + len(variantNames) + d) % len(variantNames)
 			}
 		}
 		arrow("‹", -1)
-		ui.Text(c, variantNames[app.sh.variant]).FontSize(FontSizeSmall).FontWeight(600).TextColor(ui.Hex("#FFFFFF")).Width(96).TextAlign(ui.Center) // ui-check-allow: color 原型切换条
+		ui.Text(c, variantNames[app.sh.variant]).FontSize(FontSizeSmall).FontWeight(600).TextColor(ui.Hex("#FFFFFF")).Width(84).TextAlign(ui.Center) // ui-check-allow: color 原型切换条
 		arrow("›", 1)
 	})
 }

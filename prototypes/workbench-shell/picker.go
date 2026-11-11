@@ -44,7 +44,7 @@ var (
 	}}
 )
 
-// catalogFor：会话 0、1 用提供完整映射的 Agent，会话 2、3 用只提供当前模型推理强度的 Agent。
+// catalogFor：初始会话 0、1 用提供完整映射的 Agent，会话 2、3 用只提供当前模型推理强度的 Agent。
 func catalogFor(session int) *catalog {
 	if session >= 2 {
 		return &catalogPerModel
@@ -52,7 +52,7 @@ func catalogFor(session int) *catalog {
 	return &catalogMatrix
 }
 
-func (app *App) catalog() *catalog { return catalogFor(app.sh.cur) }
+func (app *App) catalog() *catalog { return app.sh.sessions[app.sh.cur].cat }
 
 func (cat *catalog) model(name string) *modelCap {
 	for i := range cat.Models {

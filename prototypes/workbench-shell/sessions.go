@@ -39,50 +39,9 @@ func (app *App) agentLogo(c *ui.Context, p Palette, agent string, size float32) 
 
 func (app *App) sessionRunning(i int) bool { return i == app.sh.cur && app.running }
 
-// sessionList：置顶在前，其余按最近活动（原型中按创建顺序）；已归档的收在底部。
-func (app *App) sessionList(c *ui.Context, p Palette) {
-	var pinned, rest, archived []int
-	for i, s := range app.sh.sessions {
-		switch {
-		case s.archived:
-			archived = append(archived, i)
-		case s.pinned:
-			pinned = append(pinned, i)
-		default:
-			rest = append(rest, i)
-		}
-	}
-	ui.Text(c, "会话").FontSize(FontSizeSmall).TextColor(p.Muted).Padding(Space1, Space2)
-	for _, i := range append(pinned, rest...) {
-		app.sessionRow(c, p, i)
-	}
-	if len(archived) > 0 {
-		ui.Box(c).Height(Space2)
-		t := ui.ButtonBase(c.Key("archived-toggle")).Label(fmt.Sprintf("已归档 %d", len(archived))).Expanded(app.sh.showArchived).
-			Padding(4, Space2).Gap(6).AlignItems(ui.Center).Radius(RadiusControl).TextColor(p.Muted)
-		if t.Hovered() {
-			t.Background(p.Hover)
-		}
-		t.Children(func() {
-			ui.Icon(c, icArchive).Size(13, 13)
-			ui.Text(c, fmt.Sprintf("已归档 %d", len(archived))).FontSize(FontSizeSmall)
-			ui.Spacer(c)
-			ui.Icon(c, map[bool]*ui.SVG{true: icChevron, false: icRight}[app.sh.showArchived]).Size(11, 11)
-		})
-		if t.Clicked() {
-			app.sh.showArchived = !app.sh.showArchived
-		}
-		if app.sh.showArchived {
-			for _, i := range archived {
-				app.sessionRow(c, p, i)
-			}
-		}
-	}
-}
-
 func (app *App) sessionRow(c *ui.Context, p Palette, i int) {
 	s := app.sh.sessions[i]
-	cat := catalogFor(i)
+	cat := app.sh.sessions[i].cat
 	selected := i == app.sh.cur
 	box := ui.Row(c.Key("srow:"+s.name)).AlignItems(ui.Center).Gap(2).Height(SizeControl+4).Padding(0, 4, 0, 0)
 	showActions := box.Hovered() || box.FocusWithin() || s.menuOpen
@@ -172,7 +131,7 @@ func (app *App) sessionMenu(c *ui.Context, p Palette, target ui.Element, i int) 
 	}
 	items = append(items,
 		gitem{label: "复制会话信息", icon: icCopy, fn: func() {
-			c.WriteClipboard(fmt.Sprintf("%s\nAgent：%s\n工作区：aibo-rev\n模型：%s", s.name, catalogFor(i).Agent, app.sessionModelLabel(i)))
+			c.WriteClipboard(fmt.Sprintf("%s\nAgent：%s\n工作区：%s\n模型：%s", s.name, s.cat.Agent, app.sh.workspaces[s.ws].path, app.sessionModelLabel(i)))
 			app.toast("已复制会话信息", nil)
 		}},
 		gitem{sep: true},
