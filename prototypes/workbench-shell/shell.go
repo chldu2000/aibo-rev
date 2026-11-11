@@ -17,23 +17,39 @@ import (
 
 // session 保存非当前会话的内容；切换时与 App 上的当前会话字段交换。
 type session struct {
-	name  string
-	items []*Item
-	older []*Item
-	list  ui.ListState
-	draft string
-	chips []Chip
+	name       string
+	pinned     bool
+	archived   bool
+	renaming   bool
+	renameText string
+	menuOpen   bool
+	opened     bool
+	model      string
+	effort     string
+	items      []*Item
+	older      []*Item
+	list       ui.ListState
+	draft      string
+	chips      []Chip
 }
 
 type shell struct {
 	cur      int
 	sessions []*session
 
-	glass     bool    // Liquid Glass 外观（glass.go）
-	variant   int     // 组件方案（kit.go）
-	menuMore  bool
-	menuPanel bool
-	composerH float32 // 上一帧浮动输入区的高度
+	glass    bool // Liquid Glass 外观（glass.go）
+	variant  int  // 组件方案（kit.go）
+	menuMore bool
+	matrix   matrixState // 模型 × 推理强度矩阵（picker.go）
+
+	// 会话列表（sessions.go）
+	showArchived   bool
+	renameFocus    bool
+	archiveAsk     int
+	archiveAskOpen bool
+	toast          toastState
+	menuPanel      bool
+	composerH      float32 // 上一帧浮动输入区的高度
 
 	panelOpen   bool
 	panelW      float32
@@ -52,6 +68,7 @@ func newShell() shell {
 	sh := shell{panelOpen: true, panelW: 360, faults: map[string]string{}, inject: map[string]bool{}}
 	for i, n := range names {
 		s := &session{name: n}
+		s.model, s.effort = catalogFor(i).defaults()
 		if i > 0 {
 			for j := 0; j < 30; j++ {
 				s.items = append(s.items, &Item{ID: 1_000_000*i + j, Kind: KindUser, Text: fmt.Sprintf("%s · 第 %d 条", n, j), Done: true})
@@ -91,8 +108,15 @@ func (app *App) selectSession(i int) {
 	}
 	old := sh.sessions[sh.cur]
 	old.items, old.older, old.list, old.draft, old.chips = app.items, app.older, app.list, app.draft, app.chips
+	old.model, old.effort = app.model, app.effort
 	s := sh.sessions[i]
 	app.items, app.older, app.list, app.draft, app.chips = s.items, s.older, s.list, s.draft, s.chips
+	app.model, app.effort = s.model, s.effort
+	sh.matrix = matrixState{}
+	if !s.opened { // 首次打开的会话从最新内容开始
+		app.list.ScrollToEnd()
+		s.opened = true
+	}
 	app.pick = picker{}
 	sh.cur = i
 }
@@ -170,6 +194,7 @@ func (app *App) view(c *ui.Context) {
 		}).Grow(1).AlignSelf(ui.Stretch).SplitReset(room - 360)
 		app.sh.panelW = max(240, room-left)
 	})
+	app.archiveDialog(c)
 	app.variantSwitcher(c)
 }
 
@@ -204,24 +229,10 @@ func (app *App) sidebar(c *ui.Context, p Palette) {
 		ui.Row(c).Height(max(bar.Height, SizeHeader)).Padding(0, Space2, 0, bar.Left+Space2).DragWindow().Label("窗口拖动区（侧栏）")
 		ui.Column(c).Padding(Space1, Space2).Gap(Space1).Children(func() {
 			app.maybePanic("侧栏")
-			ui.Text(c, "会话").FontSize(FontSizeSmall).TextColor(p.Muted).Padding(Space1, Space2)
-			for i, s := range app.sh.sessions {
-				row := ui.ButtonBase(c.Key(s.name)).Justify(ui.Start).Padding(6, Space2).Radius(RadiusControl).Label(s.name)
-				if app.sh.glass {
-					app.kSessionRow(c, p, row, i == app.sh.cur)
-				} else if i == app.sh.cur {
-					row.Background(p.Select)
-				} else if row.Hovered() {
-					row.Background(p.Hover)
-				}
-				row.Children(func() {
-					ui.Text(c, s.name).FontWeight(map[bool]int{true: 600, false: 400}[i == app.sh.cur])
-				})
-				idx := i
-				row.OnClick(func() { app.selectSession(idx) })
-			}
+			app.sessionList(c, p)
 		})
 		ui.Spacer(c).DragWindow()
+		app.toastView(c, p)
 	})
 }
 
@@ -244,8 +255,8 @@ func (app *App) header(c *ui.Context, p Palette) {
 		app.event("标题栏双击（会话区）")
 	}
 	hdr.Children(func() {
-		ui.Text(c, app.sh.sessions[app.sh.cur].name).FontSize(FontSizeTitle).FontWeight(600)
-		ui.Text(c, "Claude Code · aibo-rev").TextColor(p.Muted)
+		app.agentLogo(c, p, app.catalog().Agent, 18)
+		ui.Text(c, app.sh.sessions[app.sh.cur].name).FontSize(FontSizeTitle).FontWeight(600).MaxLines(1)
 		ui.Spacer(c)
 		if ui.Button(c, "开始长回复").Disabled(app.running).Clicked() {
 			app.startLong()

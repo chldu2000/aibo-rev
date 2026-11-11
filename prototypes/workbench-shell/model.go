@@ -86,16 +86,15 @@ type App struct {
 }
 
 var (
-	models  = []string{"claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"}
-	efforts = []string{"低", "中", "高"}
-	files   = []string{"src/core/session.ts", "src/core/markdown.ts", "src/lib/Composer.svelte", "src/lib/Stream.svelte", "docs/design/ui-requirements.md", "docs/adr/0005-runtime-storage-and-packages.md"}
-	refs    = []string{"修复队列暂停逻辑", "设计令牌生成", "ACP 连接层", "工具面板装载"}
-	cmds    = []string{"/compact", "/review", "/clear", "/model"}
+	files = []string{"src/core/session.ts", "src/core/markdown.ts", "src/lib/Composer.svelte", "src/lib/Stream.svelte", "docs/design/ui-requirements.md", "docs/adr/0005-runtime-storage-and-packages.md"}
+	refs  = []string{"修复队列暂停逻辑", "设计令牌生成", "ACP 连接层", "工具面板装载"}
+	cmds  = []string{"/compact", "/review", "/clear", "/model"}
 )
 
 func newApp(history int) *App {
-	app := &App{model: models[0], effort: efforts[1]}
+	app := &App{}
 	app.sh = newShell()
+	app.model, app.effort = app.sh.sessions[0].model, app.sh.sessions[0].effort
 	r := rand.New(rand.NewPCG(1, 2))
 	all := make([]*Item, 0, history)
 	for i := 0; i < history; i++ {

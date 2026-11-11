@@ -32,6 +32,7 @@ var (
 	icQueue   = svg(`<path d="M3 4.5h10M3 8h10M3 11.5h6"/>`)
 	icReload  = svg(`<path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5v3h-3"/>`)
 	icClose   = svg(`<path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/>`)
+	icCheck   = svg(`<path d="M3.5 8.5 6.5 11.5 12.5 4.5"/>`)
 )
 
 type kind int
@@ -273,9 +274,9 @@ func (app *App) cbtn(c *ui.Context, p Palette, label string, k kind) ui.Element 
 // kHeader：会话区标题行。
 func (app *App) kHeader(c *ui.Context, p Palette, hdr ui.Element) {
 	hdr.Children(func() {
-		ui.Column(c).Gap(0).Shrink(1).Children(func() {
+		ui.Row(c).Gap(Space2).AlignItems(ui.Center).Shrink(1).Children(func() {
+			app.agentLogo(c, p, app.catalog().Agent, 18)
 			ui.Text(c, app.sh.sessions[app.sh.cur].name).FontSize(FontSizeTitle).FontWeight(600).MaxLines(1)
-			ui.Text(c, "Claude Code · aibo-rev").FontSize(FontSizeSmall).TextColor(p.Muted).MaxLines(1)
 		})
 		ui.Spacer(c)
 		switch app.variant() {
@@ -387,20 +388,11 @@ func (app *App) queuePopover(c *ui.Context, p Palette, anchor ui.Element) {
 // kSettings：输入框下方的设置与发送。
 func (app *App) kSettings(c *ui.Context, p Palette) {
 	ui.Row(c).Gap(Space1).AlignItems(ui.Center).Children(func() {
-		if app.variant() == 2 {
-			// 模型与推理强度合成一个分段控件
-			ui.Row(c).Gap(0).AlignItems(ui.Center).Radius(RadiusPill).Border(1, p.Border).Children(func() {
-				if app.kselect(c, p, &app.model, models, "模型") {
-					app.changeModel()
-				}
-				ui.Box(c).Size(1, 14).Background(p.Border).AccessHidden(true)
-				app.kselect(c, p, &app.effort, efforts, "推理强度")
-			})
+		if app.variant() == 2 && app.catalog().FullMap == false {
+			// C 方案：两个下拉合成一个分段控件
+			ui.Row(c).Gap(0).AlignItems(ui.Center).Radius(RadiusPill).Border(1, p.Border).Children(func() { app.modelPicker(c, p) })
 		} else {
-			if app.kselect(c, p, &app.model, models, "模型") {
-				app.changeModel()
-			}
-			app.kselect(c, p, &app.effort, efforts, "推理强度")
+			app.modelPicker(c, p)
 		}
 		if app.applying {
 			ui.Text(c, "正在应用设置…").FontSize(FontSizeSmall).TextColor(p.Muted)

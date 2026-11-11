@@ -193,6 +193,10 @@ func (app *App) statusStrip(c *ui.Context, p Palette) {
 }
 
 func (app *App) composer(c *ui.Context, p Palette) {
+	if app.curArchived() {
+		app.archivedBanner(c, p)
+		return
+	}
 	box := ui.Column(c).Gap(Space2)
 	if !app.sh.glass {
 		box.Padding(Space2)
@@ -320,12 +324,21 @@ func (app *App) settingsBar(c *ui.Context, p Palette) {
 		return
 	}
 	ui.Row(c).Gap(Space2).AlignItems(ui.Center).Children(func() {
-		prev := app.model
-		ui.Select(c, &app.model, models).Label("模型")
-		if app.model != prev {
-			app.changeModel()
+		cat := app.catalog()
+		names := make([]string, len(cat.Models))
+		for i, m := range cat.Models {
+			names[i] = m.Name
 		}
-		ui.Select(c, &app.effort, efforts).Label("推理强度")
+		model := app.model
+		ui.Select(c, &model, names).Label("模型")
+		if model != app.model {
+			app.setModel(model)
+		}
+		if m := cat.model(app.model); len(m.Efforts) > 0 {
+			ui.Select(c, &app.effort, m.Efforts).Label("推理强度")
+		} else {
+			app.unsupportedSetting(c, p, "推理强度", "当前模型不提供推理强度")
+		}
 		if app.applying {
 			ui.Text(c, "正在应用设置…").FontSize(FontSizeSmall).TextColor(p.Muted)
 		}
