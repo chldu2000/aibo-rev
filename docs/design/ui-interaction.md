@@ -346,7 +346,7 @@ Agent 请求切换模式时，以审批卡呈现，标题为“切换到计划�
 - **验收**：F17.1 由至少一个真实的面板型能力包验证安装、打开、收起、重载、故障与卸载，功能可以有限。
 - **外部呈现包**：必须提供工具面板的承载位置和打开/收起入口，形式可以不同（[05 补充](../../.scratch/aibo-rev-architecture/issues/05-presentation-interface.md#2026-11-10-补充默认工作台设计带来的完整性要求)）。
 
-面板的装载方式、接口格式、与旧 `toolView` 合同的关系，以及与工作区或会话的绑定，由 [11 号票](../../.scratch/aibo-rev-architecture/issues/11-module-and-desktop-architecture.md)选择。
+面板的装载方式与故障处理见 [ADR 0005 §5](../adr/0005-runtime-storage-and-packages.md#5-工具面板q108q110)：每个包一个独立 origin 的 iframe，按“包 + 工作区”实例化，收起只隐藏，故障只重建该面板；不沿用旧 `toolView` 合同。面板访问宿主的接口见 [ADR 0004 §8](../adr/0004-presentation-protocol.md#8-工具面板q84)。
 
 ### 8.3 会话详情（默认不展示）
 

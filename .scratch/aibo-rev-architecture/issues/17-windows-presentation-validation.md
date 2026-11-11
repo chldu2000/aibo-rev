@@ -33,3 +33,5 @@ Agent 与存储可继续使用前序模拟模型；真实 ACP 消费、停止、
 首轮可复用资产在 `prototype/presentation-conformance` 分支，提交 `83ac7e8e6b4f0020aff88d74e76a6e8db90d1ba1`，入口为 `prototypes/presentation/README.md`。Windows 还须检查最后窗口关闭后的运行与恢复入口可达性，不能沿用 macOS 应用菜单/Dock 的行为假设。
 
 同日，用户已接受前序原型基本通过，正式技术栈与 UI/交互后续单独设计。本票保持 open/unassigned，待正式候选明确后再推进；不阻塞本次主架构文档提交，也不把用户的原型接受解释为 Windows 已通过。
+
+2026-11-11：[11 号票](11-module-and-desktop-architecture.md#answer)已解决，候选为 MyGO + WebView2 + Go 宿主（[ADR 0003](../../../docs/adr/0003-desktop-and-ui-stack.md)），本票不再按 Electron 假设验证。除上文各项外，须一并验证 [ADR 0005](../../../docs/adr/0005-runtime-storage-and-packages.md#尚未验证) 中与 Windows 相关的项目：WebView2 中跨 origin iframe 的进程归属与死循环影响、自定义协议的每包独立 origin、`unresponsive` 事件与心跳中断的原生提示、菜单与托盘恢复入口在页面卡死时可达，以及 Job Object 在应用崩溃时结束全部子进程。

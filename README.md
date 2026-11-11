@@ -11,6 +11,7 @@
 - [当前方向](docs/adr/0002-aibo-refactor-direction.md)：以现有 Aibo 为基线推进彻底重构。
 - [技术栈](docs/adr/0003-desktop-and-ui-stack.md)：MyGO + 系统 WebView、Go 宿主、默认呈现 Svelte 5 + Bits UI + virtua（2026-11-10）。
 - [共享交互状态与公开呈现协议](docs/adr/0004-presentation-protocol.md)：状态在 Go 宿主，页面薄客户端；自有版本化 JSON 协议经 MyGO Channel 承载（2026-11-11）。
+- [进程、存储、ACP 接入、包与工具面板](docs/adr/0005-runtime-storage-and-packages.md)：单一应用进程、SQLite、自写 ACP 连接层、zip 包与 MCP 能力包、iframe 工具面板（2026-11-11）。
 - [全 ACP 与框架中立架构地图](.scratch/aibo-rev-architecture/map.md)：本轮约束、已完成研究与逐项架构决策的入口。
 - [完整版本功能 Checklist](docs/refactor-feature-inventory.md)：手动勾选完整版本必需的特性，包含已有功能、数据治理和新增候选。
 - [数据生命周期盘点](docs/data-lifecycle-inventory.md)：数据放大来源、已有治理和仍需完成的能力。

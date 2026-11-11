@@ -35,9 +35,6 @@ date: 2026-11-10
 - 在 MyGO 的 WKWebView 与 WebView2 中运行默认呈现：中文 IME、剪贴板图片、拖放、模块 Worker、长会话性能（[界面方案 §15](../design/ui-interaction.md#15-需要在-mygo-上验证的交互)）。
 - Windows 上的呈现故障与恢复入口（[17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
 
-## 仍由 11 号票决定
+## 后续决定
 
-- 进程部署：运行核心、ACP 接入与 Agent 进程的进程边界。
-- 存储、索引与文件布局；ACP 接入与扩展映射的实现；能力包工具面板的装载方式。
-
-共享无界面交互模块的位置与实现语言、公开呈现接口的传输方式与数据格式，已于 2026-11-11 由 [ADR 0004](0004-presentation-protocol.md) 决定。
+11 号票的其余问题已于 2026-11-11 决定：共享交互状态与公开呈现协议见 [ADR 0004](0004-presentation-protocol.md)；进程部署、存储与索引、ACP 接入实现、包交付与工具面板装载见 [ADR 0005](0005-runtime-storage-and-packages.md)。
