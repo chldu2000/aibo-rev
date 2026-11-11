@@ -5,7 +5,7 @@
 //	go test ./...                                                  无窗口的交互检查
 package main
 
-//go:generate go run gentokens.go
+//go:generate sh -c "cd ../../tools/ui-checks && go run . tokens"
 
 import (
 	"encoding/json"

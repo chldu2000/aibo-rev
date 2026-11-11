@@ -5,8 +5,8 @@
 ## 运行
 
 ```sh
-go generate                                   # 从 docs/design/tokens/tokens.json 生成 tokens_gen.go
-CGO_ENABLED=0 go test ./...                   # 无窗口交互检查（ui.Tester）
+go generate                                   # 经 tools/ui-checks 从 docs/design/tokens/tokens.json 生成 tokens_gen.go
+CGO_ENABLED=0 go test ./...                   # 无窗口交互检查（ui.Tester），含 tools/ui-checks 验收套件（TestAcceptance）
 SHOTS=1 CGO_ENABLED=0 go test -run TestShots  # 深浅色截图到 reports/
 CGO_ENABLED=0 go build -o bin/native . && ./bin/native
 MYGO_FRAME_STATS=all ./bin/native -auto reports/auto.json > reports/frames.log 2>&1   # 真实窗口自动测量
@@ -14,10 +14,11 @@ MYGO_FRAME_STATS=all ./bin/native -auto reports/auto.json > reports/frames.log 2
 
 | 文件 | 内容 |
 | --- | --- |
-| `gentokens.go` | 设计令牌生成器：`tokens.json` → `Palette`（深浅两套）与字号、间距、圆角、尺寸常量 |
+| `tokens_gen.go` | 生成的设计令牌：`Palette`（深浅两套）与字号、间距、圆角、尺寸常量；生成器在 `tools/ui-checks` |
 | `model.go` | 会话模型：10,000 条历史（尾部 200 条先载入，向上滚动时每次前插 80 条）、模拟流式回复、审批、队列、候选 |
 | `view.go` | 界面：会话列表、`ui.List` 会话流、`ui/markdown` 流式回复、工具卡、审批卡、结果未知卡、状态条与队列浮层、输入区 |
 | `view_test.go` | 无窗口交互检查 |
+| `acceptance_test.go` | 作为 `tools/ui-checks` 的验收目标，提供 `idle-empty` 与 `history-10k` 夹具 |
 | `shots_test.go` | 截图 |
 
 ## 样式怎么落地
@@ -72,3 +73,7 @@ MYGO_FRAME_STATS=all ./bin/native -auto reports/auto.json > reports/frames.log 2
 - Windows（Direct3D 11）上的绘制、字体回退与输入法。
 - 工具面板：原生窗口中嵌入能力包 WebView 已在 [`mygo-validation`](../mygo-validation/README.md) 验证可行（独立进程、可调用 Go），未与本原型合并。
 - 屏幕阅读器的实际朗读（测试器只检查了无障碍树）。
+
+## 2026-11-11 用户决定
+
+默认界面改用原生 UI（[ADR 0006](../../docs/adr/0006-native-ui.md)）。本原型同时作为 `tools/ui-checks` 的第一个验收目标：为契约补上了“用户消息”“Agent 回复”两个无障碍分组；弹层阴影颜色暂以注明例外的变量保留，待令牌生成器支持阴影。

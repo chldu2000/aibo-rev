@@ -1,19 +1,18 @@
 {
-  "$description": "ui-checks 的检查范围与验收目标。实现目录建立后把它加入 styleRoots/copyRoots，并新增一个 target。",
+  "$description": "ui-checks 的检查范围与验收目标。产品实现建立后把它的目录加入 goRoots/copyRoots/tokensGo，新增一个 target，并把 requireAllUITests 改为 true。",
   "requirements": "docs/design/ui-requirements.md",
   "inventory": "docs/refactor-feature-inventory.md",
   "tokens": "docs/design/tokens/tokens.json",
   "tokensCss": "docs/design/tokens/tokens.css",
-  "styleRoots": ["docs/design/prototype", "prototypes/stream-composer/src"],
-  "copyRoots": ["docs/design/prototype", "prototypes/stream-composer/src"],
+  "tokensGo": [
+    { "path": "prototypes/native-ui/tokens_gen.go", "package": "main" }
+  ],
+  "goRoots": ["prototypes/native-ui"],
+  "copyRoots": ["prototypes/native-ui"],
   "forbiddenCopy": ["视为已停止", "即将推出", "敬请期待", "Coming soon", "coming soon", "发送成功"],
-  "defaultTarget": "static-prototype",
-  "targets": {
-    "static-prototype": {
-      "$description": "静态原型（docs/design/prototype），仅用于演示验收脚本；不提供性能夹具。",
-      "serve": "docs/design",
-      "path": "/prototype/index.html",
-      "fixtures": ["running-approval", "delivery-unknown", "pending-question", "turn-failed", "untrusted", "idle-empty", "restart", "save-failure"]
-    }
-  }
+  "acceptance": "tools/ui-checks/acceptance",
+  "requireAllUITests": false,
+  "targets": [
+    { "name": "native-ui-prototype", "dir": "prototypes/native-ui", "run": "TestAcceptance" }
+  ]
 }

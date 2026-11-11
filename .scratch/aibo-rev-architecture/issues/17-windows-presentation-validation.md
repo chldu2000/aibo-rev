@@ -35,3 +35,11 @@ Agent 与存储可继续使用前序模拟模型；真实 ACP 消费、停止、
 同日，用户已接受前序原型基本通过，正式技术栈与 UI/交互后续单独设计。本票保持 open/unassigned，待正式候选明确后再推进；不阻塞本次主架构文档提交，也不把用户的原型接受解释为 Windows 已通过。
 
 2026-11-11：[11 号票](11-module-and-desktop-architecture.md#answer)已解决，候选为 MyGO + WebView2 + Go 宿主（[ADR 0003](../../../docs/adr/0003-desktop-and-ui-stack.md)），本票不再按 Electron 假设验证。除上文各项外，须一并验证 [ADR 0005](../../../docs/adr/0005-runtime-storage-and-packages.md#尚未验证) 中与 Windows 相关的项目：WebView2 中跨 origin iframe 的进程归属与死循环影响、自定义协议的每包独立 origin、`unresponsive` 事件与心跳中断的原生提示、菜单与托盘恢复入口在页面卡死时可达，以及 Job Object 在应用崩溃时结束全部子进程。
+
+2026-11-11（ADR 0006）：默认界面改用 MyGO 原生 UI，外部呈现包与全局恢复入口取消。本票在 Windows 上要验证的内容改为：
+
+- 原生界面：Direct3D 11 绘制与帧耗时、中文字体回退、中文 IME（候选确认与提交键、候选窗位置）、图片剪贴板、拖放、原生文件/目录选择器、深浅色切换；`prototypes/native-ui` 可直接复用。
+- 工具面板：原生窗口中嵌入的 WebView2 是否在独立进程中运行、面板死循环是否影响工作台、结束渲染进程后重新载入能否恢复、每包独立 origin。
+- 进程：Job Object 在应用崩溃时结束全部子进程；最后一个窗口关闭后托盘重新打开工作台。
+
+上文中“完整呈现替换”“两种 UI 框架”“明确失败自动回退”“页面卡死时的原生菜单恢复”等项不再需要验证。

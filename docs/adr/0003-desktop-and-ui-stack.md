@@ -1,9 +1,12 @@
 ---
-status: accepted
+status: superseded in part
 date: 2026-11-10
+superseded-by: ADR 0006（默认呈现与 WebView 路线）
 ---
 
 # 桌面容器、宿主语言与默认界面技术栈
+
+> **2026-11-11 部分取代。** 默认界面改用 MyGO 原生 UI，外部完整呈现包取消，见 [ADR 0006](0006-native-ui.md)。下表“默认呈现”一行、依据中的 WebView 路线与 Svelte 组件栈、约束 1、2、4 不再适用；桌面容器 MyGO 与 Go 宿主仍然有效。
 
 用户于 2026-11-10 决定新 Aibo 采用以下技术栈：
 

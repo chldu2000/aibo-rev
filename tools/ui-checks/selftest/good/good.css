@@ -1,9 +1,0 @@
-/* 合规样式：不应产生任何错误 */
-:root { --attention: #966319; }
-.card.attention { border: 1px solid color-mix(in srgb, var(--attention) 45%, var(--border)); background: var(--attention-bg); }
-.pane { border-left: 1px solid var(--border); }
-.vendor-mark { background: #C46A47; } /* ui-check-allow: color Agent 品牌色 */
-.input { outline: 0; } /* ui-check-allow: outline 焦点环由 .field:focus-within 提供 */
-.field:focus-within { box-shadow: 0 0 0 3px var(--select); }
-@keyframes pulse { 50% { opacity: .4; } }
-@media (prefers-reduced-motion: reduce) { * { animation: none; } }

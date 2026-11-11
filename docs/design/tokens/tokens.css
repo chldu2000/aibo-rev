@@ -1,4 +1,4 @@
-/* 由 tools/ui-checks/build-tokens.mjs 从 tokens.json 生成，请勿手改。 */
+/* 由 tools/ui-checks 从 tokens.json 生成，请勿手改（go -C tools/ui-checks run . tokens）。 */
 :root, [data-theme="light"] {
   --bg: #FBFBFA;
   --surface: #F3F3F1;

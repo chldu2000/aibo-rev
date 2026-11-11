@@ -141,6 +141,9 @@ func (app *App) header(c *ui.Context, p Palette) {
 	})
 }
 
+// popoverShadow 是弹层阴影的颜色。tokens.json 中的 shadow 是复合值，生成器尚未输出它。
+var popoverShadow = ui.RGBA(0, 0, 0, 0.12) // ui-check-allow: color 阴影令牌是复合值，尚未生成
+
 func ms(d time.Duration) float64 { return float64(d.Microseconds()) / 1000 }
 
 func (app *App) streamView(c *ui.Context, p Palette) {
@@ -158,16 +161,18 @@ func (app *App) item(c *ui.Context, p Palette, it *Item) {
 	ui.Column(c).AlignSelf(ui.Center).Width(SizeStreamMax).MaxWidth(10000).Children(func() {
 		switch it.Kind {
 		case KindUser:
-			ui.Row(c).Children(func() {
+			ui.Row(c).Role(ui.RoleGroup).Label("用户消息").Children(func() {
 				ui.Spacer(c)
 				ui.Text(c, it.Text).Padding(Space2, Space3).Radius(RadiusBubble).Background(p.Bubble).MaxWidth(560)
 			})
 		case KindAgent:
-			if it.Done {
-				markdown.View(c, it.Text, &app.md)
-			} else {
-				markdown.Stream(c, it.Text, &app.md)
-			}
+			ui.Column(c).AlignItems(ui.Stretch).Role(ui.RoleGroup).Label("Agent 回复").Children(func() {
+				if it.Done {
+					markdown.View(c, it.Text, &app.md)
+				} else {
+					markdown.Stream(c, it.Text, &app.md)
+				}
+			})
 		case KindTool:
 			ui.Column(c).Border(1, p.Border).Radius(RadiusCard).Padding(Space2, Space3).Children(func() {
 				ui.Collapsible(c, "工具 · "+it.Tool, &it.ToolOpen, func() {
@@ -235,13 +240,13 @@ func (app *App) statusStrip(c *ui.Context, p Palette) {
 			}
 			ui.PopoverBase(c, b, &app.queueOpen, func(panel ui.Element) {
 				panel.AttachTo(b, ui.AnchorTopLeft, ui.AnchorBottomLeft).Margin(0, 0, 6, 0).Padding(Space2).Gap(Space1).Width(360).
-					Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, ui.RGBA(0, 0, 0, 0.12)).Label("队列")
+					Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, popoverShadow).Label("队列")
 				ui.Text(c, "待发送").FontSize(FontSizeSmall).TextColor(p.Muted)
 				for i, q := range app.queue {
 					ui.Row(c.Key(i)).Gap(Space2).AlignItems(ui.Center).Children(func() {
 						ui.Text(c, q).Grow(1)
 						idx := i
-						ui.Button(c, "移除").Label("移除："+q).OnClick(func() {
+						ui.Button(c, "移除").Label("移除：" + q).OnClick(func() {
 							app.queue = append(app.queue[:idx:idx], app.queue[idx+1:]...)
 						})
 					})
@@ -335,7 +340,7 @@ func (app *App) pickerPanel(c *ui.Context, p Palette, box, in ui.Element) {
 	cs := app.candidates()
 	ui.Overlay(c, func() {
 		panel := ui.Column(c).AttachTo(box, ui.AnchorTopLeft, ui.AnchorBottomLeft).Margin(0, 0, 6, 0).Width(420).Padding(Space1).Gap(2).
-			Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, ui.RGBA(0, 0, 0, 0.12)).
+			Radius(RadiusPopover).Background(p.Raised).Border(1, p.Border).Shadow(0, 8, 28, 0, popoverShadow).
 			Role(ui.RoleListBox).Label("候选")
 		panel.Children(func() {
 			for i, s := range cs {

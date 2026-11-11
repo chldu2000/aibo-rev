@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: accepted, revised 2026-11-11 by ADR 0006
 date: 2026-11-11
 ---
 
@@ -14,7 +14,8 @@ date: 2026-11-11
 - **Agent 进程划分。** 每个“Agent 包 + 工作区 + 影响进程环境的启动配置”一个 ACP 连接进程，同一键下的会话共用。Agent 包可声明每会话独立进程，用于同一连接并发多会话不可靠的 Agent。强制结束前的确认须列出同一进程中会被一同中断的会话。
 - **子进程随应用结束。** Agent 与能力包进程随 Aibo 进程结束：Windows 用 Job Object，macOS 用进程组与父进程退出检测。重启时核对并清理残留进程。
 - **能力包在独立子进程中运行**，由宿主按需启动和监督，不限实现语言。
-- **手动恢复入口。** 应用菜单与托盘菜单常驻“重新载入界面”“切回默认界面”，由原生主线程处理。收到 Windows 的 `unresponsive` 事件或页面心跳长时间中断时，弹出原生提示，提供“继续等待 / 重新载入 / 切回默认界面”，不自动回退。
+- ~~**手动恢复入口。** 应用菜单与托盘菜单常驻“重新载入界面”“切回默认界面”……~~ 2026-11-11 取消（[ADR 0006](0006-native-ui.md)）：工作台改为原生界面，没有可重新载入的页面或可切回的默认界面。界面故障的处理见 ADR 0006“后果”；工具面板的故障处理见第 5 节。
+- **子进程清理的实现（2026-11-11 验证补充）。** macOS 没有父进程退出信号：子进程读 stdin、EOF 即退出可覆盖 ACP Agent 的典型情况，但不读 stdin 的子进程与孙进程会残留。每个子进程以独立进程组启动，记录进程组号与启动时间；重启时核对后按进程组结束残留进程（[`mygo-validation`](../../prototypes/mygo-validation/README.md#子进程q87)）。
 
 ## 2. 存储与索引（Q90–Q96）
 
@@ -50,7 +51,13 @@ date: 2026-11-11
 - **能力包接口。** 能力包是 stdio MCP 服务器：工具用 MCP tools，可选上下文用 MCP resources 与资源模板，Aibo 特有元数据放在 `_meta`。宿主作为 MCP 客户端连接各包，再统一对 Agent 暴露。工具面板经 ADR 0004 的公开协议访问宿主。
 - **工具调用与身份。** 宿主为每个 Aibo 会话提供一个 MCP 端点，聚合宿主内置工具（引用读取、只读补读）与该会话可用的能力包工具，经 `session/new`/`session/load` 的 `mcpServers` 传给 Agent。Agent 支持 HTTP MCP 时用 `127.0.0.1` 端点、凭据放请求头；否则用 Aibo 程序自身的桥接模式（stdio ↔ 宿主本地连接）、凭据放环境变量。凭据绑定会话、连接代际与工作区，换代、撤销信任或卸载包时立即失效；每次调用由宿主校验授权并记录活动。
 
-## 5. 工具面板（Q108–Q110）
+## 5. 工具面板（Q108–Q110；2026-11-11 由 Q114 修订）
+
+> **2026-11-11 修订。** 实测 iframe 不能调用 Go，且与工作台同线程、死循环会卡死工作台（[`mygo-validation`](../../prototypes/mygo-validation/README.md#工具面板iframe-不可行独立-webview-可行)）。Q114 改为：每个面板是原生工作台窗口中嵌入的一个 WebView（`Window.NewWebView`），在独立渲染进程中运行；页面由宿主经自定义协议从包目录提供，每个包一个协议 host（独立 origin）；顶层页面直接经受限的绑定访问宿主（ADR 0004 第 8 节）。下文中的“iframe”均按“面板 WebView”理解，实例范围不变。故障处理补充：
+>
+> - 页面卡死时 `Reload()`/`LoadURL()` 不能恢复；“重新加载面板”须先结束该面板的渲染进程，再重新载入（约 40 ms 恢复，`OnRenderProcessGone` 可观察）。
+> - 面板心跳在面板创建与页面就绪时重置，避免收起后重新展开时因旧心跳过期误报。
+> - 面板页面中的输入法判断以 `isComposing`（或 `keyCode 229`）为准，不依赖组合事件的先后。
 
 - **装载方式。** 每个面板是一个 iframe，每个包使用独立 origin；页面由宿主经自定义协议从包目录提供。面板用自己的客户端连接与受限凭据访问宿主（ADR 0004 第 8 节），不能读取未发送草稿或代替用户发送。不沿用旧 `toolView` 合同。
 - **实例范围。** 每个“包 + 工作区”一个面板实例。同一工作区内切换会话不重建面板，面板经受限接口读取当前会话身份并订阅变化；切换到其他工作区时销毁旧实例，包进程中的工作继续（F17.5）。
@@ -68,8 +75,8 @@ date: 2026-11-11
 
 这些是实现前或实现中的必做验证，结果若推翻某项选择，须新开 ADR 取代对应部分：
 
-- WKWebView 与 WebView2 中跨 origin iframe 是否在独立进程中运行；MyGO 自定义协议能否为每个包提供独立 origin。若 iframe 与主页面同进程，面板死循环会卡住整个呈现，此时由第 1 节的全局恢复入口处理并记录限制，或改用独立 WebView。
-- 纯 Go SQLite 驱动在长历史与并发流式写入下的性能，以及 FTS5 trigram 支持。
+- ~~WKWebView 与 WebView2 中跨 origin iframe 是否在独立进程中运行……~~ 2026-11-11 在 macOS 上验证：iframe 与主页面同线程、不能调用 Go；改用嵌入的独立 WebView（第 5 节修订）。每个包的独立 origin 已验证。WebView2 上的同项验证并入 17 号票。
+- 纯 Go SQLite 驱动在长历史与并发流式写入下的性能，以及 FTS5 trigram 支持。2026-11-11 在 macOS 上验证通过（`modernc.org/sqlite` v1.62.0：并发流式写入约 28 万行/秒，FTS5 trigram 可用，见 [`mygo-validation`](../../prototypes/mygo-validation/README.md)）。
 - 正式支持的 Agent 在同一连接中并发多个会话的可靠性；不可靠的 Agent 改为声明每会话独立进程。
-- Windows Job Object 与 macOS 父进程退出检测在应用崩溃时确实结束全部子进程。
-- 页面心跳中断与 Windows `unresponsive` 事件的提示，以及菜单恢复入口在页面卡死时可达（并入 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
+- Windows Job Object 与 macOS 父进程退出检测在应用崩溃时确实结束全部子进程。2026-11-11 macOS 部分已验证：须用“stdin EOF + 重启时按进程组清理”（第 1 节补充）；Windows 部分待验证。
+- ~~页面心跳中断与 Windows `unresponsive` 事件的提示……~~ 2026-11-11 随全局恢复入口取消；Windows 上工具面板 WebView 的卡死与恢复并入 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)。
