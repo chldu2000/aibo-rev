@@ -1,2 +1,6 @@
 .DS_Store
 node_modules/
+
+# 原型的构建产物（Windows 构建会生成 .exe）
+prototypes/*/bin/
+prototypes/*/dist/
