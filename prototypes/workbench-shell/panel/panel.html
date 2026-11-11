@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>示例包面板</title>
+<style>
+  :root { color-scheme: light dark; font: 13px -apple-system, "PingFang SC", sans-serif; }
+  body { margin: 0; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  input, textarea { font: inherit; padding: 6px 8px; border: 1px solid #8884; border-radius: 6px; background: transparent; color: inherit; }
+  textarea { min-height: 60px; }
+  #log { font: 11px ui-monospace, Menlo, monospace; white-space: pre-wrap; max-height: 160px; overflow: auto; border: 1px solid #8883; border-radius: 6px; padding: 6px; }
+  small { opacity: .7; }
+</style>
+</head>
+<body>
+  <div class="row"><strong>示例包面板</strong><small id="info"></small></div>
+  <div>运行计数：<span id="ticks">0</span>（隐藏面板期间应继续增长）</div>
+  <label class="row">筛选 <input id="q" placeholder="面板内的输入框"></label>
+  <textarea id="note" placeholder="面板内的多行输入（测试中文输入法）"></textarea>
+  <div class="row"><button id="btn">面板按钮</button><a href="#x" id="link">面板链接</a></div>
+  <div id="log"></div>
+<script>
+  const s = window.__panel = { ticks: 0, loadedAt: Date.now(), keys: [], focus: [] };
+  const log = (m) => { const el = document.getElementById('log'); el.textContent = (new Date().toISOString().slice(11, 23) + ' ' + m + '\n' + el.textContent).slice(0, 4000); };
+  setInterval(() => { s.ticks++; document.getElementById('ticks').textContent = s.ticks; }, 100);
+  const info = () => { document.getElementById('info').textContent = `${innerWidth}×${innerHeight} · ${location.origin}`; };
+  addEventListener('resize', info); info();
+  addEventListener('keydown', (e) => { s.keys.push(e.key); log('keydown ' + (e.metaKey ? '⌘' : '') + e.key + (e.isComposing ? ' (组字中)' : '')); });
+  addEventListener('focus', () => { s.focus.push('window-focus'); log('页面获得焦点'); });
+  addEventListener('blur', () => { s.focus.push('window-blur'); log('页面失去焦点'); });
+  document.addEventListener('focusin', (e) => log('focusin ' + (e.target.id || e.target.tagName)));
+  document.getElementById('btn').onclick = () => log('按钮点击');
+  log('载入 ' + (window.mygo ? '（可调用 Go）' : '（无 mygo）'));
+</script>
+</body>
+</html>

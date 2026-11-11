@@ -55,6 +55,6 @@ supersedes: ADR 0003 中“默认呈现”一行与 WebView 路线的依据；�
 ## 尚未验证
 
 - Windows（Direct3D 11）上的绘制、字体回退与输入法，以及嵌入 WebView2 的工具面板（[17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
-- 工作台原生界面与工具面板 WebView 在同一窗口中的组合（两者已分别验证，尚未合并）。
-- 屏幕阅读器的实际朗读（测试器只检查了无障碍树）。
-- 界面包在视图构建边界上恢复 panic 的可行性与恢复后的界面状态。
+- ~~工作台原生界面与工具面板 WebView 在同一窗口中的组合~~ 2026-11-12 在 macOS 上验证可行（[`workbench-shell`](../../prototypes/workbench-shell/README.md)，18 号票）。
+- ~~屏幕阅读器的实际朗读~~ 2026-11-12 用户在 macOS 上手动检查后认为没有问题；Windows 由 17 号票承接。
+- ~~界面包在视图构建边界上恢复 panic 的可行性与恢复后的界面状态~~ 2026-11-12 验证可行：在区域外层元素的 `Children` 闭包内 recover，故障只限于该区域，下一帧显示故障说明，重试可恢复。限制：出错的那一帧会显示一次区域内已构建的部分；边界不能放在切换主题作用域的元素内部；只覆盖视图构建，事件回调与 goroutine 的 panic 另行处理。

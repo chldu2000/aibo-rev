@@ -1,0 +1,162 @@
+{
+  "1_panelInitial": {
+    "active": "BODY",
+    "focus": false,
+    "h": 776,
+    "loadedAt": 1794414704156,
+    "ticks": 22,
+    "w": 358
+  },
+  "1_processes": {
+    "app": 21973,
+    "panel": 21977
+  },
+  "2_split": {
+    "afterWindow1500": {
+      "active": "BODY",
+      "focus": false,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 36,
+      "w": 478
+    },
+    "mainColumnW": 780,
+    "panelW480": {
+      "active": "BODY",
+      "focus": false,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 28,
+      "w": 478
+    }
+  },
+  "3_focus": {
+    "afterInputFocus": {
+      "active": "q",
+      "focus": true,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 47,
+      "w": 478
+    },
+    "afterWebViewFocus": {
+      "active": "BODY",
+      "focus": true,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 45,
+      "w": 478
+    }
+  },
+  "4_collapse": {
+    "afterExpand": {
+      "active": "q",
+      "focus": false,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 58,
+      "w": 478
+    },
+    "before": {
+      "active": "q",
+      "focus": true,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 47,
+      "w": 478
+    },
+    "whileHidden": {
+      "active": "q",
+      "focus": false,
+      "h": 776,
+      "loadedAt": 1794414704156,
+      "ticks": 52,
+      "w": 478
+    }
+  },
+  "5_panelLoop": {
+    "buildMaxMs": 0.271,
+    "mainThreadAvgMs": 0.6274666666666667,
+    "mainThreadMaxMs": 3.053,
+    "newPanelPid": 22001,
+    "panelAfterRecover": {
+      "active": "BODY",
+      "focus": false,
+      "h": 754,
+      "loadedAt": 1794414720369,
+      "ticks": 0,
+      "w": 478
+    },
+    "panelEvalWhileLooping": {
+      "error": "context deadline exceeded"
+    },
+    "publishToBuildAvgMs": 4.302,
+    "publishToBuildMaxMs": 5.601,
+    "recoverMs": 1909.459,
+    "status": "已重新载入（100 ms）",
+    "streamFrames": 108
+  },
+  "6_panelKilled": {
+    "mainThreadAvgMs": 0.0746,
+    "mainThreadMaxMs": 0.093,
+    "panelAfterRecover": {
+      "active": "BODY",
+      "focus": false,
+      "h": 754,
+      "loadedAt": 1794414721820,
+      "ticks": 0,
+      "w": 478
+    },
+    "recoverMs": 408.951,
+    "status": "面板渲染进程已退出（terminated），点“重新载入”恢复"
+  },
+  "7_panic": {
+    "buildsAfterPanic": 1,
+    "draft": "panic 之后仍可编辑",
+    "faults": {
+      "侧栏": "注入的故障：侧栏",
+      "条目 10002": "注入的故障：工具卡"
+    }
+  },
+  "8_reopen": {
+    "backgroundAfterClose": true,
+    "closeMode": "destroy",
+    "draft": "会话 3 的草稿",
+    "firstVisibleAfter": 5,
+    "firstVisibleBefore": 5,
+    "panelAfterReopen": {
+      "active": "BODY",
+      "focus": false,
+      "h": 754,
+      "loadedAt": 1794414725014,
+      "ticks": 18,
+      "w": 418
+    },
+    "panelBeforeClose": {
+      "active": "BODY",
+      "focus": false,
+      "h": 754,
+      "loadedAt": 1794414721820,
+      "ticks": 15,
+      "w": 418
+    },
+    "panelW": 420,
+    "session": "ACP 连接层"
+  },
+  "events": [
+    "00:31:43.994 窗口已创建",
+    "00:32:00.018 面板：面板无响应，结束渲染进程后重新载入…",
+    "00:32:00.018 已结束面板渲染进程 21977",
+    "00:32:00.024 面板：面板渲染进程已退出（terminated），点“重新载入”恢复",
+    "00:32:00.426 面板：已重新载入（100 ms）",
+    "00:32:00.430 已结束面板渲染进程 22001",
+    "00:32:00.430 面板：面板渲染进程已退出（terminated），点“重新载入”恢复",
+    "00:32:01.449 面板：面板无响应，结束渲染进程后重新载入…",
+    "00:32:01.858 面板：已重新载入（100 ms）",
+    "00:32:01.868 panic 已隔离：侧栏：注入的故障：侧栏",
+    "00:32:01.868 panic 已隔离：条目 10002：注入的故障：工具卡",
+    "00:32:03.373 窗口已销毁（destroy 模式）",
+    "00:32:03.382 最后一个窗口已关闭，应用留在后台",
+    "00:32:04.958 窗口已创建"
+  ]
+}

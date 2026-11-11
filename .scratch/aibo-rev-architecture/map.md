@@ -45,6 +45,7 @@ Labels: wayfinder:map
 - [持久数据、搜索与诊断的所有权](issues/10-data-ownership-and-search.md)：业务内容先保存后发布，引用共享固定内容；索引可重建、诊断独立限额，无主托管资产延迟复核后回收，关键保存故障暂停推进并核实停止。
 - [跨框架替换与呈现故障回退的最小原型](issues/13-presentation-conformance-prototype.md)：macOS 上已取得两种框架替换及故障恢复证据，用户认可原型基本通过；正式技术栈、界面与交互留待单独设计，原型实现不成为产品选型。
 - [模块接口、技术栈与桌面部署形态](issues/11-module-and-desktop-architecture.md)：MyGO + Go 宿主（ADR 0003）；宿主持有交互状态（ADR 0004）；单一应用进程、按“包 + 工作区”分 Agent 进程、SQLite 与独立索引、自写 ACP 连接层、zip 包与 MCP 能力包（ADR 0005）。2026-11-11 修订：默认界面改用 MyGO 原生 UI、取消外部呈现包、工具面板为嵌入的独立 WebView（ADR 0006）。
+- [原生工作台外壳在 macOS 上的组合验证](issues/18-macos-workbench-shell-validation.md)：同窗口工具面板、区域级 panic 边界、标题栏、通知定位与读屏在 macOS 上成立；关窗销毁窗口、宿主恢复界面状态；面板页面会被节流或销毁，F17.5 后台工作须在包进程中。
 
 ## Not yet specified
 
