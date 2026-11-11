@@ -1,0 +1,44 @@
+{
+  "fts5Trigram": "ok",
+  "indexBuild": {
+    "rows": 200000,
+    "seconds": 5.162877833
+  },
+  "pageReadAvgMs": 0.06321,
+  "queries": {
+    "approval": {
+      "err": "ok",
+      "hits": 170335,
+      "ms": 49.545
+    },
+    "两字·会话": {
+      "err": "ok",
+      "hits": 0,
+      "ms": 0.015
+    },
+    "子任务补读": {
+      "err": "ok",
+      "hits": 8912,
+      "ms": 3.336
+    },
+    "暂停恢复": {
+      "err": "ok",
+      "hits": 2950,
+      "ms": 2.125
+    }
+  },
+  "shortQueryScanMs": 0.468,
+  "sizesMB": {
+    "aibo.db": 89,
+    "index.db": 119
+  },
+  "sqliteVersion": "3.54.1",
+  "write": {
+    "bodyChars": 400,
+    "commits": 1231,
+    "maxCommitMs": 7,
+    "rows": 200000,
+    "rowsPerSec": 284381,
+    "seconds": 0.70327975
+  }
+}

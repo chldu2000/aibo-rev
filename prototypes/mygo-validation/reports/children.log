@@ -1,0 +1,6 @@
+2026/11/11 21:37:37 children [{"kind":"stdin-eof","pid":15592},{"kind":"ignores-stdin","pid":15593},{"kind":"stdin-eof-parent","pid":15594},{"kind":"grandchild-ignores-stdin","pid":15595}]
+2026/11/11 21:37:38 dom-ready {"pid":15590,"url":"mygo://localhost/"}
+2026/11/11 21:37:54 children [{"kind":"stdin-eof","pid":15643},{"kind":"ignores-stdin","pid":15644},{"kind":"stdin-eof-parent","pid":15645},{"kind":"grandchild-ignores-stdin","pid":15646}]
+2026/11/11 21:37:55 dom-ready {"pid":15641,"url":"mygo://localhost/"}
+2026/11/11 21:38:07 children [{"kind":"stdin-eof","pid":15692},{"kind":"ignores-stdin","pid":15693},{"kind":"stdin-eof-parent","pid":15694},{"kind":"grandchild-ignores-stdin","pid":15695}]
+2026/11/11 21:38:07 dom-ready {"pid":15690,"url":"mygo://localhost/"}

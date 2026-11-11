@@ -1,0 +1,21 @@
+{
+  "app": 15686,
+  "children": [
+    {
+      "kind": "stdin-eof",
+      "pid": 15692
+    },
+    {
+      "kind": "ignores-stdin",
+      "pid": 15693
+    },
+    {
+      "kind": "stdin-eof-parent",
+      "pid": 15694
+    },
+    {
+      "kind": "grandchild-ignores-stdin",
+      "pid": 15695
+    }
+  ]
+}

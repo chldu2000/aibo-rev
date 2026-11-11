@@ -1,0 +1,323 @@
+{
+  "defaultUI": {
+    "allHistory": {
+      "\u003e50ms 的帧": "累计 0（0.5s 内最长 19ms）",
+      "JS 堆": "不可用（非 Chromium）",
+      "Markdown 块渲染": "100 次",
+      "会话流 DOM 节点": "113",
+      "发布→下一帧": "平均 9ms · 最大 19ms",
+      "已挂载行": "9",
+      "帧率": "60 fps",
+      "条目总数": "10005"
+    },
+    "codeBlocks": 3,
+    "focusStaysInTextarea": true,
+    "followedBottom": true,
+    "pickerVisible": true,
+    "prepend": [
+      0,
+      0,
+      0
+    ],
+    "shikiBlocks": 3,
+    "slowPublishes": [],
+    "streaming": {
+      "\u003e50ms 的帧": "累计 0（0.5s 内最长 19ms）",
+      "JS 堆": "不可用（非 Chromium）",
+      "Markdown 块渲染": "41 次",
+      "会话流 DOM 节点": "166",
+      "发布→下一帧": "平均 10ms · 最大 19ms",
+      "已挂载行": "1",
+      "帧率": "60 fps",
+      "条目总数": "10005"
+    },
+    "workerSupported": true
+  },
+  "events": [
+    {
+      "t": "0.318",
+      "event": "dom-ready",
+      "data": {
+        "pid": 15520,
+        "url": "mygo://localhost/"
+      }
+    },
+    {
+      "t": "14.984",
+      "event": "dom-ready",
+      "data": {
+        "pid": 15520,
+        "url": "mygo://localhost/lab/"
+      }
+    },
+    {
+      "t": "15.850",
+      "event": "stream",
+      "data": {
+        "sent": 20000,
+        "totalMs": 38,
+        "maxSendMs": 1.643,
+        "blockedSends": 0,
+        "canceled": false
+      }
+    },
+    {
+      "t": "21.052",
+      "event": "stream",
+      "data": {
+        "sent": 300,
+        "totalMs": 5197,
+        "maxSendMs": 0.214,
+        "blockedSends": 0,
+        "canceled": false
+      }
+    },
+    {
+      "t": "24.639",
+      "event": "stream",
+      "data": {
+        "sent": 2000,
+        "totalMs": 3585,
+        "maxSendMs": 256.709,
+        "blockedSends": 14,
+        "canceled": false
+      }
+    },
+    {
+      "t": "25.457",
+      "event": "stream",
+      "data": {
+        "sent": 316,
+        "totalMs": 402,
+        "maxSendMs": 0.043,
+        "blockedSends": 0,
+        "canceled": true
+      }
+    },
+    {
+      "t": "25.467",
+      "event": "protocol",
+      "data": {
+        "host": "pkg-a",
+        "path": "/panel.html"
+      }
+    },
+    {
+      "t": "25.474",
+      "event": "protocol",
+      "data": {
+        "host": "pkg-b",
+        "path": "/panel.html"
+      }
+    },
+    {
+      "t": "42.518",
+      "event": "page:lab-result",
+      "data": {
+        "echo": {
+          "avg": 0.083,
+          "max": 1,
+          "p95": 1
+        },
+        "frames": {
+          "pkg-a": {
+            "callResult": "no window.mygo",
+            "eventOrigin": "aibopkg://pkg-a",
+            "hasMygo": "undefined",
+            "origin": "aibopkg://pkg-a"
+          },
+          "pkg-b": {
+            "callResult": "no window.mygo",
+            "eventOrigin": "aibopkg://pkg-b",
+            "hasMygo": "undefined",
+            "origin": "aibopkg://pkg-b"
+          },
+          "same-origin": {
+            "callResult": "no window.mygo",
+            "eventOrigin": "mygo://localhost",
+            "hasMygo": "undefined",
+            "origin": "mygo://localhost"
+          }
+        },
+        "hang": {
+          "pkg-a": {
+            "parentMaxGapMs": 3001
+          },
+          "same-origin": {
+            "parentMaxGapMs": 3001
+          }
+        },
+        "origin": "mygo://localhost",
+        "relay": {
+          "avg": 0.165,
+          "from": "aibopkg://pkg-a/panel.html",
+          "max": 2,
+          "p95": 1,
+          "type": "relay-done"
+        },
+        "streamCancel": {
+          "host": {
+            "blockedSends": 0,
+            "canceled": true,
+            "maxSendMs": 0.043,
+            "sent": 316,
+            "totalMs": 402
+          },
+          "latAvgMs": -0.41,
+          "latMaxMs": 0,
+          "outOfOrder": 0,
+          "pageMs": 402,
+          "received": 315
+        },
+        "streamFast": {
+          "host": {
+            "blockedSends": 0,
+            "canceled": false,
+            "maxSendMs": 1.643,
+            "sent": 20000,
+            "totalMs": 38
+          },
+          "latAvgMs": 2.49,
+          "latMaxMs": 5,
+          "outOfOrder": 0,
+          "pageMs": 43,
+          "received": 20000
+        },
+        "streamSlowConsumer": {
+          "host": {
+            "blockedSends": 14,
+            "canceled": false,
+            "maxSendMs": 256.709,
+            "sent": 2000,
+            "totalMs": 3585
+          },
+          "latAvgMs": 365.83,
+          "latMaxMs": 512,
+          "outOfOrder": 0,
+          "pageMs": 4002,
+          "received": 2000
+        },
+        "streamTokens": {
+          "host": {
+            "blockedSends": 0,
+            "canceled": false,
+            "maxSendMs": 0.214,
+            "sent": 300,
+            "totalMs": 5197
+          },
+          "latAvgMs": -0.08,
+          "latMaxMs": 2,
+          "outOfOrder": 0,
+          "pageMs": 5199,
+          "received": 300
+        }
+      }
+    },
+    {
+      "t": "46.178",
+      "event": "heartbeat-lost",
+      "data": 4.125793625
+    },
+    {
+      "t": "71.325",
+      "event": "render-process-gone",
+      "data": "terminated"
+    },
+    {
+      "t": "71.367",
+      "event": "dom-ready",
+      "data": {
+        "pid": 15550,
+        "url": "mygo://localhost/lab/"
+      }
+    },
+    {
+      "t": "76.678",
+      "event": "heartbeat-lost",
+      "data": 4.309266375
+    },
+    {
+      "t": "76.680",
+      "event": "render-process-gone",
+      "data": "terminated"
+    },
+    {
+      "t": "76.718",
+      "event": "dom-ready",
+      "data": {
+        "pid": 15551,
+        "url": "mygo://localhost/lab/"
+      }
+    },
+    {
+      "t": "77.114",
+      "event": "protocol",
+      "data": {
+        "host": "pkg-a",
+        "path": "/panel.html"
+      }
+    },
+    {
+      "t": "81.421",
+      "event": "protocol",
+      "data": {
+        "host": "pkg-a",
+        "path": "/panel.html"
+      }
+    },
+    {
+      "t": "87.384",
+      "event": "protocol",
+      "data": {
+        "host": "pkg-a",
+        "path": "/panel.html"
+      }
+    }
+  ],
+  "hang": {
+    "evalWhilePanelLooping": "context deadline exceeded",
+    "loadURLRecovered": false,
+    "mainThreadMaxMs": 0.034,
+    "recovery": {
+      "evalAfter": "ok",
+      "ms": 40,
+      "pidAfter": 15550,
+      "pidBefore": 15520,
+      "recovered": true,
+      "renderProcessGone": "terminated"
+    },
+    "reloadRecovered": false
+  },
+  "lab": {
+    "error": "context deadline exceeded"
+  },
+  "mainLoop": {
+    "evalDuringHang": "context deadline exceeded",
+    "recovery": {
+      "evalAfter": "ok",
+      "ms": 37,
+      "pidAfter": 15551,
+      "pidBefore": 15550,
+      "recovered": true,
+      "renderProcessGone": "terminated"
+    }
+  },
+  "mygo": "v0.9.0",
+  "origin": "mygo://localhost",
+  "pid": 15520,
+  "separateWindow": {
+    "mainEvalAfterPanelKilled": "ok",
+    "mainEvalWhilePanelLoops": "ok",
+    "mainPid": 15551,
+    "panelPid": 15552
+  },
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko)",
+  "webViews": {
+    "mainEvalAfterPanelKilled": "ok",
+    "mainEvalWhilePanelLoops": "ok",
+    "mainPid": 15554,
+    "panelEvalAfterReload": "ok",
+    "panelHasMygo": "ok",
+    "panelPid": 15555
+  }
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>MyGO 实验页</title>
+<style>
+  :root { color-scheme: light; font: 13px/1.5 -apple-system, "PingFang SC", sans-serif; color: #1c1c1a; background: #fbfbfa; }
+  body { margin: 0; padding: 16px 20px; }
+  h1 { font-size: 15px; margin: 0 0 12px; }
+  h2 { font-size: 13px; margin: 16px 0 6px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  iframe { width: 300px; height: 64px; border: 1px solid #d2d2cc; border-radius: 6px; }
+  .zone { border: 1px dashed #d2d2cc; border-radius: 8px; padding: 16px; min-width: 280px; min-height: 60px; }
+  textarea { width: 420px; height: 64px; font: inherit; }
+  pre { background: #f3f3f1; border-radius: 6px; padding: 8px; max-height: 260px; overflow: auto; font-size: 12px; }
+  button { font: inherit; }
+</style>
+</head>
+<body>
+<h1>MyGO 实验页（非产品界面）</h1>
+<div class="row">
+  <button id="run">运行自动实验</button>
+  <a href="/">回到默认界面原型</a>
+</div>
+
+<h2>工具面板 iframe</h2>
+<div class="row" id="frames"></div>
+
+<h2>手动：中文输入法</h2>
+<textarea id="ime" placeholder="用中文输入法输入，候选确认时按 Enter；下方记录 composition 与 Enter 事件"></textarea>
+
+<h2>手动：粘贴图片 / 拖放文件</h2>
+<div class="row">
+  <div class="zone" id="paste" tabindex="0">点击此处后按 ⌘V 粘贴图片</div>
+  <div class="zone" id="drop">把文件或图片拖到这里</div>
+</div>
+
+<h2>记录</h2>
+<pre id="log"></pre>
+<script src="lab.js"></script>
+</body>
+</html>

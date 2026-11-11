@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>面板</title>
+<style>
+  body { margin: 0; padding: 8px; font: 12px/1.5 -apple-system, sans-serif; color: #1c1c1a; background: #f3f3f1; }
+</style>
+</head>
+<body>
+<div id="info">面板载入中</div>
+<script>
+  // 一次性实验：报告自己的 origin、能否直接调用 Go，并响应父页面的测试指令。
+  const post = (msg) => parent.postMessage({ from: location.href, ...msg }, '*');
+  const pending = new Map();
+  let nextId = 1;
+  window.addEventListener('message', async (e) => {
+    const m = e.data || {};
+    if (m.type === 'relay-reply') { pending.get(m.id)?.(m.value); pending.delete(m.id); return; }
+    if (m.type === 'hang') { const t = Date.now(); while (Date.now() - t < m.ms) {} post({ type: 'hang-done' }); }
+    if (m.type === 'loop') { setTimeout(() => { for (;;) {} }, 0); }
+    if (m.type === 'relay') {
+      // 经父页面转发调用 Go，测往返延迟
+      const call = (value) => new Promise((r) => { const id = nextId++; pending.set(id, r); post({ type: 'relay', id, value }); });
+      const times = [];
+      for (let i = 0; i < m.n; i++) { const s = performance.now(); await call(i); times.push(performance.now() - s); }
+      times.sort((a, b) => a - b);
+      post({ type: 'relay-done', avg: times.reduce((a, b) => a + b, 0) / times.length, p95: times[Math.floor(times.length * 0.95)], max: times[times.length - 1] });
+    }
+  });
+  (async () => {
+    let callResult = 'no window.mygo';
+    if (window.mygo && typeof window.mygo.call === 'function') {
+      try {
+        callResult = await Promise.race([window.mygo.call('Lab.Echo', 'from-iframe').then((v) => 'ok:' + v), new Promise((r) => setTimeout(() => r('timeout'), 1500))]);
+      } catch (err) { callResult = 'error:' + (err && err.message); }
+    }
+    document.getElementById('info').textContent = location.origin + ' · ' + callResult;
+    post({ type: 'ready', origin: location.origin, hasMygo: typeof window.mygo, callResult });
+  })();
+</script>
+</body>
+</html>

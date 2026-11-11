@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "stdin-eof",
+    "pid": 15692,
+    "pgid": null,
+    "aliveAfterAppKilled": false,
+    "aliveAfterGroupKill": false
+  },
+  {
+    "kind": "ignores-stdin",
+    "pid": 15693,
+    "pgid": 15693,
+    "aliveAfterAppKilled": true,
+    "aliveAfterGroupKill": false
+  },
+  {
+    "kind": "stdin-eof-parent",
+    "pid": 15694,
+    "pgid": null,
+    "aliveAfterAppKilled": false,
+    "aliveAfterGroupKill": false
+  },
+  {
+    "kind": "grandchild-ignores-stdin",
+    "pid": 15695,
+    "pgid": 15694,
+    "aliveAfterAppKilled": true,
+    "aliveAfterGroupKill": false
+  }
+]
