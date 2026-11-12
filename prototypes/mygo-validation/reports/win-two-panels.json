@@ -1,0 +1,82 @@
+{
+  "aAfterBrowserKilled": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "aAfterBrowserReload": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "aAfterRendererReload": {
+    "hasMygo": true,
+    "now": 1794422870040,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aInitial": {
+    "hasMygo": true,
+    "now": 1794422853312,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aLoopStartMs": 4495,
+  "aWhileLooping": {
+    "error": "context deadline exceeded"
+  },
+  "bAfterARendererKilled": {
+    "hasMygo": true,
+    "now": 1794422869039,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bAfterBrowserKilled": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "bAfterBrowserReload": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "bInitial": {
+    "hasMygo": true,
+    "now": 1794422855535,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bWhileALoops": {
+    "hasMygo": true,
+    "now": 1794422867537,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "browserA": 11928,
+  "browserB": 11928,
+  "browserKilled": 11928,
+  "events": [
+    {
+      "elapsedMs": 17501,
+      "panel": "a",
+      "reason": "crashed"
+    },
+    {
+      "elapsedMs": 19008,
+      "panel": "a",
+      "reason": "browser-exited"
+    },
+    {
+      "elapsedMs": 19008,
+      "panel": "b",
+      "reason": "browser-exited"
+    }
+  ],
+  "rendererKilled": 17976,
+  "renderersAfterB": [
+    17976,
+    25328
+  ],
+  "renderersBeforeB": [
+    17976
+  ],
+  "startLoop": 1
+}

@@ -1,0 +1,96 @@
+{
+  "aAfterBrowserKilled": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "aAfterBrowserReload": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "aAfterRecreate": {
+    "hasMygo": true,
+    "now": 1794422948408,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aAfterRendererReload": {
+    "hasMygo": true,
+    "now": 1794422944904,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aInitial": {
+    "hasMygo": true,
+    "now": 1794422928157,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aLoopStartMs": 4499,
+  "aWhileLooping": {
+    "error": "context deadline exceeded"
+  },
+  "bAfterARendererKilled": {
+    "hasMygo": true,
+    "now": 1794422943902,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bAfterBrowserKilled": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "bAfterBrowserReload": {
+    "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+  },
+  "bAfterRecreate": {
+    "hasMygo": true,
+    "now": 1794422948409,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bInitial": {
+    "hasMygo": true,
+    "now": 1794422930399,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bWhileALoops": {
+    "hasMygo": true,
+    "now": 1794422942401,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "browserA": 7200,
+  "browserB": 7200,
+  "browserKilled": 7200,
+  "events": [
+    {
+      "elapsedMs": 17505,
+      "panel": "a",
+      "reason": "crashed"
+    },
+    {
+      "elapsedMs": 19011,
+      "panel": "a",
+      "reason": "browser-exited"
+    },
+    {
+      "elapsedMs": 19011,
+      "panel": "b",
+      "reason": "browser-exited"
+    }
+  ],
+  "rendererKilled": 24852,
+  "renderersAfterB": [
+    24852,
+    21116
+  ],
+  "renderersBeforeB": [
+    24852
+  ],
+  "startLoop": 1
+}

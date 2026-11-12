@@ -36,7 +36,7 @@ func (app *App) mainLatency(n int) (avgMs, maxMs float64) {
 }
 
 func (app *App) panelState() map[string]any {
-	v, err := app.evalPanel("return { ticks: window.__panel.ticks, loadedAt: window.__panel.loadedAt, w: innerWidth, h: innerHeight, focus: document.hasFocus(), active: document.activeElement && (document.activeElement.id || document.activeElement.tagName) }")
+	v, err := app.evalPanel("return { origin: location.origin, secureContext: isSecureContext, ticks: window.__panel.ticks, loadedAt: window.__panel.loadedAt, w: innerWidth, h: innerHeight, focus: document.hasFocus(), active: document.activeElement && (document.activeElement.id || document.activeElement.tagName) }")
 	if err != nil {
 		return map[string]any{"error": shortErr(err)}
 	}

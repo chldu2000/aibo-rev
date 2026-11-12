@@ -70,7 +70,7 @@ MYGO_FRAME_STATS=all ./bin/native -auto reports/auto.json > reports/frames.log 2
 
 ## 未验证
 
-- Windows（Direct3D 11）上的绘制、字体回退与输入法。
+- ~~Windows（Direct3D 11）上的绘制、字体回退与输入法~~ 2026-11-12 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)已完成 Windows 11 x64 自动实验与用户人工确认，报告见 `reports/win-auto.json`、`win-memory.json` 及[汇总](../workbench-shell/reports/win-validation-progress.md)。
 - 工具面板：原生窗口中嵌入能力包 WebView 已在 [`mygo-validation`](../mygo-validation/README.md) 验证可行（独立进程、可调用 Go），未与本原型合并。
 - 屏幕阅读器的实际朗读（测试器只检查了无障碍树）。
 

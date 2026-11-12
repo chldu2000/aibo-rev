@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"syscall"
+
 	"time"
 
 	"github.com/egoist/mygo"
@@ -48,7 +48,7 @@ func webViewsTest() map[string]any {
 	time.Sleep(500 * time.Millisecond)
 	r["mainEvalWhilePanelLoops"] = ev(mainView.Page(), "return 1")
 	if pid := panelView.Page().ProcessID(); pid > 0 && pid != mainView.Page().ProcessID() {
-		_ = syscall.Kill(pid, syscall.SIGKILL)
+		_ = killProcess(pid)
 		time.Sleep(800 * time.Millisecond)
 		r["mainEvalAfterPanelKilled"] = ev(mainView.Page(), "return 1")
 		panelView.Page().Reload()

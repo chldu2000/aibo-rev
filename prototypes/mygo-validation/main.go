@@ -16,10 +16,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
+
 	"strings"
 	"sync"
-	"syscall"
+
 	"time"
 
 	"github.com/egoist/mygo"
@@ -63,18 +63,18 @@ type Lab struct {
 
 // Msg 是 Channel 推送的消息。
 type Msg struct {
-	Seq  int    `json:"seq"`
-	SentAt int64 `json:"sentAt"` // Unix 纳秒
-	Body string `json:"body"`
+	Seq    int    `json:"seq"`
+	SentAt int64  `json:"sentAt"` // Unix 纳秒
+	Body   string `json:"body"`
 }
 
 // StreamResult 记录宿主侧的发送情况。
 type StreamResult struct {
-	Sent          int     `json:"sent"`
-	TotalMs       float64 `json:"totalMs"`
-	MaxSendMs     float64 `json:"maxSendMs"`
-	BlockedSends  int     `json:"blockedSends"` // Send 超过 5ms 的次数，视为背压
-	Canceled      bool    `json:"canceled"`
+	Sent         int     `json:"sent"`
+	TotalMs      float64 `json:"totalMs"`
+	MaxSendMs    float64 `json:"maxSendMs"`
+	BlockedSends int     `json:"blockedSends"` // Send 超过 5ms 的次数，视为背压
+	Canceled     bool    `json:"canceled"`
 }
 
 // Stream 推送 n 条 size 字节的消息，每条间隔 intervalMs（0 为尽快发送）。
@@ -137,9 +137,9 @@ func (l *Lab) sinceBeat() time.Duration {
 // ---- 窗口与恢复入口 ----
 
 var (
-	lab     = &Lab{}
-	mainWin *mygo.Window
-	winMu   sync.Mutex
+	lab      = &Lab{}
+	mainWin  *mygo.Window
+	winMu    sync.Mutex
 	domReady = make(chan struct{}, 16)
 	gone     = make(chan string, 4)
 )
@@ -203,7 +203,7 @@ func recoverPage(load func(p *mygo.Page)) {
 			for len(gone) > 0 {
 				<-gone
 			}
-			_ = syscall.Kill(pid, syscall.SIGKILL)
+			_ = killProcess(pid)
 			go func() {
 				select {
 				case <-gone:
@@ -230,7 +230,11 @@ func defaultUI() {
 func hangPage() {
 	if p := page(); p != nil {
 		record("menu:hang", nil)
-		go func() { _, _ = p.EvalContext(ctxTimeout(500*time.Millisecond), "setTimeout(() => { for (;;) {} }, 0); return 1") }()
+		go func() {
+			ctx, cancel := context.WithTimeout(context.Background(), 500*time.Millisecond)
+			defer cancel()
+			_, _ = p.EvalContext(ctx, "setTimeout(() => { for (;;) {} }, 0); return 1")
+		}()
 	}
 }
 
@@ -239,14 +243,9 @@ func killRenderer() {
 		pid := p.ProcessID()
 		record("menu:kill-renderer", pid)
 		if pid > 0 {
-			_ = syscall.Kill(pid, syscall.SIGKILL)
+			_ = killProcess(pid)
 		}
 	}
-}
-
-func ctxTimeout(d time.Duration) context.Context {
-	ctx, _ := context.WithTimeout(context.Background(), d) //nolint:govet // 实验代码，随超时释放
-	return ctx
 }
 
 func menuItems() []*mygo.MenuItem {
@@ -304,48 +303,18 @@ func watchHeartbeat() {
 
 // ---- 子进程（Q87） ----
 
-func spawnChildren(out string) {
-	type child struct {
-		Kind string `json:"kind"`
-		PID  int    `json:"pid"`
-	}
-	var kids []child
-	// 1. 读 stdin 的子进程：父进程退出后 stdin 收到 EOF 即退出（ACP Agent 的典型行为）。
-	cat := exec.Command("/bin/cat")
-	cat.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-	if _, err := cat.StdinPipe(); err == nil && cat.Start() == nil {
-		kids = append(kids, child{"stdin-eof", cat.Process.Pid})
-	}
-	// 2. 不读 stdin 的子进程。
-	sl := exec.Command("/bin/sleep", "600")
-	sl.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-	if sl.Start() == nil {
-		kids = append(kids, child{"ignores-stdin", sl.Process.Pid})
-	}
-	// 3. 读 stdin 的子进程，再派生一个不读 stdin 的孙进程。
-	sh := exec.Command("/bin/sh", "-c", "sleep 600 & echo $! ; cat")
-	sh.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-	stdout, _ := sh.StdoutPipe()
-	if _, err := sh.StdinPipe(); err == nil && sh.Start() == nil {
-		kids = append(kids, child{"stdin-eof-parent", sh.Process.Pid})
-		buf := make([]byte, 32)
-		n, _ := stdout.Read(buf)
-		var gpid int
-		fmt.Sscan(strings.TrimSpace(string(buf[:n])), &gpid)
-		kids = append(kids, child{"grandchild-ignores-stdin", gpid})
-	}
-	b, _ := json.MarshalIndent(map[string]any{"app": os.Getpid(), "children": kids}, "", "  ")
-	_ = os.WriteFile(out, b, 0o644)
-	record("children", kids)
-}
-
 // ---- main ----
 
 func main() {
 	auto := flag.String("auto", "", "自动检查并把报告写到该路径")
 	children := flag.String("children", "", "启动子进程并把进程号写到该路径")
+	panelsReport := flag.String("panels-report", "", "双面板故障隔离报告（Windows）")
+	panelsRecreateLoop := flag.Bool("panels-recreate-loop", false, "双面板实验：直接重建死循环 WebView")
 	logPath := flag.String("log", "", "事件日志文件")
 	flag.Parse()
+	if *children != "" && runChildrenProbe(*children) {
+		return
+	}
 	if *logPath != "" {
 		if f, err := os.OpenFile(*logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644); err == nil {
 			log.SetOutput(f)
@@ -362,7 +331,8 @@ func main() {
 		openMain("/")
 	})
 
-	web, _ := fs.Sub(webFS, "web/app")
+	// 17 号票只使用实验页；旧默认呈现的构建产物不再是依赖。
+	web, _ := fs.Sub(webFS, "web/lab")
 	mygo.SetFrontend(overlay{app: web, root: webFS})
 	panels, _ := fs.Sub(panelFS, "panels")
 	// 每个包一个 host：aibopkg://pkg-a/、aibopkg://pkg-b/，origin 随 host 区分。
@@ -382,6 +352,10 @@ func main() {
 	})
 
 	mygo.App.WhenReady(func() {
+		if *panelsReport != "" {
+			go runPanelsProbe(*panelsReport, *panelsRecreateLoop)
+			return
+		}
 		mygo.App.SetMenu(mygo.NewMenu([]*mygo.MenuItem{
 			{Role: mygo.RoleAppMenu},
 			{Role: mygo.RoleEditMenu},

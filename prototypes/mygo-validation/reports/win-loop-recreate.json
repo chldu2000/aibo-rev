@@ -1,0 +1,69 @@
+{
+  "aAfterLoopRecreate": {
+    "hasMygo": true,
+    "now": 1794423176878,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aInitial": {
+    "hasMygo": true,
+    "now": 1794423159633,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aLoopStartMs": 4543,
+  "aWhileLooping": {
+    "error": "context deadline exceeded"
+  },
+  "bAfterLoopRecreate": {
+    "hasMygo": true,
+    "now": 1794423176879,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bInitial": {
+    "hasMygo": true,
+    "now": 1794423161873,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bWhileALoops": {
+    "hasMygo": true,
+    "now": 1794423173875,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "browserA": 14460,
+  "browserB": 14460,
+  "destroyAndCreateMs": 1.997,
+  "events": null,
+  "oldRendererAfterRecreate": {
+    "alive": false,
+    "openError": "The parameter is incorrect."
+  },
+  "oldRendererBeforeDestroy": {
+    "alive": true,
+    "cpuMs": 13046.875
+  },
+  "oldRendererOneSecondLater": {
+    "alive": false,
+    "openError": "The parameter is incorrect."
+  },
+  "renderersAfterB": [
+    21964,
+    23916
+  ],
+  "renderersAfterLoopRecreate": [
+    23916,
+    3232
+  ],
+  "renderersBeforeB": [
+    21964
+  ],
+  "startLoop": 1
+}

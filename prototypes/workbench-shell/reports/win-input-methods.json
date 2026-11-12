@@ -1,0 +1,24 @@
+[
+  {
+    "LanguageTag": "zh-Hans-HK",
+    "Autonym": "中文 (香港特别行政区)",
+    "EnglishName": "Chinese",
+    "LocalizedName": "中文(简体汉字，香港特别行政区)",
+    "ScriptName": "中文(简体)",
+    "InputMethodTips": [
+      "0804:{81D4E9C9-1D3B-41BC-9E6C-4B40BF79E35E}{FA550B04-5AD7-411F-A5AC-CA038EC515D7}"
+    ],
+    "Spellchecking": true,
+    "Handwriting": true
+  },
+  {
+    "LanguageTag": "en-US",
+    "Autonym": "English (United States)",
+    "EnglishName": "English",
+    "LocalizedName": "英语(美国)",
+    "ScriptName": "拉丁文",
+    "InputMethodTips": [],
+    "Spellchecking": true,
+    "Handwriting": false
+  }
+]

@@ -1,0 +1,140 @@
+{
+  "1_panelInitial": {
+    "active": "BODY",
+    "focus": false,
+    "h": 767,
+    "loadedAt": 1794422438060,
+    "ticks": 20,
+    "w": 358
+  },
+  "1_processes": {
+    "app": 12040,
+    "panel": 19196
+  },
+  "2_split": {
+    "afterWindow1500": {
+      "active": "BODY",
+      "focus": false,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 34,
+      "w": 358
+    },
+    "mainColumnW": 780,
+    "panelW480": {
+      "active": "BODY",
+      "focus": false,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 26,
+      "w": 358
+    }
+  },
+  "3_focus": {
+    "afterInputFocus": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 46,
+      "w": 358
+    },
+    "afterWebViewFocus": {
+      "active": "BODY",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 44,
+      "w": 358
+    }
+  },
+  "4_collapse": {
+    "afterExpand": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 82,
+      "w": 358
+    },
+    "before": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 46,
+      "w": 358
+    },
+    "whileHidden": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422438060,
+      "ticks": 76,
+      "w": 358
+    }
+  },
+  "5_panelLoop": {
+    "buildMaxMs": 0,
+    "mainThreadAvgMs": 0,
+    "mainThreadMaxMs": 0,
+    "newPanelPid": 0,
+    "panelAfterRecover": {
+      "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+    },
+    "panelEvalWhileLooping": {
+      "error": "context deadline exceeded"
+    },
+    "publishToBuildAvgMs": 0,
+    "publishToBuildMaxMs": 0,
+    "recoverMs": 4816.59,
+    "status": "重新载入超时",
+    "streamFrames": 0
+  },
+  "6_panelKilled": {
+    "mainThreadAvgMs": 0,
+    "mainThreadMaxMs": 0,
+    "panelAfterRecover": {
+      "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+    },
+    "recoverMs": 3315.703,
+    "status": "重新载入超时"
+  },
+  "7_panic": {
+    "buildsAfterPanic": 0,
+    "draft": "panic 之后仍可编辑",
+    "faults": {}
+  },
+  "8_reopen": {
+    "backgroundAfterClose": true,
+    "closeMode": "destroy",
+    "draft": "会话 3 的草稿",
+    "firstVisibleAfter": 5,
+    "firstVisibleBefore": 0,
+    "panelAfterReopen": {
+      "active": "BODY",
+      "focus": false,
+      "h": 743,
+      "loadedAt": 1794422462843,
+      "ticks": 17,
+      "w": 418
+    },
+    "panelBeforeClose": {
+      "error": "mygo: Runtime.evaluate failed (HRESULT 0x8007139f)"
+    },
+    "panelW": 420,
+    "session": "ACP 连接层"
+  },
+  "events": [
+    "02:40:37.568 窗口已创建",
+    "02:40:51.916 面板：面板无响应，结束渲染进程后重新载入…",
+    "02:40:51.916 已结束面板渲染进程 19196",
+    "02:40:51.924 面板：面板渲染进程已退出（browser-exited），点“重新载入”恢复",
+    "02:40:55.232 面板：重新载入超时",
+    "02:40:56.238 面板：面板无响应，结束渲染进程后重新载入…",
+    "02:40:59.553 面板：重新载入超时",
+    "02:41:01.056 窗口已销毁（destroy 模式）",
+    "02:41:01.069 最后一个窗口已关闭，应用留在后台",
+    "02:41:02.578 窗口已创建"
+  ]
+}

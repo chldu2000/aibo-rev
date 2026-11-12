@@ -1,5 +1,5 @@
 ---
-status: accepted, revised 2026-11-11 by ADR 0006
+status: accepted, revised 2026-11-11 by ADR 0006, 2026-11-12 by ADR 0008
 date: 2026-11-11
 ---
 
@@ -55,7 +55,7 @@ date: 2026-11-11
 
 > **2026-11-11 修订。** 实测 iframe 不能调用 Go，且与工作台同线程、死循环会卡死工作台（[`mygo-validation`](../../prototypes/mygo-validation/README.md#工具面板iframe-不可行独立-webview-可行)）。Q114 改为：每个面板是原生工作台窗口中嵌入的一个 WebView（`Window.NewWebView`），在独立渲染进程中运行；页面由宿主经自定义协议从包目录提供，每个包一个协议 host（独立 origin）；顶层页面直接经受限的绑定访问宿主（ADR 0004 第 8 节）。下文中的“iframe”均按“面板 WebView”理解，实例范围不变。故障处理补充：
 >
-> - 页面卡死时 `Reload()`/`LoadURL()` 不能恢复；“重新加载面板”须先结束该面板的渲染进程，再重新载入（约 40 ms 恢复，`OnRenderProcessGone` 可观察）。
+> - 页面卡死时 `Reload()`/`LoadURL()` 不能恢复。macOS 的已验证方式为先结束该面板的渲染进程再载入；Windows 按下述 ADR 0008 修订处理，不使用 `Page.ProcessID()` 结束面板。
 > - 面板心跳在面板创建与页面就绪时重置，避免收起后重新展开时因旧心跳过期误报。
 > - 面板页面中的输入法判断以 `isComposing`（或 `keyCode 229`）为准，不依赖组合事件的先后。
 >
@@ -63,7 +63,14 @@ date: 2026-11-11
 
 - **装载方式。** 每个面板是一个 iframe，每个包使用独立 origin；页面由宿主经自定义协议从包目录提供。面板用自己的客户端连接与受限凭据访问宿主（ADR 0004 第 8 节），不能读取未发送草稿或代替用户发送。不沿用旧 `toolView` 合同。
 - **实例范围。** 每个“包 + 工作区”一个面板实例。同一工作区内切换会话不重建面板，面板经受限接口读取当前会话身份并订阅变化；切换到其他工作区时销毁旧实例，包进程中的工作继续（F17.5）。
-- **收起与故障。** 收起只隐藏 iframe。加载失败、握手超时或心跳超时时，面板区显示错误与“重新加载面板”，只重建该 iframe，不触发整套呈现回退、不影响会话执行。包进程退出时面板显示进程已停止，“重新加载”同时重新启动包进程。
+- **收起与故障。** 收起只隐藏面板 WebView。加载失败、握手超时或心跳超时时，面板区显示错误与“重新加载面板”，只重建该面板，不触发整套呈现回退、不影响会话执行。Windows 的共享浏览器故障按下述修订处理。包进程退出时面板显示进程已停止，“重新加载”同时重新启动包进程。
+
+**2026-11-12 Windows 修订（[ADR 0008](0008-windows-tool-panel-recovery.md)，用户已确认）：**
+
+- WebView2 的面板 renderer 独立，但浏览器进程共享；`Page.ProcessID()` 返回共享浏览器 PID，不得用于结束单个面板。
+- renderer 崩溃可先尝试 Reload；面板无响应时，经心跳识别并由用户选择“重新加载面板”，销毁并重建该 WebView，释放原 renderer，不枚举或强杀进程。
+- `browser-exited` 时标记全部受影响面板失效；用户重新加载时，销毁并重建这些 WebView。保留原生窗口、会话执行和包进程，并按包与工作区恢复展示状态。
+- 不能仅依赖 `unresponsive` 回调发现无响应；本次死循环 12 秒内未观察到该回调。重建不代替用户发送消息，也不重启 Agent。
 
 ## 依据
 
@@ -77,8 +84,13 @@ date: 2026-11-11
 
 这些是实现前或实现中的必做验证，结果若推翻某项选择，须新开 ADR 取代对应部分：
 
-- ~~WKWebView 与 WebView2 中跨 origin iframe 是否在独立进程中运行……~~ 2026-11-11 在 macOS 上验证：iframe 与主页面同线程、不能调用 Go；改用嵌入的独立 WebView（第 5 节修订）。每个包的独立 origin 已验证。WebView2 上的同项验证并入 17 号票。
+- ~~WKWebView 与 WebView2 中跨 origin iframe 是否在独立进程中运行……~~ 2026-11-11 在 macOS 上验证：iframe 与主页面同线程、不能调用 Go；改用嵌入的独立 WebView（第 5 节修订）。每个包的独立 origin 已验证。WebView2 的独立 origin 与 renderer 隔离已由 17 号票验证，恢复修订见 ADR 0008。
 - 纯 Go SQLite 驱动在长历史与并发流式写入下的性能，以及 FTS5 trigram 支持。2026-11-11 在 macOS 上验证通过（`modernc.org/sqlite` v1.62.0：并发流式写入约 28 万行/秒，FTS5 trigram 可用，见 [`mygo-validation`](../../prototypes/mygo-validation/README.md)）。
 - 正式支持的 Agent 在同一连接中并发多个会话的可靠性；不可靠的 Agent 改为声明每会话独立进程。2026-11-12 Codex（codex-cli 0.167.0 + `@agentclientprotocol/codex-acp` 2.6.0）验证可靠：一个连接 6 个会话并发、各自工作目录、取消互不影响，适配器退出时 app-server 随之退出（[`acp-concurrency`](../../prototypes/acp-concurrency/README.md)，19 号票）。其他 Agent 待各自验证。
-- Windows Job Object 与 macOS 父进程退出检测在应用崩溃时确实结束全部子进程。2026-11-11 macOS 部分已验证：须用“stdin EOF + 重启时按进程组清理”（第 1 节补充）；Windows 部分待验证。
+- Windows Job Object 与 macOS 父进程退出检测在应用崩溃时确实结束全部子进程。2026-11-11 macOS 部分已验证：须用“stdin EOF + 重启时按进程组清理”（第 1 节补充）；Windows 部分于 2026-11-12 由下文三组 Job Object 实验验证。
 - ~~页面心跳中断与 Windows `unresponsive` 事件的提示……~~ 2026-11-11 随全局恢复入口取消；Windows 上工具面板 WebView 的卡死与恢复并入 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)。
+
+2026-11-12 Windows 验证（17 号票已由自动证据与用户人工确认收口）：
+
+- Job Object：专用宿主在创建后代前加入 KILL_ON_JOB_CLOSE 的 Job Object；正常退出、Stop-Process -Force、taskkill /F 三组中，事先确认存活的四类子孙进程全部结束。见 [win-children-result.json](../../prototypes/mygo-validation/reports/win-children-result.json)。这补齐上文 Windows 子进程清理项的原型证据，不代替产品接线验收。
+- WebView2：不同包为不同安全 origin，renderer 独立但共享浏览器。renderer 死循环时另一面板可用；结束 renderer 后 Reload 可恢复。共享浏览器退出会同时影响两面板，Reload 无效；重建 WebView 可恢复。直接重建死循环面板也已验证原 renderer 退出、另一面板不受影响。心跳仍必要：本次 12 秒观察内未出现 unresponsive 回调。见[原始报告与限制](../../prototypes/workbench-shell/reports/win-validation-progress.md)。恢复合同由已接受的 [ADR 0008](0008-windows-tool-panel-recovery.md)补充。

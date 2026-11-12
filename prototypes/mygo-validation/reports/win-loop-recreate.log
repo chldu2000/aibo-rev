@@ -1,0 +1,6 @@
+2026/11/12 02:52:37 protocol {"host":"pkg-a","path":"/panel.html"}
+2026/11/12 02:52:37 protocol {"host":"pkg-a","path":"/favicon.ico"}
+2026/11/12 02:52:39 protocol {"host":"pkg-b","path":"/panel.html"}
+2026/11/12 02:52:39 protocol {"host":"pkg-b","path":"/favicon.ico"}
+2026/11/12 02:52:54 protocol {"host":"pkg-a","path":"/panel.html"}
+2026/11/12 02:52:58 all-windows-closed null

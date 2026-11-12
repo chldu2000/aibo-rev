@@ -357,6 +357,11 @@ func (app *App) killPanel() {
 		return
 	}
 	if pid := app.sh.panel.Page().ProcessID(); pid > 0 && pid != syscall.Getpid() {
+		pid, err := panelKillPID(pid)
+		if err != nil {
+			app.event("未结束面板进程：%v", err)
+			return
+		}
 		// 原型：跨平台结束进程。Windows 上 WebView2 的 ProcessID 是共享的浏览器进程（见 mygo-validation），17 号票另行验证。
 		if proc, err := os.FindProcess(pid); err == nil {
 			_ = proc.Kill()

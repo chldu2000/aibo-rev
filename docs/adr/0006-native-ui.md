@@ -54,7 +54,9 @@ supersedes: ADR 0003 中“默认呈现”一行与 WebView 路线的依据；�
 
 ## 尚未验证
 
-- Windows（Direct3D 11）上的绘制、字体回退与输入法，以及嵌入 WebView2 的工具面板（[17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
+2026-11-12 Windows 验证收口：原生窗口 GPU 绘制、长历史自动检查、关窗重开状态、区域 panic 隔离及嵌入面板 renderer 隔离已有实测；用户确认字体、IME、剪贴板、拖放、讲述人等人工清单通过。面板的共享浏览器退出和无响应恢复补充由已接受的 [ADR 0008](0008-windows-tool-panel-recovery.md)规定，全部证据与范围见 [17 号票验收报告](../../prototypes/workbench-shell/reports/win-validation-progress.md)。
+
+- ~~Windows（Direct3D 11）上的绘制、字体回退与输入法，以及嵌入 WebView2 的工具面板~~ 2026-11-12 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)的自动实验与用户人工确认通过（Windows 11 x64）。
 - ~~工作台原生界面与工具面板 WebView 在同一窗口中的组合~~ 2026-11-12 在 macOS 上验证可行（[`workbench-shell`](../../prototypes/workbench-shell/README.md)，18 号票）。
-- ~~屏幕阅读器的实际朗读~~ 2026-11-12 用户在 macOS 上手动检查后认为没有问题；Windows 由 17 号票承接。
+- ~~屏幕阅读器的实际朗读~~ 2026-11-12 用户分别确认 macOS 与 Windows 人工清单通过；Windows 结果见 17 号票。
 - ~~界面包在视图构建边界上恢复 panic 的可行性与恢复后的界面状态~~ 2026-11-12 验证可行：在区域外层元素的 `Children` 闭包内 recover，故障只限于该区域，下一帧显示故障说明，重试可恢复。限制：出错的那一帧会显示一次区域内已构建的部分；边界不能放在切换主题作用域的元素内部；只覆盖视图构建，事件回调与 goroutine 的 panic 另行处理。

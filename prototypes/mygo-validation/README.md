@@ -103,6 +103,6 @@ macOS 27.0（Darwin 27.0.0，arm64），Go 1.27.3，MyGO v0.9.0（2026-11-11 发
 
 ## 未验证
 
-- Windows / WebView2：全部项目由 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)承接。WebView2 的 `ProcessID` 是共享的浏览器进程，不能照搬“结束单个页面进程”的恢复方式。
+- Windows / WebView2：当前有效的原生界面、工具面板与进程验证已由 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)收口；旧默认 WebView 呈现不在范围。WebView2 的 `ProcessID` 是共享浏览器进程，恢复按已接受的 ADR 0008 执行，不能照搬 macOS 的结束单面板进程方式。
 - 原生窗口 + 多 WebView 作为主窗口时，面板区域随窗口缩放与面板拖拽调整的同步表现、跨 WebView 拖放。
 - 屏幕阅读器、真实 Agent 负载下的长会话、打包后的 `.app`（本实验直接运行可执行文件）。
