@@ -33,6 +33,7 @@ import (
 var panelFS embed.FS
 
 var closeMode = flag.String("close", "destroy", "关闭窗口：destroy 销毁窗口（状态留在宿主），hide 隐藏窗口")
+var killTarget = flag.String("kill", "browser", "Windows 故障实验：browser 或 renderer")
 
 func main() {
 	auto := flag.String("auto", "", "自动检查并写出报告")
@@ -100,6 +101,7 @@ func main() {
 func (app *App) menuItems() []*mygo.MenuItem {
 	return []*mygo.MenuItem{
 		{Label: "显示工作台", Click: func(*mygo.MenuItem, *mygo.Window) { app.openWindow() }},
+		{Label: "打开附件文件选择器（验证）", Click: func(*mygo.MenuItem, *mygo.Window) { app.pickAttachmentForValidation() }},
 		{Label: "8 秒后发送审批通知（可先切到别的应用）", Click: func(*mygo.MenuItem, *mygo.Window) {
 			go func() {
 				time.Sleep(8 * time.Second)

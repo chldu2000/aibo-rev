@@ -1,0 +1,35 @@
+{
+  "allHistory": {
+    "atEnd": false,
+    "buildAvgMs": 0.1006,
+    "buildMaxMs": 0.503,
+    "builds": 5,
+    "items": 10004,
+    "loaded": 10004,
+    "publishToBuildAvgMs": 0,
+    "publishToBuildMaxMs": 0,
+    "streamFrames": 0
+  },
+  "idle": {
+    "atEnd": true,
+    "buildAvgMs": 0,
+    "buildMaxMs": 0,
+    "builds": 1,
+    "items": 10001,
+    "loaded": 281,
+    "publishToBuildAvgMs": 0,
+    "publishToBuildMaxMs": 0,
+    "streamFrames": 0
+  },
+  "streaming": {
+    "atEnd": true,
+    "buildAvgMs": 0.07416713091922006,
+    "buildMaxMs": 1.005,
+    "builds": 359,
+    "items": 10004,
+    "loaded": 284,
+    "publishToBuildAvgMs": 3.858,
+    "publishToBuildMaxMs": 10.002,
+    "streamFrames": 108
+  }
+}

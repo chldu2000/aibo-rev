@@ -1,0 +1,185 @@
+{
+  "1_panelInitial": {
+    "active": "BODY",
+    "focus": false,
+    "h": 767,
+    "loadedAt": 1794422722277,
+    "origin": "http://pkg-demo.aibopkg.localhost",
+    "secureContext": true,
+    "ticks": 23,
+    "w": 358
+  },
+  "1_processes": {
+    "app": 24780,
+    "panel": 20996
+  },
+  "2_split": {
+    "afterWindow1500": {
+      "active": "BODY",
+      "focus": false,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 37,
+      "w": 478
+    },
+    "mainColumnW": 780,
+    "panelW480": {
+      "active": "BODY",
+      "focus": false,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 29,
+      "w": 478
+    }
+  },
+  "3_focus": {
+    "afterInputFocus": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 49,
+      "w": 478
+    },
+    "afterWebViewFocus": {
+      "active": "BODY",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 47,
+      "w": 478
+    }
+  },
+  "4_collapse": {
+    "afterExpand": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 59,
+      "w": 478
+    },
+    "before": {
+      "active": "q",
+      "focus": true,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 49,
+      "w": 478
+    },
+    "whileHidden": {
+      "active": "q",
+      "focus": false,
+      "h": 767,
+      "loadedAt": 1794422722277,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 52,
+      "w": 478
+    }
+  },
+  "5_panelLoop": {
+    "buildMaxMs": 1.007,
+    "mainThreadAvgMs": 0.0334,
+    "mainThreadMaxMs": 0.502,
+    "newPanelPid": 20996,
+    "panelAfterRecover": {
+      "active": "BODY",
+      "focus": false,
+      "h": 743,
+      "loadedAt": 1794422737127,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 0,
+      "w": 478
+    },
+    "panelEvalWhileLooping": {
+      "error": "context deadline exceeded"
+    },
+    "publishToBuildAvgMs": 3.965,
+    "publishToBuildMaxMs": 12.5,
+    "recoverMs": 2260.18,
+    "status": "已重新载入（100 ms）",
+    "streamFrames": 108
+  },
+  "6_panelKilled": {
+    "mainThreadAvgMs": 0.0603,
+    "mainThreadMaxMs": 0.603,
+    "panelAfterRecover": {
+      "active": "BODY",
+      "focus": false,
+      "h": 743,
+      "loadedAt": 1794422740584,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 0,
+      "w": 478
+    },
+    "recoverMs": 2178.054,
+    "status": "面板渲染进程已退出（crashed），点“重新载入”恢复"
+  },
+  "7_panic": {
+    "buildsAfterPanic": 1,
+    "draft": "panic 之后仍可编辑",
+    "faults": {
+      "侧栏": "注入的故障：侧栏",
+      "条目 10002": "注入的故障：工具卡"
+    }
+  },
+  "8_reopen": {
+    "backgroundAfterClose": true,
+    "closeMode": "hide",
+    "draft": "会话 3 的草稿",
+    "firstVisibleAfter": 5,
+    "firstVisibleBefore": 5,
+    "panelAfterReopen": {
+      "active": "BODY",
+      "focus": true,
+      "h": 743,
+      "loadedAt": 1794422740584,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 39,
+      "w": 418
+    },
+    "panelBeforeClose": {
+      "active": "BODY",
+      "focus": false,
+      "h": 743,
+      "loadedAt": 1794422740584,
+      "origin": "http://pkg-demo.aibopkg.localhost",
+      "secureContext": true,
+      "ticks": 16,
+      "w": 418
+    },
+    "panelW": 420,
+    "session": "ACP 连接层"
+  },
+  "events": [
+    "02:45:22.077 窗口已创建",
+    "02:45:36.428 面板：面板无响应，结束渲染进程后重新载入…",
+    "02:45:36.786 已结束面板渲染进程 9840",
+    "02:45:36.790 面板：面板渲染进程已退出（crashed），点“重新载入”恢复",
+    "02:45:37.188 面板：已重新载入（100 ms）",
+    "02:45:37.462 已结束面板渲染进程 23908",
+    "02:45:37.467 面板：面板渲染进程已退出（crashed），点“重新载入”恢复",
+    "02:45:39.967 面板：面板无响应，结束渲染进程后重新载入…",
+    "02:45:40.244 未结束面板进程：browser 20996 has 0 renderers; cannot select one",
+    "02:45:40.645 面板：已重新载入（100 ms）",
+    "02:45:40.651 panic 已隔离：侧栏：注入的故障：侧栏",
+    "02:45:40.651 panic 已隔离：条目 10002：注入的故障：工具卡",
+    "02:45:42.237 窗口已隐藏（hide 模式）"
+  ]
+}

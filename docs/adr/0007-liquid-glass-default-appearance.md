@@ -33,5 +33,7 @@ date: 2026-11-12
 
 ## 尚未验证
 
-- Windows 上侧栏的 Mica 效果、`plugins/glass` 在 Direct3D 11 上的绘制与帧耗时（[17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
-- 没有 GPU 或 GPU 不可用时 CPU 绘制的实际帧耗时。
+- ~~Windows 上侧栏的 Mica 效果、`plugins/glass` 在 Direct3D 11 上的绘制与帧耗时~~ 2026-11-12 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)已有 GPU 实测，用户确认 Mica 与关闭透明效果后的人工检查通过。
+- ~~没有 GPU 或 GPU 不可用时 CPU 绘制的实际帧耗时~~ 2026-11-12 用 MYGO_GPU=0 强制 CPU 路径取得下述实测；不代表全部无 GPU 硬件。
+
+2026-11-12 Windows 实测：GPU 玻璃外观流式帧耗时中位/p95 为 1.5/2.0 ms，滚动为 1.5/2.5 ms；启动最大帧 507.7 ms 单独记录。用 MyGO 的 MYGO_GPU=0 在本机强制 CPU 绘制，流式为 20.0/21.5 ms，滚动为 20.0/21.0 ms；这补齐 CPU 路径的实测，不代表所有无 GPU 硬件。用户已确认人工验证通过。见[原始日志、测量口径与环境](../../prototypes/workbench-shell/reports/win-validation-progress.md)。

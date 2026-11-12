@@ -1,0 +1,13 @@
+﻿
+  MyGo!!!!! v0.9.0  build
+
+  ○ Compiling windows/amd64
+  ✓ Compiled windows/amd64  783ms
+  ○ Creating aibo-shell-prototype-setup-0.0.1-amd64.exe
+  ✓ Created aibo-shell-prototype-setup-0.0.1-amd64.exe  3.5s
+
+  ✓ Built Aibo Shell Prototype 0.0.1 in 4.6s
+
+    dist/manual-next/windows-amd64/
+      Aibo Shell Prototype.exe                      13.4 MB
+      aibo-shell-prototype-setup-0.0.1-amd64.exe     4.3 MB

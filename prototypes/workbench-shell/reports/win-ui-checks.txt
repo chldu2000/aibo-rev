@@ -1,0 +1,47 @@
+
+规则自检
+✓ no-hardcoded-color  — 违规样例命中 3 处，合规样例误报 0 处
+✓ min-font-size  — 违规样例命中 2 处，合规样例误报 0 处
+✓ no-left-accent  — 违规样例命中 4 处，合规样例误报 0 处
+✓ focus-ring  — 违规样例命中 2 处，合规样例误报 0 处
+✓ reduced-motion  — 违规样例命中 1 处，合规样例误报 0 处
+✓ forbidden-copy  — 违规样例命中 1 处，合规样例误报 0 处
+  ✓ no-left-accent 识别 BorderStartWidth
+  ✓ no-left-accent 识别 BorderWidth
+  ✓ no-left-accent 识别 QuoteBarWidth
+
+静态检查
+✓ tokens-complete  — 26 个颜色令牌
+✓ contrast  — 46 组对比度
+✓ token-sync  — 核对了 tokens.css 与 1 个 Go 令牌文件
+✓ no-hardcoded-color  — 扫描 3 个 Go 文件
+✓ min-font-size  — 扫描 3 个 Go 文件
+✓ no-left-accent  — 扫描 3 个 Go 文件
+✓ focus-ring  — 扫描 3 个 Go 文件
+✓ reduced-motion  — 扫描 3 个 Go 文件
+✓ forbidden-copy  — 扫描 3 个 Go 文件、0 个资源文件
+
+要求文档
+△ requirements  — 72 条要求：必须 63、不得 9、建议 0；可自动验证 56，仅人工 16；验收用例 5；覆盖已勾选 Checklist 81/81
+    △ 43 条要求的验收用例尚未编写（产品实现成为验收目标时补齐，并把 requireAllUITests 改为 true）：UI-VIS-07、UI-NAV-01、UI-NAV-02、UI-NAV-03、UI-NAV-04、UI-NAV-05、UI-NAV-06、UI-NAV-07、UI-NAV-10、UI-NAV-09、UI-STREAM-01、UI-STREAM-02、UI-STREAM-03、UI-STREAM-06、UI-STREAM-07、UI-STREAM-08、UI-STREAM-09、UI-COMP-02、UI-COMP-03、UI-COMP-05、UI-COMP-06、UI-COMP-07、UI-COMP-08、UI-COMP-09、UI-COMP-12、UI-COMP-10、UI-STRIP-01、UI-STRIP-02、UI-STRIP-03、UI-STRIP-04、UI-STRIP-05、UI-STRIP-06、UI-STRIP-07、UI-APPR-01、UI-APPR-02、UI-APPR-03、UI-LIFE-01、UI-LIFE-02、UI-LIFE-03、UI-A11Y-01、UI-A11Y-02、UI-A11Y-03、UI-SEARCH-01
+
+验收测试（uitest）
+— 目标 native-ui-prototype（prototypes/native-ui）
+=== RUN   TestAcceptance
+=== RUN   TestAcceptance/UI-GEN-04_验收接口：夹具可加载、核心元素存在、未知夹具报错
+=== RUN   TestAcceptance/UI-STREAM-04_一万条历史虚拟化
+    cases.go:49: 10,000 条历史中构建的消息：14
+=== RUN   TestAcceptance/UI-STREAM-05_流式输出不阻塞界面
+    cases.go:69: 流式 108 帧：平均 2.64 ms，最长 5.51 ms（无窗口，含 CPU 绘制）
+=== RUN   TestAcceptance/UI-COMP-01_组字期间按_Enter_不发送
+=== RUN   TestAcceptance/UI-COMP-04_触发符候选可含路径，焦点留在输入框
+--- PASS: TestAcceptance (0.33s)
+    --- PASS: TestAcceptance/UI-GEN-04_验收接口：夹具可加载、核心元素存在、未知夹具报错 (0.03s)
+    --- PASS: TestAcceptance/UI-STREAM-04_一万条历史虚拟化 (0.00s)
+    --- PASS: TestAcceptance/UI-STREAM-05_流式输出不阻塞界面 (0.29s)
+    --- PASS: TestAcceptance/UI-COMP-01_组字期间按_Enter_不发送 (0.00s)
+    --- PASS: TestAcceptance/UI-COMP-04_触发符候选可含路径，焦点留在输入框 (0.00s)
+PASS
+ok  	aibo-rev/native-ui	0.421s
+
+全部通过

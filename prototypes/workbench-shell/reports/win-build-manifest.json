@@ -1,0 +1,207 @@
+{
+  "recordedAt": "2026-11-12T02:56:34.7040174+08:00",
+  "sourceCommit": "930240bb02616497edca8b20afb94a06664424fd",
+  "uncommittedChanges": true,
+  "artifacts": [
+    {
+      "path": "prototypes/workbench-shell/bin/shell.exe",
+      "sha256": "EEEA9EA02E472F724877828B200F9EA2ECBF1932E6D6FE7D3582ED1ED8CB139D",
+      "bytes": 20539904
+    },
+    {
+      "path": "prototypes/workbench-shell/dist/windows-amd64/Aibo Shell Prototype.exe",
+      "sha256": "14C8E83A4C3B265B9C8D4EF98EC23DC634194DAEA3FE03DB20B8B03AFEB92304",
+      "bytes": 14060544
+    },
+    {
+      "path": "prototypes/workbench-shell/dist/windows-amd64/aibo-shell-prototype-setup-0.0.1-amd64.exe",
+      "sha256": "9EA34DAFF2A05B67916EB438AEC1A6DDAFA4E5C6EC710469C937D1D133B475C2",
+      "bytes": 4549445
+    },
+    {
+      "path": "prototypes/native-ui/bin/native.exe",
+      "sha256": "D5239C92A89A97C4A0DAF71BC279112B00624B17A49CAC0A50490F952CB5348E",
+      "bytes": 18097152
+    },
+    {
+      "path": "prototypes/mygo-validation/bin/validate.exe",
+      "sha256": "F656A859F3E6D42FF4281752D3BF3F4E8E8A676A150502AA6FDC8ADEDCE975A1",
+      "bytes": 22368256
+    }
+  ],
+  "currentSourceFiles": [
+    {
+      "path": "prototypes/workbench-shell/auto.go",
+      "sha256": "C8BA28DDE13940889233B77268E735238F43DC0F9C638948DB024821C9338240"
+    },
+    {
+      "path": "prototypes/workbench-shell/glass.go",
+      "sha256": "36153EAC9ABD69A0676716136112AC65A97B709D965DD3D7470EB314301EA0DB"
+    },
+    {
+      "path": "prototypes/workbench-shell/go.mod",
+      "sha256": "9069E4FC16AA67D30E718D09B30C8D39EC16082CFC992F56798F3B5AEE794518"
+    },
+    {
+      "path": "prototypes/workbench-shell/go.sum",
+      "sha256": "AE4E1943798F9CE0AF3EA3D997B087E9C2D97B78C41E5AFECFEB0B9AC6E55B34"
+    },
+    {
+      "path": "prototypes/workbench-shell/kit_shots_test.go",
+      "sha256": "7B3AABB3E6D4BEAA5ACAF633644904A0358D816BD83AA2B17C8360A522C51197"
+    },
+    {
+      "path": "prototypes/workbench-shell/kit.go",
+      "sha256": "E196BF5CF5DD484362DB9A31E05A63556026DFCCBF669029134C7DD8C560BEC9"
+    },
+    {
+      "path": "prototypes/workbench-shell/main.go",
+      "sha256": "7E261DA5C2E2A443C78563DDA7847DE5543CFD2B84CE9B4A3F54A1339F81604F"
+    },
+    {
+      "path": "prototypes/workbench-shell/manual.go",
+      "sha256": "76AE031C5E3521FFD5B074B2E2DC7828662184991774C815609B1C6A7D653FEB"
+    },
+    {
+      "path": "prototypes/workbench-shell/menu_test.go",
+      "sha256": "916F1CFE1F7D7D44D7F07C36793EC582D27E4521368C6E6FB2A0958EC8823CC2"
+    },
+    {
+      "path": "prototypes/workbench-shell/model.go",
+      "sha256": "1DDE6005B5BDD3A6D2B789124AB032850E3850BEF6DF7E049D0078C2068F4CF3"
+    },
+    {
+      "path": "prototypes/workbench-shell/picker_test.go",
+      "sha256": "191F5E74B0DF5FCEA5018AF2F3E3762EF0E00B90D6353BF2D90DCC0D4F7E9C59"
+    },
+    {
+      "path": "prototypes/workbench-shell/picker.go",
+      "sha256": "D92BAA8984F9CE57F08E6577341419BC60CEFEE3B7DD8C628BE01D3E3D4BB6B0"
+    },
+    {
+      "path": "prototypes/workbench-shell/process_darwin.go",
+      "sha256": "75E3DAB83D78B1F5EE58859743C5BD4CD69EEA13A07D660627C54101AE980839"
+    },
+    {
+      "path": "prototypes/workbench-shell/process_windows.go",
+      "sha256": "98C9813FAF2EA5C86DD82C6900C9F759034478705989A0AB287031076BAA1DA1"
+    },
+    {
+      "path": "prototypes/workbench-shell/sessions_test.go",
+      "sha256": "887CABE4F877C68210688B565FA068C4DF6E9FB3A9AC6AF625F1B9261FB0F6E6"
+    },
+    {
+      "path": "prototypes/workbench-shell/sessions.go",
+      "sha256": "D1334F2A5A07260AF365288610554DD3F9159E46D4E4D7AAED5E277659CA5D5B"
+    },
+    {
+      "path": "prototypes/workbench-shell/shell_test.go",
+      "sha256": "678EFBBAABD9F56E9EB9683D504DBD761A1D310AFD837D2D88E04B7338D67F4E"
+    },
+    {
+      "path": "prototypes/workbench-shell/shell.go",
+      "sha256": "A654F763CCA13F13ED9F830D2137B40123F26242DABA329E85FFE532F0195FB0"
+    },
+    {
+      "path": "prototypes/workbench-shell/shots_test.go",
+      "sha256": "40B626E97EF28C178C62B46418E3D44FB4B2DEDA8FA519AE3344C9BE642FF2DF"
+    },
+    {
+      "path": "prototypes/workbench-shell/tokens_gen.go",
+      "sha256": "4D588D430DA8136B7FDCA8B86971974D15DF4A7C5C39FBFC23B7179B5DE8DB1F"
+    },
+    {
+      "path": "prototypes/workbench-shell/view.go",
+      "sha256": "A19C50ED04D9D51423E0C61F0982A7A373EBDF208B8BDDA36B27EB2A8D2F2129"
+    },
+    {
+      "path": "prototypes/workbench-shell/win_sim_test.go",
+      "sha256": "A779222270F0383706E746C196801CB9929EBF820B844721098068239F3EB74E"
+    },
+    {
+      "path": "prototypes/workbench-shell/workspaces_test.go",
+      "sha256": "6F1AE2D190D508B49E679AB9B742243E3BBCD9F75C2E1CC2773F2218A80A786E"
+    },
+    {
+      "path": "prototypes/workbench-shell/workspaces.go",
+      "sha256": "DAF5F21C2B1E476F03CCAD3948EC9EA7351895B5AFB39A35DC1BEBC8BF2934B7"
+    },
+    {
+      "path": "prototypes/mygo-validation/auto.go",
+      "sha256": "E011B9767D8F331D43E17E0A9C029FCA7620E56681FE6D94ABB99A807DD843E5"
+    },
+    {
+      "path": "prototypes/mygo-validation/children_darwin.go",
+      "sha256": "5DADDF81CD24A25B28FACD04964FF81C8A374DC4297B9B283FB301CB4FF2915E"
+    },
+    {
+      "path": "prototypes/mygo-validation/children_windows.go",
+      "sha256": "6FEC52428296C765BE0C91AE0A9786DD7D351C7B16AB6D8CC8CE7473087AB618"
+    },
+    {
+      "path": "prototypes/mygo-validation/go.mod",
+      "sha256": "EE443A0CEC32C14DB6BCACFE8D3D33C4A096B48FA514712450328866FECB8B70"
+    },
+    {
+      "path": "prototypes/mygo-validation/go.sum",
+      "sha256": "4DFB71A414514178E4A4280816F53FE7A0A11AB80116BEDA54F4FC83284A76AD"
+    },
+    {
+      "path": "prototypes/mygo-validation/main.go",
+      "sha256": "E3393EAD832AC147F3A86DD36252F99FBDB75CAA51CCE2F405875B1CCDD1577D"
+    },
+    {
+      "path": "prototypes/mygo-validation/panels_darwin.go",
+      "sha256": "F47FD1A359FC711732C8B162FFB91DD86C8EF3300510FBF7CA9958D4A770CB3E"
+    },
+    {
+      "path": "prototypes/mygo-validation/panels_windows.go",
+      "sha256": "27320EC341B376F543B7EAE2D5A5FBC5B6ECE8C9E2BAA2E70CB53903914246D2"
+    },
+    {
+      "path": "prototypes/mygo-validation/process.go",
+      "sha256": "DD766010B4315C0BB8E339004D2F552FB9C729E88036DAF2100A3A4CB789B90A"
+    },
+    {
+      "path": "prototypes/mygo-validation/webviews.go",
+      "sha256": "995751525EB7173D54679DB55CC6513109E818218A9913DC01DB1D55FB45065B"
+    },
+    {
+      "path": "prototypes/native-ui/acceptance_test.go",
+      "sha256": "CD11797C47C49723955FE73D94966754238B70F76CF2CC46ADC215142E05865F"
+    },
+    {
+      "path": "prototypes/native-ui/go.mod",
+      "sha256": "8945ED28884B827CE53D99B43C4627170970B189B85A1F0FFD5CE1EABC657384"
+    },
+    {
+      "path": "prototypes/native-ui/go.sum",
+      "sha256": "D87127DA59AEED1AB430193041882FE29CFA2A0EE1EA454E922D0C3329B58DAA"
+    },
+    {
+      "path": "prototypes/native-ui/main.go",
+      "sha256": "71FD910A440344FCF0205F6CB9133601F6202EF92A160008ECD3FBF80A1DEE14"
+    },
+    {
+      "path": "prototypes/native-ui/model.go",
+      "sha256": "6FE82031928A134AD02D1B6242366B243C20B2A979A11CD3DAAF7BDA5CF67E7F"
+    },
+    {
+      "path": "prototypes/native-ui/shots_test.go",
+      "sha256": "2D532CF547814191EBAFD2883C1BDFE64EC8F4A7C97FCA522A8006C6EBAD4E1E"
+    },
+    {
+      "path": "prototypes/native-ui/tokens_gen.go",
+      "sha256": "A6DF57B26020A0C7B502DEBBC36419CEB32F87F6097F86EF51F0332819A4999E"
+    },
+    {
+      "path": "prototypes/native-ui/view_test.go",
+      "sha256": "C826CEA2936A8ECDC44AA9EE038D58EFC7975760ECBAF7D8D151D3B2D55D00CB"
+    },
+    {
+      "path": "prototypes/native-ui/view.go",
+      "sha256": "A448EF4330313927978CEF4C2D3372839A19B6F8CCCDB1639CD6CA5394A95773"
+    }
+  ],
+  "sourceNote": "Current source snapshot includes the attachment dialog fixture. Older shell.exe and dist/windows-amd64 artifacts predate that fixture; shell-next.exe and dist/manual-next contain it."
+}

@@ -1,0 +1,74 @@
+{
+  "aAfterLoopRecreate": {
+    "bindingResult": "http://pkg-a.aibopkg.localhost · ok:from-iframe",
+    "hasMygo": true,
+    "now": 1794423277820,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aInitial": {
+    "bindingResult": "http://pkg-a.aibopkg.localhost · ok:from-iframe",
+    "hasMygo": true,
+    "now": 1794423260586,
+    "origin": "http://pkg-a.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "aLoopStartMs": 4498,
+  "aWhileLooping": {
+    "error": "context deadline exceeded"
+  },
+  "bAfterLoopRecreate": {
+    "bindingResult": "http://pkg-b.aibopkg.localhost · ok:from-iframe",
+    "hasMygo": true,
+    "now": 1794423277820,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bInitial": {
+    "bindingResult": "http://pkg-b.aibopkg.localhost · ok:from-iframe",
+    "hasMygo": true,
+    "now": 1794423262814,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "bWhileALoops": {
+    "bindingResult": "http://pkg-b.aibopkg.localhost · ok:from-iframe",
+    "hasMygo": true,
+    "now": 1794423274816,
+    "origin": "http://pkg-b.aibopkg.localhost",
+    "ready": "complete",
+    "secureContext": true
+  },
+  "browserA": 22616,
+  "browserB": 22616,
+  "destroyAndCreateMs": 1.864,
+  "events": null,
+  "oldRendererAfterRecreate": {
+    "alive": false,
+    "openError": "The parameter is incorrect."
+  },
+  "oldRendererBeforeDestroy": {
+    "alive": true,
+    "cpuMs": 13109.375
+  },
+  "oldRendererOneSecondLater": {
+    "alive": false,
+    "openError": "The parameter is incorrect."
+  },
+  "renderersAfterB": [
+    4512,
+    5740
+  ],
+  "renderersAfterLoopRecreate": [
+    5740,
+    23780
+  ],
+  "renderersBeforeB": [
+    4512
+  ],
+  "startLoop": 1
+}

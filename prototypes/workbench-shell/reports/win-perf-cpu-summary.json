@@ -1,0 +1,26 @@
+﻿[
+    {
+        "appearance":  "cpu-glass",
+        "phase":  "startup",
+        "frames":  4,
+        "medianMs":  21,
+        "p95Ms":  73,
+        "maxMs":  73
+    },
+    {
+        "appearance":  "cpu-glass",
+        "phase":  "stream",
+        "frames":  85,
+        "medianMs":  20,
+        "p95Ms":  21.5,
+        "maxMs":  27.5
+    },
+    {
+        "appearance":  "cpu-glass",
+        "phase":  "scroll",
+        "frames":  119,
+        "medianMs":  20,
+        "p95Ms":  21,
+        "maxMs":  23.1
+    }
+]

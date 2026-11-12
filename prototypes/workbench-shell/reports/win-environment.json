@@ -1,0 +1,37 @@
+{
+  "recordedAt": "2026-11-12T02:41:35.6236059+08:00",
+  "sourceCommit": "930240bb02616497edca8b20afb94a06664424fd",
+  "os": {
+    "Caption": "Microsoft Windows 11 专业版",
+    "Version": "10.0.26300",
+    "BuildNumber": "26300",
+    "OSArchitecture": "64 位"
+  },
+  "windows": {
+    "DisplayVersion": "26H2",
+    "CurrentBuild": "26300",
+    "UBR": 9711
+  },
+  "gpu": [
+    {
+      "Name": "GameViewer Virtual Display Adapter",
+      "DriverVersion": "15.6.5.199"
+    },
+    {
+      "Name": "Parsec Virtual Display Adapter",
+      "DriverVersion": "0.45.0.0"
+    },
+    {
+      "Name": "AMD Radeon RX 7900 XT",
+      "DriverVersion": "32.0.31041.1004"
+    },
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "DriverVersion": "32.0.21045.5002"
+    }
+  ],
+  "toolchain": "go version go1.27.3 windows/amd64",
+  "mygo": "v0.9.0",
+  "cgo": "0",
+  "webview2": "157.0.4341.46"
+}

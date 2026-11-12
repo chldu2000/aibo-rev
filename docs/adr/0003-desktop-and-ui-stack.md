@@ -38,6 +38,8 @@ superseded-by: ADR 0006（默认呈现与 WebView 路线）
 - 在 MyGO 的 WKWebView 与 WebView2 中运行默认呈现：中文 IME、剪贴板图片、拖放、模块 Worker、长会话性能（[界面方案 §15](../design/ui-interaction.md#15-需要在-mygo-上验证的交互)）。
 - Windows 上的呈现故障与恢复入口（[17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md)）。
 
+2026-11-12 Windows 验证收口：按 ADR 0006 的原生 UI 路线取得可见窗口性能、关窗重开、区域 panic 隔离与工具面板实验，用户确认人工清单通过；旧默认 WebView 呈现不再验收。Windows 当前有效的原型验证项由 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)完成；面板恢复按已接受的 [ADR 0008](0008-windows-tool-panel-recovery.md)。本结论不代替产品端到端验收。
+
 ## 后续决定
 
 11 号票的其余问题已于 2026-11-11 决定：共享交互状态与公开呈现协议见 [ADR 0004](0004-presentation-protocol.md)；进程部署、存储与索引、ACP 接入实现、包交付与工具面板装载见 [ADR 0005](0005-runtime-storage-and-packages.md)。

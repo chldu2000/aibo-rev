@@ -1,0 +1,22 @@
+{
+  "app": 19952,
+  "children": [
+    {
+      "kind": "stdin-eof",
+      "pid": 6188
+    },
+    {
+      "kind": "ignores-stdin",
+      "pid": 9616
+    },
+    {
+      "kind": "parent",
+      "pid": 23716
+    },
+    {
+      "kind": "grandchild-ignores-stdin",
+      "pid": 20068
+    }
+  ],
+  "jobKillOnClose": true
+}

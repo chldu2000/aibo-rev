@@ -49,6 +49,8 @@ Labels: wayfinder:map
 - [原生工作台外壳在 macOS 上的组合验证](issues/18-macos-workbench-shell-validation.md)：同窗口工具面板、区域级 panic 边界、标题栏、通知定位与读屏在 macOS 上成立；关窗销毁窗口、宿主恢复界面状态；面板页面会被节流或销毁，F17.5 后台工作须在包进程中。
 - [同一 ACP 连接中并发多个会话的可靠性（Codex）](issues/19-acp-same-connection-concurrency.md)：Codex 经 codex-acp 在一个连接中并发 6 个会话可靠（隔离、cwd、取消、退出清理），可共用“包 + 工作区”进程；其他 Agent 待各自验证。
 
+- [Windows 11 x64 的关键验证](issues/17-windows-presentation-validation.md#answer)：原生界面与面板、Job Object、GPU/CPU 性能已有实测，用户人工验收通过；ADR 0008 确定无响应面板直接重建、共享浏览器退出时重建全部受影响面板。12 号票的 Windows 前置阻塞已解除。
+
 ## Not yet specified
 
 - 真实接入与协议样本验证可能暴露固定源码研究之外的适配和兼容问题；已有产品承诺见上述能力决议，后续按具体证据为新增缺口建票。

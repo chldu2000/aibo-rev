@@ -7,7 +7,7 @@ import (
 	"image"
 	"image/color"
 	"image/png"
-	"syscall"
+
 	"time"
 
 	"github.com/egoist/mygo"
@@ -151,7 +151,7 @@ func killAndReload() map[string]any {
 	for len(gone) > 0 {
 		<-gone
 	}
-	_ = syscall.Kill(pid, syscall.SIGKILL)
+	_ = killProcess(pid)
 	select {
 	case g := <-gone:
 		r["renderProcessGone"] = g
@@ -200,7 +200,7 @@ func separateWindowTest() map[string]any {
 	_, err := eval("return 1", 2*time.Second)
 	r["mainEvalWhilePanelLoops"] = errString(err)
 	if pid := p2.ProcessID(); pid > 0 && pid != page().ProcessID() {
-		_ = syscall.Kill(pid, syscall.SIGKILL)
+		_ = killProcess(pid)
 		time.Sleep(800 * time.Millisecond)
 		_, err = eval("return 1", 2*time.Second)
 		r["mainEvalAfterPanelKilled"] = errString(err)

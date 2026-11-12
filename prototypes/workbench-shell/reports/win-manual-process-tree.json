@@ -1,0 +1,38 @@
+[
+  {
+    "ProcessId": 23692,
+    "ParentProcessId": 21808,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --embedded-browser-webview=1 --webview-exe-name=\"Aibo Shell Prototype.exe\" --webview-exe-version=0.0.1 --user-data-dir=\"C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --noerrdialogs --lang=en --mojo-named-platform-channel-pipe=21808.11172.17359538573706859812 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03"
+  },
+  {
+    "ProcessId": 19196,
+    "ParentProcessId": 23692,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --type=crashpad-handler \"--user-data-dir=C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" /prefetch:4 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03 --monitor-self-annotation=ptype=crashpad-handler --user-stream-region=328,65568 \"--database=C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\\Crashpad\" \"--metrics-dir=C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --annotation=IsOfficialBuild=1 --annotation=channel= --annotation=chromium-version=157.0.8103.39 \"--annotation=exe=C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --annotation=plat=Win64 \"--annotation=prod=Edge WebView2\" --annotation=ver=157.0.4341.46 --initial-client-data=0x18c,0x190,0x194,0x168,0x19c,0x7fff8567b3a0,0x7fff8567b3b0,0x7fff8567b3c0"
+  },
+  {
+    "ProcessId": 6648,
+    "ParentProcessId": 23692,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --type=gpu-process --gpu-recent-crash-count=0 --noerrdialogs --user-data-dir=\"C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --webview-exe-name=\"Aibo Shell Prototype.exe\" --webview-exe-version=0.0.1 --embedded-browser-webview=1 --gpu-preferences=WAAAAAAAAABgAAACAAAAAAAAAAAAAGAAQAAAAAAAAAADAAAAAAAAADgAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAoAAAAAAAAAAgAAAAAAAAAEAAAAAIAAAABAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA= --startup-read-main-dll --metrics-shmem-handle=1848,i,12901254618656800670,8389234096679826443,262144 --field-trial-handle=1616,i,368205340487753366,3789615874139187454,262144 --variations-seed-version --pseudonymization-salt-handle=2036,i,7112314721201396394,15107055331804012052,4 --trace-process-track-uuid=3190708988185955192 --mojo-platform-channel-handle=1612 /prefetch:2 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03"
+  },
+  {
+    "ProcessId": 21392,
+    "ParentProcessId": 23692,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --noerrdialogs --user-data-dir=\"C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --webview-exe-name=\"Aibo Shell Prototype.exe\" --webview-exe-version=0.0.1 --embedded-browser-webview=1 --startup-read-main-dll --metrics-shmem-handle=2268,i,14528984600803389099,15787986624433688099,524288 --field-trial-handle=1616,i,368205340487753366,3789615874139187454,262144 --variations-seed-version --pseudonymization-salt-handle=2036,i,7112314721201396394,15107055331804012052,4 --trace-process-track-uuid=3190708989122997041 --mojo-platform-channel-handle=2276 /prefetch:11 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03"
+  },
+  {
+    "ProcessId": 24840,
+    "ParentProcessId": 23692,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=service --noerrdialogs --user-data-dir=\"C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --webview-exe-name=\"Aibo Shell Prototype.exe\" --webview-exe-version=0.0.1 --embedded-browser-webview=1 --startup-read-main-dll --metrics-shmem-handle=2636,i,162122534537133246,13571151800164556201,524288 --field-trial-handle=1616,i,368205340487753366,3789615874139187454,262144 --variations-seed-version --pseudonymization-salt-handle=2036,i,7112314721201396394,15107055331804012052,4 --trace-process-track-uuid=3190708990060038890 --mojo-platform-channel-handle=2492 /prefetch:13 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03"
+  },
+  {
+    "ProcessId": 24136,
+    "ParentProcessId": 23692,
+    "Name": "msedgewebview2.exe",
+    "CommandLine": "\"C:\\Program Files (x86)\\Microsoft\\EdgeWebView\\Application\\157.0.4341.46\\msedgewebview2.exe\" --type=renderer --noerrdialogs --user-data-dir=\"C:\\Users\\chldu\\AppData\\Local\\Aibo Workbench Shell Prototype\\WebView2\\EBWebView\" --webview-exe-name=\"Aibo Shell Prototype.exe\" --webview-exe-version=0.0.1 --embedded-browser-webview=1 --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1 --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=5 --ssd-no-pressure-read-main-dll --launch-time-ticks=1653127386 --metrics-shmem-handle=3840,i,9451975779488389313,11775697324928358106,1048576 --field-trial-handle=1616,i,368205340487753366,3789615874139187454,262144 --variations-seed-version --pseudonymization-salt-handle=2036,i,7112314721201396394,15107055331804012052,4 --trace-process-track-uuid=3190708990997080739 --mojo-platform-channel-handle=3868 /pfhostedapp:96683e917785641872bdb8cd5d8880be0f6a7e03 /prefetch:1"
+  }
+]

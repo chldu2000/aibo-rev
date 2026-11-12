@@ -1,0 +1,74 @@
+[
+  {
+    "mode": "force",
+    "app": 15928,
+    "children": [
+      {
+        "kind": "stdin-eof",
+        "pid": 25344
+      },
+      {
+        "kind": "ignores-stdin",
+        "pid": 10404
+      },
+      {
+        "kind": "parent",
+        "pid": 23840
+      },
+      {
+        "kind": "grandchild-ignores-stdin",
+        "pid": 1884
+      }
+    ],
+    "remaining": [],
+    "passed": true
+  },
+  {
+    "mode": "taskkill",
+    "app": 19952,
+    "children": [
+      {
+        "kind": "stdin-eof",
+        "pid": 6188
+      },
+      {
+        "kind": "ignores-stdin",
+        "pid": 9616
+      },
+      {
+        "kind": "parent",
+        "pid": 23716
+      },
+      {
+        "kind": "grandchild-ignores-stdin",
+        "pid": 20068
+      }
+    ],
+    "remaining": [],
+    "passed": true
+  },
+  {
+    "mode": "normal",
+    "app": 8820,
+    "children": [
+      {
+        "kind": "stdin-eof",
+        "pid": 7712
+      },
+      {
+        "kind": "ignores-stdin",
+        "pid": 11336
+      },
+      {
+        "kind": "parent",
+        "pid": 3248
+      },
+      {
+        "kind": "grandchild-ignores-stdin",
+        "pid": 3520
+      }
+    ],
+    "remaining": [],
+    "passed": true
+  }
+]
