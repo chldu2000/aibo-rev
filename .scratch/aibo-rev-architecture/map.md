@@ -18,6 +18,7 @@ Labels: wayfinder:map
 - 2026-11-11 用户决定共享交互状态与公开呈现协议（11 号票 Q72–Q84），见 [ADR 0004](../../docs/adr/0004-presentation-protocol.md)；11 号票剩余问题随后由 [ADR 0005](../../docs/adr/0005-runtime-storage-and-packages.md) 回答，11 号票已解决。
 - 2026-11-11 用户在 MyGO 实机验证与原生 UI 原型之后决定（Q112–Q114）：默认界面改用 MyGO 原生 UI，取消外部完整呈现包（F20.4–F20.7 取消勾选），工具面板改为嵌入的独立 WebView，见 [ADR 0006](../../docs/adr/0006-native-ui.md)；05、09 号决议与 ADR 0003–0005 已加修订说明，界面验收工具改为 Go。
 - 2026-11-11 用户决定不迁移旧版 Aibo 数据（D08.2–D08.4 不进入范围），记录于[功能清单](../../docs/refactor-feature-inventory.md)与 12 号票。
+- 2026-11-12 用户决定（17 号票收口后）：正式版本先支持 Codex 与 Claude Code；产品平台为 macOS arm64 与 Windows 11 x64，开发验证以 macOS 为主；首次启动不提示旧数据位置；无 GPU 时玻璃外观暂不自动切换。详见 [12 号票](issues/12-architecture-acceptance-and-transition.md) Comments；Claude Code 并发验证为 [20 号票](issues/20-acp-same-connection-concurrency-claude-code.md)。
 - 主目标是降低维护成本。旧 aibo 的代码、合同、存储及语言不是新架构约束；已有行为和失败经验仍是参考。
 - Checklist 是功能选择的唯一入口；83 项来自提交 `86b8efd`，2026-11-10 用户加选 F17.1（插件工具面板）与 F17.5（隐藏工具视图后保持后台运行），共 85 项；2026-11-11 取消 F20.4–F20.7，共 81 项。未选项不等于永久删除，旧文档中的 Git/编辑器/终端阶段建议不能扩大本图范围。数据正确性、恢复及必要保留规则随所选功能成立。
 - 参考 [Zed 实现研究](../../docs/zed-acp-research.md)中的结构化会话内容、状态合并、类型驱动呈现和动态配置。其“保留宿主原生协议接入”的候选建议已被本轮全部 ACP 的要求取代。
