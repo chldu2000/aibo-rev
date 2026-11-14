@@ -143,7 +143,7 @@ cd ..\mygo-validation; .\scripts\crash-children.ps1        # P1 产物
 
 Windows 11 x64 的原型验证完成。用户于 2026-11-12 明确确认人工验证通过，并接受 ADR 0008 的恢复策略。证据汇总见[验收报告](../../../prototypes/workbench-shell/reports/win-validation-progress.md)，人工确认原文见[验收记录](../../../prototypes/workbench-shell/reports/win-manual-confirmation.md)。
 
-1. **环境与可复现性。** Windows 11 专业版 26H2、26300.9711、x64；WebView2 157.0.4341.46、Go 1.27.3、MyGO v0.9.0、CGO_ENABLED=0。原型、打包 exe 与 NSIS 安装程序构建成功。实验已合入 `main`（合并提交 `6d1292f`，原 `prototype/windows-validation` 分支未保留），源码基线与各产物/源码 SHA-256 见 win-build-manifest.json。用户未另报第三方输入法版本、多显示器型号或通知安装方式，不推定这些细节。
+1. **环境与可复现性。** Windows 11 专业版 26H2、26300.9711、x64；WebView2 157.0.4341.46、Go 1.27.3、MyGO v0.9.0、CGO_ENABLED=0。原型、打包 exe 与 NSIS 安装程序构建成功。实验已合入 `main`（合并提交 `2cb1319`，原 `prototype/windows-validation` 分支未保留），源码基线与各产物/源码 SHA-256 见 win-build-manifest.json。用户未另报第三方输入法版本、多显示器型号或通知安装方式，不推定这些细节。
 2. **原生工作台。** 窗口缩放与面板宽度同步；区域级 panic 隔离有效。关窗销毁窗口、应用后台存活，重开后所选会话、草稿、面板宽度与可见条目恢复。标题栏、输入法、字体与缩放、粘贴与拖放、选择器、深浅色、焦点与快捷键、托盘、通知定位、讲述人、Mica 与透明效果关闭由用户人工清单确认通过。
 3. **性能与资源。** GPU 标准/玻璃流式帧耗时中位数为 1.0/1.5 ms，p95 为 1.5/2.0 ms；滚动中位数为 1.0/1.5 ms，p95 为 1.5/2.5 ms。玻璃启动最大帧 507.7 ms 单列，不混入稳态。强制 CPU 玻璃流式中位/p95 为 20.0/21.5 ms，滚动为 20.0/21.0 ms。长历史加载 10,004 条，采样 Working Set 峰值约 82.8 MiB。全部口径、采样和原始日志见报告，不与其他平台内存直接排名。
 4. **WebView2 隔离与恢复。** 两包 origin 不同、均为安全上下文，Go 绑定调用成功；renderer 独立，但浏览器进程共享。A 死循环不影响 B 与原生工作台；结束 A renderer 后 Reload 可恢复。共享浏览器退出会使两面板失效，Reload 无效，重建可恢复。单个无响应面板直接 Destroy 后重建也可恢复，原 renderer 退出、B 不受影响，无需枚举或结束 renderer。销毁/创建调用约 2 ms；页面可用性在 2 秒后探测，不能当作完整恢复延迟。本次 12 秒观察内未出现 unresponsive 回调，保留心跳检测。

@@ -1,6 +1,6 @@
 # Windows 11 x64 验收报告（17 号票）
 
-2026-11-12；自动证据与用户人工验收通过，17 号票已收口。源码基线 `930240bb02616497edca8b20afb94a06664424fd`，实验包含本次 Windows 适配；具体产物与源码哈希见 `win-build-manifest.json`。环境见 `win-environment.json`。Go 1.27.3、MyGO v0.9.0、CGO_ENABLED=0。
+2026-11-12；自动证据与用户人工验收通过，17 号票已收口。源码基线 `930240bb02616497edca8b20afb94a06664424fd`（2026-11-15 为移除误提交的二进制改写了历史，该提交现为树完全相同的 `5522151c34a31de3cb1494631b1942b1f5c1525c`；`win-*.json` 中的 `sourceCommit` 保留实测时的原值），实验包含本次 Windows 适配；具体产物与源码哈希见 `win-build-manifest.json`。环境见 `win-environment.json`。Go 1.27.3、MyGO v0.9.0、CGO_ENABLED=0。
 
 ## 已有实机证据
 
