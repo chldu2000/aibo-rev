@@ -5,6 +5,7 @@
 本次核查官方文档与源码，没有安装 MyGo、构建示例、运行原型或测量 Aibo 性能。源码依据固定的 main 提交 [`6842ad5e0aa2cd168166e0a4ae12c0cd0f527a3d`](https://github.com/egoist/mygo/tree/6842ad5e0aa2cd168166e0a4ae12c0cd0f527a3d)；官网为滚动文档，其页脚版本不保证每项功能已进入同名发布版。本文不形成技术栈决议。
 
 > 2026-11-10 更新：用户已决定采用 MyGO 的系统 WebView 路线与 Go 宿主，见 [ADR 0003](../adr/0003-desktop-and-ui-stack.md)。下文“建议的验证边界”转为选型后的必做验证。
+> **2026-11-11 更新：** 默认界面改用 MyGO 原生 UI，WebView 只用于工具面板（[ADR 0006](../adr/0006-native-ui.md)）；下文关于 Web 呈现包的部分仅作背景。
 
 ## 结论与适用范围
 

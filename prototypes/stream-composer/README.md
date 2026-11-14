@@ -1,5 +1,7 @@
 # 会话流与输入区原型（Svelte 5 + Bits UI + virtua）
 
+> **已被取代（2026-11-11）。** WebView + Svelte 方案已由 MyGO 原生 UI 取代（[ADR 0006](../../docs/adr/0006-native-ui.md)），见 [`native-ui`](../native-ui/README.md)。仅作背景。
+
 一次性验证，不是产品实现。目的：在[默认工作台界面方案](../../docs/design/ui-interaction.md)确定后，验证候选组件栈能否承担会话流和输入区里最难的部分。
 
 ## 运行

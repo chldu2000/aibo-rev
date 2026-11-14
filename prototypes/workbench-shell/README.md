@@ -2,6 +2,8 @@
 
 一次性实验，不是产品实现。回答 [18 号票](../../.scratch/aibo-rev-architecture/issues/18-macos-workbench-shell-validation.md)：ADR 0006 与界面方案 §15 中不依赖 Windows 的未验证项。基于 [`native-ui`](../native-ui/README.md) 复制（`model.go`、`view.go`、`tokens_gen.go`），未改动作为验收目标的 `native-ui`。
 
+> **与当前要求的差异（2026-11-15）。** 原型之后的决定以要求文档为准：置顶会话显示在全部工作区分组之上的“置顶”区（UI-NAV-02），原型仍排在各分组顶部；模型与推理强度在正式版本先用两个下拉（界面方案 §5.3），原型中的矩阵只作今后参考；Windows 上的工具面板恢复按 ADR 0008，原型的“结束面板渲染进程”只适用于 macOS。
+
 ## 运行
 
 2026-11-12 Windows 11 x64 验证已收口，用户人工清单确认通过，见 [17 号票](../../.scratch/aibo-rev-architecture/issues/17-windows-presentation-validation.md#answer)及[完整验收报告](reports/win-validation-progress.md)。Windows 的无响应与共享浏览器退出恢复采用 ADR 0008 的 WebView 重建方式；`-kill renderer` 只用于故障注入实验。下面 macOS 测量与运行记录仍保留其原始平台口径。
