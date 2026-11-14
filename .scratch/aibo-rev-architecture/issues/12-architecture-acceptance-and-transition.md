@@ -51,3 +51,5 @@ Blocked by: 10, 11, 17
 - **正式支持的 Agent**：先支持 Codex 与 Claude Code（F02.1、F02.3）。验收中的“已验证组合”即这两个 Agent 的固定版本组合；其他 ACP Agent（F02.5）属于允许接入的未验证组合。Claude Code 的同连接并发可靠性由 [20 号票](20-acp-same-connection-concurrency-claude-code.md)验证。
 - **产品平台**：macOS arm64 与 Windows 11 x64。开发过程中的验证以 macOS 为主；Windows 11 x64 在本票定义的验收节点上复核，不要求每次改动都在 Windows 上验证。Windows 10、ARM64 与 macOS Intel 不在支持范围内。
 - **无 GPU 时的玻璃外观**：暂不自动切换为不透明外观（ADR 0007）。
+
+2026-11-15：用户决定开始产品实现，本票不阻塞开工，与实现并行编写，在第一个里程碑之前关闭（[ADR 0010](../../../docs/adr/0010-implementation-start.md)）。同日用户决定 Codex 与 Claude Code 的官方 Agent 包随安装程序预装、不带 CLI、为 JS 脚本，Node 先用用户已有的或按需下载最新 LTS，并加选 F02.7，必需项为 82 项（[ADR 0009](../../../docs/adr/0009-official-agent-packages-and-node-runtime.md)）。验收须覆盖：缺 CLI 时的指引、无 Node 时的选择与下载（含校验失败）、系统 Node 在 Dock 启动时的查找。

@@ -190,6 +190,13 @@ Status: active（2026-11-10；2026-11-11 改为 MyGO 原生 UI，见 [ADR 0006](
 - 验收：`Mod+N` 打开新建会话；选中检查未通过的 Agent 后“创建”不可用。
 - 验证：uitest
 
+#### UI-NAV-11 · 必须 · 缺少 CLI 或 Node 时的指引
+- 条款：Agent 检查发现缺少 CLI 时，显示该 Agent 包提供的安装指引与官方文档链接，Aibo 不代为安装；缺少满足版本要求的 Node 时，提供“选择已有的 Node”与“为 Aibo 下载 Node（最新 LTS）”，下载只在用户操作后开始，显示进度与校验结果，校验失败时不切换。设置中显示当前 Node 的版本与来源（手动选择 / 系统 / Aibo 下载），并提供“更新到最新 LTS”。
+- 依据：ui-interaction §12；ADR 0009
+- Checklist：F02.6、F02.7
+- 验收：`agent-missing-cli` 中显示指引与链接、“创建”不可用；`node-missing` 中两个入口都在，模拟校验失败后仍为原来的 Node。
+- 验证：uitest
+
 #### UI-NAV-07 · 必须 · 未验证组合的标识
 - 条款：当前会话的 Agent/适配器组合未经验证时，会话头显示“未验证”并说明含义；不得因此禁用全部功能。
 - 依据：ui-interaction §5.1；决议 04 Q15

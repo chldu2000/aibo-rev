@@ -43,7 +43,7 @@
 - [ ] F02.4 Cursor 接入。
 - [x] F02.5 其他 ACP Agent 的接入模板与通用适配。
 - [x] F02.6 Agent 可执行文件、依赖与认证状态检查。
-- [ ] F02.7 Node 运行时自动查找、手动选择与按需下载。
+- [x] F02.7 Node 运行时自动查找、手动选择与按需下载（2026-11-15 用户勾选：官方 Agent 包为 JS 脚本，见 [ADR 0009](adr/0009-official-agent-packages-and-node-runtime.md)）。
 
 ### F03 会话生命周期
 
