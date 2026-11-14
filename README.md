@@ -8,7 +8,7 @@
 
 **范围与决定**
 
-- [功能 Checklist](docs/refactor-feature-inventory.md)：范围以已勾选的 82 项为准。
+- [功能 Checklist](docs/refactor-feature-inventory.md)：范围以已勾选的 81 项为准。
 - [方向](docs/adr/0002-aibo-refactor-direction.md)：降低维护成本，数据治理是主线。
 - [原生界面](docs/adr/0006-native-ui.md)：模块划分、依赖方向、线程与 panic 边界。
 - [进程、存储、ACP 接入、包与工具面板](docs/adr/0005-runtime-storage-and-packages.md)（经 ADR 0006、0008、0009 修订）。

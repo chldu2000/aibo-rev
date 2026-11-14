@@ -5,7 +5,7 @@ Labels: wayfinder:map
 
 ## Destination
 
-按已接受的 ADR 与[架构图](../aibo-rev-architecture/map.md)决议实现 Aibo Rev，覆盖[功能 Checklist](../../docs/refactor-feature-inventory.md)已勾选的 82 项，并通过 [12 号票](../aibo-rev-architecture/issues/12-architecture-acceptance-and-transition.md)定义的验收。本图拆解实施任务，不重新决定架构。
+按已接受的 ADR 与[架构图](../aibo-rev-architecture/map.md)决议实现 Aibo Rev，覆盖[功能 Checklist](../../docs/refactor-feature-inventory.md)已勾选的 81 项，并通过 [12 号票](../aibo-rev-architecture/issues/12-architecture-acceptance-and-transition.md)定义的验收。本图拆解实施任务，不重新决定架构。
 
 ## Notes
 

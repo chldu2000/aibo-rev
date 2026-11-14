@@ -5,7 +5,7 @@ Labels: wayfinder:map
 
 ## Destination
 
-形成可据此实施的 Aibo Rev 架构规格：覆盖[完整版本 Checklist](../../docs/refactor-feature-inventory.md)当前 82 项必需功能，明确模块职责、进程与数据所有权、ACP 与呈现扩展接口、技术选型及验收方式。完成条件是实施前的重要架构问题均已有决策和依据；本图不编写产品代码。
+形成可据此实施的 Aibo Rev 架构规格：覆盖[完整版本 Checklist](../../docs/refactor-feature-inventory.md)当前 81 项必需功能，明确模块职责、进程与数据所有权、ACP 与呈现扩展接口、技术选型及验收方式。完成条件是实施前的重要架构问题均已有决策和依据；本图不编写产品代码。
 
 ## Notes
 
@@ -21,7 +21,7 @@ Labels: wayfinder:map
 - 2026-11-12 用户决定（17 号票收口后）：正式版本先支持 Codex 与 Claude Code；产品平台为 macOS arm64 与 Windows 11 x64，开发验证以 macOS 为主；首次启动不提示旧数据位置；无 GPU 时玻璃外观暂不自动切换。详见 [12 号票](issues/12-architecture-acceptance-and-transition.md) Comments；Claude Code 并发验证为 [20 号票](issues/20-acp-same-connection-concurrency-claude-code.md)。
 - 2026-11-15 用户决定：官方 Agent 包不带 CLI、为 JS 脚本，Node 先用用户已有的或按需下载最新 LTS（[ADR 0009](../../docs/adr/0009-official-agent-packages-and-node-runtime.md)）；开始产品实现，不等 12 号票关闭，实施任务进入[实施地图](../aibo-rev-implementation/map.md)（[ADR 0010](../../docs/adr/0010-implementation-start.md)）。
 - 主目标是降低维护成本。旧 aibo 的代码、合同、存储及语言不是新架构约束；已有行为和失败经验仍是参考。
-- Checklist 是功能选择的唯一入口；83 项来自提交 `86b8efd`，2026-11-10 用户加选 F17.1（插件工具面板）与 F17.5（隐藏工具视图后保持后台运行），共 85 项；2026-11-11 取消 F20.4–F20.7，共 81 项；2026-11-15 加选 F02.7（Node 运行时，ADR 0009），共 82 项。未选项不等于永久删除，旧文档中的 Git/编辑器/终端阶段建议不能扩大本图范围。数据正确性、恢复及必要保留规则随所选功能成立。
+- Checklist 是功能选择的唯一入口；83 项来自提交 `86b8efd`，2026-11-10 用户加选 F17.1（插件工具面板）与 F17.5（隐藏工具视图后保持后台运行），共 85 项；2026-11-11 取消 F20.4–F20.7，共 81 项；2026-11-15 加选 F02.7（Node 运行时，ADR 0009），共 82 项；同日取消 F03.3（关闭会话，默认界面没有关闭入口），共 81 项。未选项不等于永久删除，旧文档中的 Git/编辑器/终端阶段建议不能扩大本图范围。数据正确性、恢复及必要保留规则随所选功能成立。
 - 参考 [Zed 实现研究](../../docs/zed-acp-research.md)中的结构化会话内容、状态合并、类型驱动呈现和动态配置。其“保留宿主原生协议接入”的候选建议已被本轮全部 ACP 的要求取代。
 - 历史与引用以本轮[业务历史与跨 Agent 引用的权威来源](issues/06-history-reference-authority.md#answer)为准，不直接继承终端路线对原生格式的要求；遵循 [CONTEXT](../../CONTEXT.md)，不能以归一化历史替代原始 transcript 的术语定义。
 - 旧包格式兼容、新包升级的关联会话迁移、旧应用数据迁移是不同问题。2026-11-11 用户决定不迁移旧应用数据；不读取或清理真实运行库。

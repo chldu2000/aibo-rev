@@ -16,7 +16,7 @@ aibo-rev 是现有 Aibo 的彻底重构。架构与界面已经决定，下一�
    - [0004](docs/adr/0004-presentation-protocol.md) 只读仍有效的部分：§1 状态归属、§5 草稿同步、工具面板协议。
    - [0008](docs/adr/0008-windows-tool-panel-recovery.md) Windows 工具面板恢复；[0009](docs/adr/0009-official-agent-packages-and-node-runtime.md) 官方 Agent 包与 Node 运行时；[0010](docs/adr/0010-implementation-start.md) 开始实现的约定（ACP v1、代码位置、CI、第一条纵向链路）。
    - [0003](docs/adr/0003-desktop-and-ui-stack.md) 只有 MyGO 与 Go 宿主仍有效。0001 已被取代。
-4. [功能 Checklist](docs/refactor-feature-inventory.md)：范围以已勾选的 82 项为准，未勾选的不实现、也不留占位。
+4. [功能 Checklist](docs/refactor-feature-inventory.md)：范围以已勾选的 81 项为准，未勾选的不实现、也不留占位。
 5. 与任务相关的[架构决议](.scratch/aibo-rev-architecture/map.md)：每张已解决票的 `## Answer` 是行为合同（例如 07 投递与控制、08 目标与后台任务、10 数据所有权）。
 6. 涉及界面时，读下文“界面设计来源”。
 7. 写代码前读 [Clean Code 规范](docs/agents/clean-code.md)。它约束所有产品代码与测试。
